@@ -615,7 +615,15 @@
                     <i class="fas fa-search"></i>
                     <input type="text" id="searchCorretora" placeholder="Buscar corretora...">
                 </div>
-                <ul id="listaCorretoras" class="corretoras-list"></ul>
+                <ul id="listaCorretoras" class="corretoras-list">
+                    <!-- Link Rápido da Porto Seguro adicionado abaixo -->
+                    <li>
+                        <a href="https://corretor.portoseguro.com.br/novocol/homepage?code=d59892f7-a084-4125-b600-618cac8c7294&state=rAnDoMtExT" target="_blank" rel="noopener noreferrer">
+                            <span>Porto Seguro</span>
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </li>
+                </ul>
             </div>
         </aside>
 
@@ -845,13 +853,12 @@
                     </div>
                 </div>
 
-                <!-- OUTRAS ABAS (Mantidas idênticas para economizar espaço e preservar a estrutura) -->
+                <!-- OUTRAS ABAS -->
                 <div id="aba-auto" class="tab-content">
                     <div class="status-bar-tab">
                         <label class="chk-interesse"><input type="checkbox" id="chkInteresseAuto"> <i class="fas fa-car"></i> Tem interesse?</label>
                         <label class="chk-contrato"><input type="checkbox" id="chkContratoAuto"> <i class="fas fa-check-circle"></i> Já contratado?</label>
                     </div>
-                    <!-- Campos de Auto... -->
                 </div>
 
                 <div id="aba-residencial" class="tab-content">
@@ -1189,7 +1196,6 @@
             const dataHojeStr = `${ano}-${mes}-${dia}`;
             const diaMesAtualStr = `${dia}/${mes}`;
 
-            // 1. Filtra Retornos Pendentes
             const leadsRetorno = todosOsLeadsMemoria.filter(lead => {
                 if (lead.vendedor !== NOME_VENDEDOR_LOGADO) return false;
                 if (!lead.data_prioridade) return false;
@@ -1198,11 +1204,9 @@
                 return lead.data_prioridade <= dataHojeStr; 
             });
 
-            // 2. Filtra Aniversariantes do Dia (Compara o formato DD/MM)
             const leadsAniversario = todosOsLeadsMemoria.filter(lead => {
                 if (lead.vendedor !== NOME_VENDEDOR_LOGADO) return false;
                 if (!lead.data_nascimento) return false;
-                // Extrai o dia/mês da data de nascimento do lead (esperada como DD/MM/AAAA)
                 const partesNasc = lead.data_nascimento.split('/');
                 if (partesNasc.length >= 2) {
                     const diaMesLead = `${partesNasc[0]}/${partesNasc[1]}`;
@@ -1227,7 +1231,6 @@
                 return;
             }
 
-            // Exibe Aniversariantes primeiro
             if (leadsAniversario.length > 0) {
                 const tituloAniversarios = document.createElement('div');
                 tituloAniversarios.className = 'birthday-section-title';
@@ -1266,7 +1269,6 @@
                 listaNotificacoes.appendChild(item);
             });
 
-            // Exibe Retornos Agendados em seguida
             leadsRetorno.forEach(lead => {
                 const item = document.createElement('div');
                 item.className = 'notification-item';
