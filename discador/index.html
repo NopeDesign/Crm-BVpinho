@@ -1,0 +1,2429 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discador - BV Pinho</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* ==========================================
+           1. RESET E VARIÁVEIS GERAIS (BV Pinho)
+           ========================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            /* Paleta Azul Petróleo */
+            --color-primary: #3a6e85;       
+            --color-primary-hover: #2c5466; 
+            --color-primary-dark: #1e3b48;
+            
+            /* Paleta Dourada para Botões de Ação */
+            --color-gold: #bb8e44;
+            --color-gold-hover: #9c7536;
+            --color-gold-light: #cda259;
+            
+            --color-bg-app: #f4f6f8;            
+            --color-bg-column: #e2e8f0;     
+            --color-card: #ffffff;       
+            
+            --color-text-main: #1e293b;     
+            --color-text-muted: #64748b;    
+            --color-text-light: #ffffff;    
+            
+            --color-whatsapp: #25D366;      
+            --color-border: #cbd5e1;        
+            
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.02);
+            --shadow-md: 0 6px 12px rgba(0,0,0,0.08);
+            --shadow-lg: 0 15px 35px rgba(58, 110, 133, 0.15); /* Sombra baseada no Azul Petróleo */
+        }
+
+        body {
+            background-color: var(--color-bg-app);
+            color: var(--color-text-main);
+            overflow: hidden; 
+        }
+
+        .dashboard-layout {
+            display: flex;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        /* ==========================================
+           2. SIDEBAR (MENU LATERAL)
+           ========================================== */
+        .sidebar {
+            width: 240px; 
+            background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+            display: flex;
+            flex-direction: column;
+            box-shadow: 4px 0 20px rgba(0, 0, 0, 0.08);
+            z-index: 10;
+            padding: 30px 0; 
+        }
+
+        .sidebar-logo {
+            padding: 0 25px;
+            text-align: left;
+            margin-bottom: 40px; 
+        }
+
+        .sidebar-logo img {
+            max-width: 140px; 
+            display: block;
+            margin: 0 auto;
+        }
+
+        .sidebar-menu ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            padding: 0 15px;
+        }
+
+        .sidebar-menu li a {
+            display: block;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            padding: 14px 20px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-menu li:hover a {
+            color: var(--color-text-light);
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar-menu li.active a {
+            background-color: rgba(255, 255, 255, 0.15);
+            color: var(--color-text-light);
+            box-shadow: inset 4px 0 0 var(--color-gold); /* Detalhe Dourado */
+        }
+
+        /* AREA DE CORRETORAS (NA SIDEBAR) */
+        .sidebar-corretoras {
+            margin-top: 30px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            overflow: hidden; 
+        }
+
+        .corretoras-titulo {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 0 25px;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .corretoras-search {
+            position: relative;
+            padding: 0 15px;
+            margin-bottom: 15px;
+        }
+
+        .corretoras-search i {
+            position: absolute;
+            left: 25px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 12px;
+        }
+
+        .corretoras-search input {
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            border-radius: 8px;
+            padding: 10px 10px 10px 32px;
+            font-size: 13px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .corretoras-search input:focus {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .corretoras-list {
+            list-style: none;
+            padding: 0 10px;
+            margin: 0;
+            overflow-y: auto;
+            flex: 1; 
+        }
+
+        .corretoras-list::-webkit-scrollbar { width: 4px; }
+        .corretoras-list::-webkit-scrollbar-thumb { background-color: rgba(255, 255, 255, 0.2); border-radius: 10px; }
+
+        .corretoras-list li a {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 13px;
+            padding: 10px 15px;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            margin-bottom: 4px;
+        }
+
+        .corretoras-list li a i {
+            font-size: 10px;
+            opacity: 0; 
+            transition: opacity 0.2s;
+        }
+
+        .corretoras-list li:hover a {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+        }
+
+        .corretoras-list li:hover a i { opacity: 1; }
+
+        /* ==========================================
+           3. CONTEÚDO PRINCIPAL E FILTROS
+           ========================================== */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 30px 40px;
+            background-color: var(--color-bg-app);
+            overflow-y: auto;
+        }
+
+        /* ==========================================
+           ESTILOS DA NOTIFICAÇÃO (SINO) E PERFIL
+           ========================================== */
+        .notification-wrapper { position: relative; }
+        .notification-bell { background: white; border: 1px solid var(--color-border); padding: 6px 12px; border-radius: 12px; cursor: pointer; position: relative; font-size: 20px; color: var(--color-text-muted); height: 100%; transition: 0.3s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+        .notification-bell:hover { background: #f8fafc; color: var(--color-text-main); }
+        .notification-badge { position: absolute; top: -6px; right: -6px; background: #ef4444; color: white; font-size: 10px; font-weight: bold; padding: 2px 6px; border-radius: 50%; display: none; }
+        .notification-dropdown { display: none; position: absolute; right: 0; top: 120%; width: 390px; background: white; border: 1px solid var(--color-border); border-radius: 14px; box-shadow: 0 18px 45px rgba(15, 23, 42, 0.16); z-index: 1000; max-height: 500px; overflow-y: auto; text-align: left; }
+        .notification-header { padding: 14px 17px; border-bottom: 1px solid var(--color-border); font-weight: 800; color: var(--color-text-main); background: #f8fafc; border-radius: 14px 14px 0 0; display: flex; align-items: center; gap: 8px; }
+        .notification-item { padding: 12px 15px; border-bottom: 1px solid #f1f5f9; cursor: pointer; transition: 0.2s; display: flex; flex-direction: column; gap: 5px; }
+        .notification-item:hover { background-color: #f8fafc; }
+        .notification-item:last-child { border-bottom: none; }
+        .notif-nome { font-weight: bold; color: var(--color-text-main); font-size: 14px; }
+        .notif-data { font-size: 12px; color: #ef4444; font-weight: 600; }
+
+        /* CARD DE ANIVERSÁRIO NAS NOTIFICAÇÕES */
+        .notification-birthday {
+            margin: 8px 10px;
+            padding: 14px;
+            border: 1px solid #f3d6a0;
+            border-radius: 13px;
+            background: linear-gradient(135deg, #fffaf0 0%, #fff 100%);
+            box-shadow: 0 3px 10px rgba(187, 142, 68, 0.08);
+            cursor: default;
+        }
+        .notification-birthday:hover { background: linear-gradient(135deg, #fff8e8 0%, #fff 100%); }
+        .birthday-top { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+        .birthday-icon {
+            width: 42px; height: 42px; min-width: 42px;
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            background: #fff0cf;
+            color: #bb8e44;
+            font-size: 20px;
+        }
+        .birthday-info { min-width: 0; }
+        .birthday-label {
+            display: block;
+            color: #bb8e44;
+            font-size: 10px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: .8px;
+            margin-bottom: 2px;
+        }
+        .birthday-name {
+            display: block;
+            color: #1e293b;
+            font-size: 15px;
+            font-weight: 800;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .birthday-message {
+            color: #64748b;
+            font-size: 12px;
+            line-height: 1.4;
+            margin-bottom: 11px;
+        }
+        .btn-birthday-whatsapp {
+            width: 100%;
+            border: none;
+            border-radius: 10px;
+            padding: 11px 12px;
+            background: #25D366;
+            color: #fff;
+            font-size: 12px;
+            font-weight: 800;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 4px 10px rgba(37, 211, 102, 0.20);
+            transition: .2s ease;
+        }
+        .btn-birthday-whatsapp:hover {
+            background: #1ebd5a;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 14px rgba(37, 211, 102, 0.25);
+        }
+        .btn-birthday-whatsapp:active { transform: translateY(0); }
+        .birthday-no-phone {
+            width: 100%;
+            padding: 9px;
+            border-radius: 9px;
+            background: #f1f5f9;
+            color: #64748b;
+            font-size: 11px;
+            font-weight: 700;
+            text-align: center;
+        }
+        .notification-section-title {
+            padding: 10px 15px 5px;
+            color: #94a3b8;
+            font-size: 10px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: .8px;
+        }
+
+        /* ==========================================
+           5. MODAL E FORMS GERAIS
+           ========================================== */
+        .form-row { display: flex; gap: 20px; margin-bottom: 20px; flex-wrap: wrap; }
+        .form-group { display: flex; flex-direction: column; flex: 1; min-width: 150px; }
+        .form-group.flex-2 { flex: 2; }
+
+        .form-group label {
+            color: var(--color-text-muted);
+            font-size: 11px; font-weight: 700;
+            text-transform: uppercase; margin-bottom: 8px; margin-left: 4px;
+        }
+
+        .form-group input, .form-group select {
+            background-color: #f8fafc; 
+            color: var(--color-text-main);
+            border: 1px solid var(--color-border);
+            border-radius: 12px; padding: 14px 16px;
+            font-size: 15px; font-weight: 500; outline: none;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            background-color: #ffffff;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 4px rgba(58, 110, 133, 0.15); 
+        }
+
+        /* ==========================================
+           BOTÕES SECUNDÁRIOS PADRÃO (Brancos/Cinzas)
+           ========================================== */
+        .btn-modal-secundario {
+            background-color: #f8fafc; color: var(--color-text-main);
+            border: 1px solid var(--color-border); border-radius: 10px; padding: 12px 24px;
+            font-size: 14px; font-weight: 700; cursor: pointer; transition: 0.2s;
+        }
+        .btn-modal-secundario:hover { 
+            background-color: #ffffff; 
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(58, 110, 133, 0.1);
+        }
+
+        /* Botão Salvar - Dourado */
+        .btn-modal-salvar {
+            background: linear-gradient(135deg, var(--color-gold), var(--color-gold-hover)); color: #ffffff;
+            border: none; border-radius: 12px; padding: 12px 30px;
+            font-size: 14px; font-weight: 700; cursor: pointer;
+            box-shadow: 0 4px 10px rgba(187, 142, 68, 0.2); transition: 0.2s;
+        }
+        .btn-modal-salvar:hover { background: linear-gradient(135deg, var(--color-gold-light), var(--color-gold)); transform: translateY(-1px); }
+
+        .btn-modal-whatsapp {
+            background-color: var(--color-whatsapp); color: #ffffff;
+            border: none; border-radius: 12px; padding: 12px 24px;
+            font-size: 14px; font-weight: 700; cursor: pointer;
+            display: flex; align-items: center; gap: 8px;
+            box-shadow: 0 4px 10px rgba(37, 211, 102, 0.2); transition: 0.2s;
+        }
+        .btn-modal-whatsapp:hover { background-color: #1ebd5a; transform: translateY(-1px); }
+
+        /* ==========================================
+           6. TELA DO DISCADOR (PROFISSIONAL E CLEAN)
+           ========================================== */
+        .discador-container {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            height: 100%;
+        }
+
+        .discador-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: stretch;
+            gap: 25px;
+        }
+
+        .discador-card-principal {
+            background-color: var(--color-card); 
+            flex: 1;
+            border-radius: 20px;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            border: 1px solid var(--color-border); 
+            box-shadow: var(--shadow-sm);
+        }
+
+        .discador-card-principal::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 6px;
+            background-color: var(--color-primary); /* Detalhe Superior Azul Petróleo */
+            border-top-left-radius: 20px; border-top-right-radius: 20px;
+        }
+
+        .aviso-lead-vazio {
+            position: absolute;
+            top: 25px; left: 30px;
+            font-size: 12px; font-weight: 700; color: var(--color-text-muted);
+            text-transform: uppercase; letter-spacing: 0.5px;
+        }
+
+        .disc-text {
+            color: var(--color-text-main);
+            font-size: 24px; margin-bottom: 8px; font-weight: 800;
+        }
+
+        .disc-text span {
+            font-weight: 500; color: var(--color-text-muted);
+        }
+
+        .btn-disc-whatsapp {
+            background-color: var(--color-whatsapp); color: white;
+            border: none; padding: 14px 40px; border-radius: 12px; 
+            font-size: 16px; font-weight: 700; margin: 25px 0; cursor: pointer;
+            box-shadow: 0 4px 10px rgba(37, 211, 102, 0.2); transition: 0.2s;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .btn-disc-whatsapp:hover { background-color: #1ebd5a; transform: translateY(-2px); }
+
+        .disc-contadores {
+            display: flex; gap: 40px;
+            color: var(--color-text-main); font-size: 18px; font-weight: 700;
+        }
+
+        .modo-contato-toggle {
+            display: flex; gap: 5px; margin-bottom: 10px;
+            background-color: #f1f5f9; padding: 6px;
+            border-radius: 12px; border: 1px solid var(--color-border);
+        }
+
+        .modo-btn {
+            background-color: transparent; color: var(--color-text-muted);
+            border: none; padding: 10px 25px; border-radius: 8px;
+            font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.3s ease;
+            display: flex; align-items: center; gap: 6px;
+        }
+        .modo-btn.ativo {
+            background-color: #ffffff; color: var(--color-primary); /* Texto do Botão Ativo Azul Petróleo */
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+        }
+        
+        .vendedor-badge {
+            align-self: flex-start;
+            font-size: 11px;
+            background-color: #f1f5f9;
+            padding: 4px 8px;
+            border-radius: 6px;
+            color: var(--color-primary);
+            font-weight: 700;
+            border: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* BOTÕES DE STATUS LATERAIS NO DISCADOR */
+        .discador-acoes {
+            display: flex; flex-direction: column; gap: 12px;
+            justify-content: center; width: 250px;
+            background-color: var(--color-card); padding: 25px;
+            border-radius: 20px; border: 1px solid var(--color-border);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-block { width: 100%; display: block; }
+
+        .btn-pular { background-color: #fff7ed !important; color: #ea580c !important; border-color: #fed7aa !important; }
+        .btn-pular:hover { background-color: #ea580c !important; color: #ffffff !important; }
+
+        /* DETALHES INFERIORES DO DISCADOR */
+        .discador-detalhes-bottom {
+            background-color: var(--color-card); 
+            border-radius: 20px; padding: 35px;
+            border: 1px solid var(--color-border); box-shadow: var(--shadow-sm);
+        }
+
+        /* ==========================================
+           7. ESTILOS DAS ABAS E COBERTURAS MODERNAS
+           ========================================== */
+        .tabs-container {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+            margin-bottom: 25px;
+            border-bottom: 2px solid var(--color-border);
+            overflow-x: auto;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 10px 15px;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--color-text-muted);
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            margin-bottom: -2px; 
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .tab-btn:hover {
+            color: var(--color-text-main);
+        }
+
+        .tab-btn.active {
+            color: var(--color-primary); /* Aba Ativa em Azul Petróleo */
+            border-bottom-color: var(--color-primary);
+        }
+
+        .tab-content { display: none; animation: fadeIn 0.3s ease; }
+        .tab-content.active { display: block; }
+
+        .status-bar-tab { display: flex; gap: 25px; background: #f8fafc; padding: 12px 15px; border-radius: 8px; margin-bottom: 15px; border: 1px solid var(--color-border); }
+        .chk-interesse { cursor: pointer; display: flex; align-items: center; gap: 8px; font-weight: 700; color: var(--color-text-muted); font-size: 14px; }
+        .chk-interesse input { cursor: pointer; width: 18px; height: 18px; accent-color: var(--color-text-muted); }
+        .chk-contrato { cursor: pointer; display: flex; align-items: center; gap: 8px; font-weight: 700; color: var(--color-primary); font-size: 14px; }
+        .chk-contrato input { cursor: pointer; width: 18px; height: 18px; accent-color: var(--color-primary); }
+
+        /* ESTILOS MODERNOS DA ABA DE COBERTURAS */
+        .cob-modern-section { margin-top: 20px; margin-bottom: 25px;}
+        .cob-modern-row { display: flex; gap: 15px; margin-bottom: 15px; flex-wrap: wrap; }
+        .cob-modern-group { display: flex; flex-direction: column; gap: 6px; flex: 1; min-width: 130px; }
+        .cob-modern-group label { font-size: 11px; font-weight: 800; color: #475569; text-transform: uppercase; letter-spacing: 0.5px; margin: 0; }
+        .cob-modern-group input[type="text"], 
+        .cob-modern-group input[type="number"], 
+        .cob-modern-group select { border: 1px solid var(--color-border); border-radius: 8px; padding: 10px 12px; font-size: 14px; color: var(--color-text-main); width: 100%; box-sizing: border-box; background-color: #fff; transition: 0.2s; outline: none; }
+        .cob-modern-group input:focus, 
+        .cob-modern-group select:focus { border-color: var(--color-primary); box-shadow: 0 0 0 3px rgba(58, 110, 133, 0.15); }
+        
+        .cob-modern-grid-wrapper { width: 100%; overflow-x: auto; padding-bottom: 15px; }
+        .cob-modern-grid-wrapper::-webkit-scrollbar { height: 8px; }
+        .cob-modern-grid-wrapper::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 4px; }
+        .cob-modern-grid-wrapper::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 4px; }
+        .cob-modern-grid-wrapper::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+        .cob-modern-grid { display: grid; grid-template-columns: repeat(4, minmax(230px, 1fr)); gap: 15px; min-width: 950px; }
+        .cob-modern-fieldset { border: 1px solid var(--color-border); border-radius: 8px; padding: 15px 15px 20px; margin: 0; display: flex; flex-direction: column; gap: 15px; background: transparent; }
+        .cob-modern-legend { color: var(--color-primary); font-weight: 800; font-size: 14px; padding: 0 8px; background: white; border-radius: 4px; margin-left: -5px; }
+        .cob-modern-col { display: flex; flex-direction: column; gap: 15px; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="dashboard-layout">
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <img src="/src/logo.svg" alt="Logo BV Pinho" style="max-width: 140px; display: block; margin: 0 auto;">
+            </div>
+            
+            <nav class="sidebar-menu">
+                <ul>
+                    <li><a href="../painel/index.html">Painel / Kanban</a></li>
+                    <li><a href="../dashboard/index.html">Dashboard</a></li>
+                    <li class="active"><a href="./index.html">Discador</a></li>
+                    <li><a href="#" onclick="fazerLogout()" style="margin-top: 40px; color: #fca5a5;"><i class="fas fa-sign-out-alt"></i> Sair</a></li>
+                </ul>
+            </nav>
+
+            <div class="sidebar-corretoras">
+                <h4 class="corretoras-titulo">Links Rápidos</h4>
+                <div class="corretoras-search">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchCorretora" placeholder="Buscar corretora...">
+                </div>
+                <ul id="listaCorretoras" class="corretoras-list"></ul>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            
+            <!-- ÁREA DE NOTIFICAÇÕES E USUÁRIO LOGADO -->
+            <div class="perfil-ativo-container" style="display: flex; justify-content: flex-end; align-items: stretch; gap: 15px; margin-bottom: 20px;">
+                
+                <!-- Sino de Notificações -->
+                <div class="notification-wrapper">
+                    <button id="btnNotificacoes" class="notification-bell" title="Leads Agendados">
+                        <i class="fas fa-bell"></i>
+                        <span id="badgeNotificacao" class="notification-badge">0</span>
+                    </button>
+
+                    <div id="dropdownNotificacoes" class="notification-dropdown">
+                        <div class="notification-header"><i class="fas fa-bell"></i> Avisos para Hoje</div>
+                        <div id="listaNotificacoes" style="padding: 5px 0;">
+                            <!-- Leads aparecerão aqui -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Perfil do Corretor -->
+                <div style="display: flex; align-items: center; gap: 10px; background: white; padding: 10px 20px; border-radius: 12px; box-shadow: var(--shadow-sm); width: max-content; border: 1px solid var(--color-border);">
+                    <i class="fas fa-user-circle" style="color: var(--color-primary); font-size: 24px;"></i>
+                    <div style="display: flex; flex-direction: column;">
+                        <span style="font-size: 11px; color: var(--color-text-muted); font-weight: bold; text-transform: uppercase;">Corretor Logado:</span>
+                        <span id="nomeVendedorLogado" style="font-weight: 800; color: var(--color-text-main); font-size: 16px;">Carregando sessão...</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="discador-container">
+                    
+                <div class="discador-top">
+                    <div class="discador-card-principal">
+                        <div class="aviso-lead-vazio" id="discUltimoContato">Carregando leads...</div>
+                        
+                        <div class="modo-contato-toggle" style="margin-top: 15px;">
+                            <button id="btnModoLigacao" class="modo-btn ativo" onclick="setModo('ligacao')"><i class="fas fa-phone"></i> Ligação</button>
+                            <button id="btnModoWhats" class="modo-btn" onclick="setModo('whatsapp')"><i class="fab fa-whatsapp"></i> WhatsApp</button>
+                        </div>
+
+                        <div class="vendedor-badge" style="margin: 15px 0;">
+                            <i class="fas fa-user-tag"></i> Dono atual: <span id="discDonoLead">---</span>
+                        </div>
+
+                        <h3 class="disc-text">Número: <span id="discNumero">---</span></h3>
+                        <h3 class="disc-text">Nome: <span id="discNome">---</span></h3>
+                        
+                        <button class="btn-disc-whatsapp" onclick="abrirJanelaWhatsApp()">
+                            <i class="fab fa-whatsapp" style="font-size: 20px;"></i> Abrir conversa (WhatsApp)
+                        </button>
+                        
+                        <div class="disc-contadores">
+                            <span><i class="fas fa-phone" style="color: var(--color-text-muted);"></i> <span id="discContLigacao">0</span>/4</span>
+                            <span><i class="fab fa-whatsapp" style="color: var(--color-text-muted);"></i> <span id="discContWhats">0</span>/4</span>
+                        </div>
+                    </div>
+
+                    <div class="discador-acoes">
+                        <button class="btn-modal-secundario btn-block" onclick="salvarStatusEPular('Interessado')">Interessado</button>
+                        <button class="btn-modal-secundario btn-block" onclick="salvarStatusEPular('Respondeu')">Respondeu</button>
+                        <button class="btn-modal-secundario btn-block" onclick="salvarStatusEPular('Sem Interesse')">Sem Interesse</button>
+                        <button class="btn-modal-secundario btn-block" onclick="salvarStatusEPular('Sem resposta')">Sem resposta</button>
+                        
+                        <hr style="border: none; border-top: 1px solid var(--color-border); margin: 5px 0;">
+                        
+                        <button class="btn-modal-secundario btn-block btn-pular" onclick="pularLead()">Pular número <i class="fas fa-forward"></i></button>
+                        <button class="btn-modal-secundario btn-block" onclick="window.open('https://app2.paineldocorretor.com.br/', '_blank')">Abrir cotador <i class="fas fa-external-link-alt"></i></button>
+                    </div>
+                </div>
+
+                <div class="discador-detalhes-bottom">
+                    
+                    <div class="tabs-container">
+                        <button type="button" class="tab-btn active" onclick="mudarAbaDiscador(event, 'disc-aba-geral')"><i class="fas fa-address-card"></i> Dados Gerais</button>
+                        <button type="button" class="tab-btn" onclick="mudarAbaDiscador(event, 'disc-aba-saude')"><i class="fas fa-heartbeat"></i> Saúde</button>
+                        <button type="button" class="tab-btn" onclick="mudarAbaDiscador(event, 'disc-aba-odonto')"><i class="fas fa-tooth"></i> Odonto</button>
+                        <button type="button" class="tab-btn" onclick="mudarAbaDiscador(event, 'disc-aba-auto')"><i class="fas fa-car"></i> Auto</button>
+                        <button type="button" class="tab-btn" onclick="mudarAbaDiscador(event, 'disc-aba-residencial')"><i class="fas fa-house-user"></i> Residencial</button>
+                        <button type="button" class="tab-btn" onclick="mudarAbaDiscador(event, 'disc-aba-vida')"><i class="fas fa-user-shield"></i> Vida</button>
+                        <button type="button" class="tab-btn" onclick="mudarAbaDiscador(event, 'disc-aba-consorcio')"><i class="fas fa-home"></i> Consórcio</button>
+                        <button type="button" class="tab-btn" onclick="mudarAbaDiscador(event, 'disc-aba-pet')"><i class="fas fa-paw"></i> Pet</button>
+                        <button type="button" class="tab-btn" onclick="mudarAbaDiscador(event, 'disc-aba-viagem')"><i class="fas fa-plane"></i> Viagem</button>
+                        <button type="button" class="tab-btn" onclick="mudarAbaDiscador(event, 'disc-aba-empresarial')"><i class="fas fa-building"></i> Empresarial</button>
+                        <button type="button" class="tab-btn" onclick="mudarAbaDiscador(event, 'disc-aba-outros')"><i class="fas fa-box-open"></i> Outros</button>
+                    </div>
+
+                    <!-- ABA: DADOS GERAIS -->
+                    <div id="disc-aba-geral" class="tab-content active">
+                        <div class="form-row">
+                            <div class="form-group flex-1"><label>Email:</label><input type="text" id="discEmail" placeholder="Digite o email"></div>
+                            <div class="form-group flex-1"><label>Telefone Fixo:</label><input type="text" id="discTelefoneFixo" placeholder="(00) 0000-0000"></div>
+                            <div class="form-group flex-1"><label>CPF ou CNPJ:</label><input type="text" id="discCpf" placeholder="Apenas números"></div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group"><label>Data de Nascimento:</label><input type="text" id="discNascimento" placeholder="DD/MM/AAAA"></div>
+                            <div class="form-group" style="flex: 0.5;"><label>Idade:</label><input type="text" id="discIdade" placeholder="00"></div>
+                            <div class="form-group flex-1">
+                                <label>Gênero:</label>
+                                <select id="discGenero">
+                                    <option value="">Selecione</option>
+                                    <option value="masculino">Masculino</option>
+                                    <option value="feminino">Feminino</option>
+                                    <option value="outro">Outro</option>
+                                </select>
+                            </div>
+                            <div class="form-group flex-1">
+                                <label>Estado Civil:</label>
+                                <select id="discEstadoCivil">
+                                    <option value="">Selecione</option>
+                                    <option value="solteiro">Solteiro(a)</option>
+                                    <option value="casado">Casado(a)</option>
+                                    <option value="divorciado">Divorciado(a)</option>
+                                    <option value="viuvo">Viúvo(a)</option>
+                                    <option value="uniao_estavel">União Estável</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group flex-1"><label>CEP:</label><input type="text" id="discCep" placeholder="00000-000" maxlength="9"></div>
+                            <div class="form-group flex-1"><label>Cidade:</label><input type="text" id="discCidade" placeholder="Cidade"></div>
+                            <div class="form-group flex-1"><label>Profissão:</label><input type="text" id="discProfissao" placeholder="Profissão"></div>
+                            <div class="form-group flex-1"><label>Origem do Lead:</label><input type="text" id="discOrigem" placeholder="Ex: Face Ads, Indicação..."></div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group flex-1"><label>Tipo de Leads:</label><input type="text" id="discTipo" placeholder="Ex: PME, PF"></div>
+                            <div class="form-group flex-1"><label>Valor Esperado:</label><input type="text" id="discValorEsp" placeholder="R$ 0,00"></div>
+                            <div class="form-group flex-1"><label>Valor Atual:</label><input type="text" id="discValorAtual" placeholder="R$ 0,00"></div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group flex-2"><label>OBSERVAÇÕES:</label><input type="text" id="discObs" placeholder="Anotações sobre o cliente..."></div>
+                            <div class="form-group flex-1"><label style="color: #ef4444;"><i class="fas fa-calendar-alt"></i> Agendar Retorno:</label><input type="date" id="discDataPrioridade" style="border: 1px solid #fca5a5;"></div>
+                        </div>
+                    </div>
+
+                    <!-- ABA: SAÚDE -->
+                    <div id="disc-aba-saude" class="tab-content">
+                        <div class="status-bar-tab">
+                            <label class="chk-interesse"><input type="checkbox" id="chkInteresseSaude"> <i class="fas fa-heartbeat"></i> Tem interesse?</label>
+                            <label class="chk-contrato"><input type="checkbox" id="chkContratoSaude"> <i class="fas fa-check-circle"></i> Já contratado?</label>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group flex-1"><label>Já possui plano? (Qual?):</label><input type="text" id="discPlanoAnt" placeholder="Plano Atual"></div>
+                            <div class="form-group flex-1"><label>Plano de Interesse:</label><input type="text" id="discPlanoInt" placeholder="Plano Desejado"></div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group flex-1">
+                                <label>Cotação PF:</label>
+                                <div style="display: flex; gap: 5px;">
+                                    <input type="text" id="discLinkCotacaoPF" placeholder="Cole o link aqui" style="width: 100%;">
+                                    <button type="button" id="btnAbrirLinkCotacaoPF" class="btn-modal-secundario" style="padding: 0 12px; cursor: pointer;" title="Abrir Link PF"><i class="fas fa-external-link-alt"></i></button>
+                                </div>
+                            </div>
+                            <div class="form-group flex-1">
+                                <label>Cotação PME:</label>
+                                <div style="display: flex; gap: 5px;">
+                                    <input type="text" id="discLinkCotacaoPME" placeholder="Cole o link aqui" style="width: 100%;">
+                                    <button type="button" id="btnAbrirLinkCotacaoPME" class="btn-modal-secundario" style="padding: 0 12px; cursor: pointer;" title="Abrir Link PME"><i class="fas fa-external-link-alt"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group flex-1">
+                                <label>Cotação Adesão:</label>
+                                <div style="display: flex; gap: 5px;">
+                                    <input type="text" id="discLinkCotacaoAdesao" placeholder="Cole o link aqui" style="width: 100%;">
+                                    <button type="button" id="btnAbrirLinkCotacaoAdesao" class="btn-modal-secundario" style="padding: 0 12px; cursor: pointer;" title="Abrir Link Adesão"><i class="fas fa-external-link-alt"></i></button>
+                                </div>
+                            </div>
+                            <div class="form-group flex-1"></div>
+                        </div>
+                    </div>
+
+                    <!-- ABA: ODONTO -->
+                    <div id="disc-aba-odonto" class="tab-content">
+                        <div class="status-bar-tab">
+                            <label class="chk-interesse"><input type="checkbox" id="chkInteresseOdonto"> <i class="fas fa-tooth"></i> Tem interesse?</label>
+                            <label class="chk-contrato"><input type="checkbox" id="chkContratoOdonto"> <i class="fas fa-check-circle"></i> Já contratado?</label>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group flex-2">
+                                <label>Plano Odonto de Interesse:</label>
+                                <input type="text" id="discPlanoOdontoInteresse" placeholder="Ex: Amil Dental, SulAmérica...">
+                            </div>
+                            <div class="form-group flex-1">
+                                <label>Valor (Odonto):</label>
+                                <input type="text" id="discValorOdonto" placeholder="R$ 0,00">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group flex-1">
+                                <label>Cotação Odonto:</label>
+                                <div style="display: flex; gap: 5px;">
+                                    <input type="text" id="discLinkCotacaoOdonto" placeholder="Cole o link de Odonto aqui" style="width: 100%;">
+                                    <button type="button" id="btnAbrirLinkCotacaoOdonto" class="btn-modal-secundario" style="padding: 0 12px; cursor: pointer;" title="Abrir Link Odonto"><i class="fas fa-external-link-alt"></i></button>
+                                </div>
+                            </div>
+                            <div class="form-group flex-1"></div>
+                        </div>
+                    </div>
+
+                    <!-- ABA: SEGURO AUTO -->
+                    <div id="disc-aba-auto" class="tab-content">
+                        <div class="status-bar-tab">
+                            <label class="chk-interesse"><input type="checkbox" id="chkInteresseAuto"> <i class="fas fa-car"></i> Tem interesse?</label>
+                            <label class="chk-contrato"><input type="checkbox" id="chkContratoAuto"> <i class="fas fa-check-circle"></i> Já contratado?</label>
+                        </div>
+
+                        <!-- INÍCIO: COTAÇÕES AUTO -->
+                        <h4 style="margin: 15px 0 10px; color: #1e293b; border-bottom: 1px solid #e2e8f0; padding-bottom: 5px;"><i class="fas fa-file-invoice-dollar" style="color: #64748b;"></i> Cotações Auto</h4>
+                        <div class="form-row">
+                            <div class="form-group flex-1">
+                                <label>Cotação CPF:</label>
+                                <div style="display: flex; gap: 5px;">
+                                    <input type="text" id="discAutoCotacaoCPF" placeholder="Link CPF" style="width: 100%;">
+                                    <button type="button" id="btnAbrirAutoCotacaoCPFDisc" class="btn-modal-secundario" style="padding: 0 12px; cursor: pointer;" title="Abrir Link CPF"><i class="fas fa-external-link-alt"></i></button>
+                                </div>
+                            </div>
+                            <div class="form-group flex-1">
+                                <label>Cotação CNPJ:</label>
+                                <div style="display: flex; gap: 5px;">
+                                    <input type="text" id="discAutoCotacaoCNPJ" placeholder="Link CNPJ" style="width: 100%;">
+                                    <button type="button" id="btnAbrirAutoCotacaoCNPJDisc" class="btn-modal-secundario" style="padding: 0 12px; cursor: pointer;" title="Abrir Link CNPJ"><i class="fas fa-external-link-alt"></i></button>
+                                </div>
+                            </div>
+                            <div class="form-group flex-1">
+                                <label>Auto Frota:</label>
+                                <div style="display: flex; gap: 5px;">
+                                    <input type="text" id="discAutoCotacaoFrota" placeholder="Link Frota" style="width: 100%;">
+                                    <button type="button" id="btnAbrirAutoCotacaoFrotaDisc" class="btn-modal-secundario" style="padding: 0 12px; cursor: pointer;" title="Abrir Link Frota"><i class="fas fa-external-link-alt"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- FIM: COTAÇÕES AUTO -->
+
+                        <!-- INÍCIO: SEGURO -->
+                        <h4 style="margin: 5px 0 10px; color: #1e293b; border-bottom: 1px solid #e2e8f0; padding-bottom: 5px;"><i class="fas fa-shield-alt" style="color: #64748b;"></i> Seguro</h4>
+                        <div class="form-row">
+                            <div class="form-group flex-1">
+                                <label>Tipo de Seguro:</label>
+                                <select id="discAutoTipoSeguro">
+                                    <option value="Novo">Novo</option>
+                                    <option value="Renovação">Renovação</option>
+                                </select>
+                            </div>
+                            <div class="form-group flex-1">
+                                <label>Vigência Inicial:</label>
+                                <input type="date" id="discAutoVigenciaInicial">
+                            </div>
+                            <div class="form-group flex-1">
+                                <label>Vigência Final:</label>
+                                <input type="date" id="discAutoVigenciaFinal">
+                            </div>
+                            <div class="form-group" style="flex: 0.5;">
+                                <label>Comissão (%):</label>
+                                <div style="display: flex; align-items: center; gap: 8px;">
+                                    <input type="number" id="discAutoComissao" placeholder="10" min="0" step="0.01" style="width: 100%;">
+                                    <span style="color: #64748b; font-weight: 700; font-size: 16px;">%</span>
+                                </div>
+                            </div>
+                            <div class="form-group flex-2">
+                                <label>Banco de Maior Relacionamento:</label>
+                                <select id="discAutoBancoRelacionamento">
+                                    <option value="Não Informado">Não Informado</option>
+                                    <option value="Banco do Brasil">Banco do Brasil</option>
+                                    <option value="Santander">Santander</option>
+                                    <option value="Ailos">Ailos</option>
+                                    <option value="Caixa Econômica Federal">Caixa Econômica Federal</option>
+                                    <option value="Bradesco">Bradesco</option>
+                                    <option value="Itaú">Itaú</option>
+                                    <option value="HSBC">HSBC</option>
+                                    <option value="Sicredi">Sicredi</option>
+                                    <option value="Sicoob">Sicoob</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- FIM: SEGURO -->
+
+                        <!-- INÍCIO: COBERTURAS -->
+                        <div class="cob-modern-section">
+                            <h4 style="margin: 0 0 15px; color: #1e293b; font-size: 16px; border-bottom: none;"><i class="fas fa-umbrella" style="color: #64748b;"></i> Coberturas</h4>
+                            
+                            <div class="cob-modern-row">
+                                <div class="cob-modern-group">
+                                    <label>TIPO DE COBERTURA:</label>
+                                    <select id="discAutoCobTipo">
+                                        <option value="Compreensiva">Compreensiva</option>
+                                        <option value="Roubo/Furto">Roubo/Furto</option>
+                                        <option value="Terceiros">Terceiros</option>
+                                    </select>
+                                </div>
+                                <div class="cob-modern-group">
+                                    <label>TIPO DE FRANQUIA:</label>
+                                    <select id="discAutoCobFrqTipo">
+                                        <option value="Normal">Normal</option>
+                                        <option value="Majorada">Majorada</option>
+                                        <option value="Reduzida">Reduzida</option>
+                                        <option value="Isenta">Isenta</option>
+                                    </select>
+                                </div>
+                                <div class="cob-modern-group">
+                                    <label>% FRANQUIA:</label>
+                                    <select id="discAutoCobFrqPerc">
+                                        <option value="100%">100%</option>
+                                        <option value="150%">150%</option>
+                                        <option value="50%">50%</option>
+                                    </select>
+                                </div>
+                                <div class="cob-modern-group">
+                                    <label>FATOR AJUSTE:</label>
+                                    <div style="display: flex; align-items: center; gap: 5px;">
+                                        <input type="number" id="discAutoCobFatorAjuste" placeholder="100" style="width: 100%;">
+                                        <span style="font-weight: bold; color: #475569;">%</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="cob-modern-row" style="margin-bottom: 25px;">
+                                <div class="cob-modern-group" style="width: 100%;">
+                                    <label>VALOR DE REFERÊNCIA:</label>
+                                    <input type="text" id="discAutoCobValorRef" placeholder="R$ 0,00" style="background-color: #f8fafc;">
+                                </div>
+                            </div>
+
+                            <!-- CARROSEL (SCROLL HORIZONTAL) -->
+                            <div class="cob-modern-grid-wrapper">
+                                <div class="cob-modern-grid">
+                                    <!-- RCF -->
+                                    <fieldset class="cob-modern-fieldset">
+                                        <legend class="cob-modern-legend">RCF</legend>
+                                        <div class="cob-modern-group">
+                                            <label>DANOS MATERIAIS:</label>
+                                            <input type="text" id="discAutoCobRcfMat" placeholder="R$ 100.000,00">
+                                        </div>
+                                        <div class="cob-modern-group">
+                                            <label>DANOS CORPORAIS:</label>
+                                            <input type="text" id="discAutoCobRcfCorp" placeholder="R$ 100.000,00">
+                                        </div>
+                                        <div class="cob-modern-group">
+                                            <label>DANOS MORAIS:</label>
+                                            <input type="text" id="discAutoCobRcfMorais" placeholder="R$ 10.000,00">
+                                        </div>
+                                    </fieldset>
+
+                                    <!-- APP & ACESSÓRIOS -->
+                                    <div class="cob-modern-col">
+                                        <fieldset class="cob-modern-fieldset" style="flex: 1;">
+                                            <legend class="cob-modern-legend">APP</legend>
+                                            <div class="cob-modern-group">
+                                                <label>MORTE/INVALIDEZ:</label>
+                                                <input type="text" id="discAutoCobAppMorte" placeholder="R$ 5.000,00">
+                                            </div>
+                                        </fieldset>
+                                        <fieldset class="cob-modern-fieldset" style="flex: 1;">
+                                            <legend class="cob-modern-legend">Acessórios</legend>
+                                            <div class="cob-modern-group">
+                                                <label>KIT GÁS:</label>
+                                                <input type="text" id="discAutoCobAcessGas" placeholder="R$ 0,00">
+                                            </div>
+                                            <div class="cob-modern-group">
+                                                <label>BLINDAGEM:</label>
+                                                <input type="text" id="discAutoCobAcessBlind" placeholder="R$ 0,00">
+                                            </div>
+                                        </fieldset>
+                                    </div>
+
+                                    <!-- SERVIÇOS -->
+                                    <fieldset class="cob-modern-fieldset">
+                                        <legend class="cob-modern-legend">Serviços</legend>
+                                        <div class="cob-modern-group">
+                                            <label>ASSISTÊNCIA:</label>
+                                            <select id="discAutoCobServAssist">
+                                                <option value="Básica">Básica</option>
+                                                <option value="Completa">Completa</option>
+                                                <option value="VIP">VIP</option>
+                                            </select>
+                                        </div>
+                                        <div class="cob-modern-group">
+                                            <label>VIDROS:</label>
+                                            <select id="discAutoCobServVidros">
+                                                <option value="Básico">Básico</option>
+                                                <option value="Completo">Completo</option>
+                                                <option value="Blindado">Blindado</option>
+                                            </select>
+                                        </div>
+                                        <div class="cob-modern-group">
+                                            <label>CARRO RESERVA:</label>
+                                            <select id="discAutoCobServCarro">
+                                                <option value="Não">Não</option>
+                                                <option value="7 Dias" selected>7 Dias</option>
+                                                <option value="15 Dias">15 Dias</option>
+                                                <option value="30 Dias">30 Dias</option>
+                                                <option value="Livre">Livre</option>
+                                            </select>
+                                        </div>
+                                        <div style="display: flex; align-items: center; gap: 8px; margin-top: 5px;">
+                                            <input type="checkbox" id="discAutoCobServCarroAr" style="width: 18px; height: 18px; accent-color: var(--color-primary); cursor: pointer;">
+                                            <label for="discAutoCobServCarroAr" style="font-size: 13px; color: #475569; cursor: pointer; margin: 0; font-weight: 500; text-transform: none;">Com Ar Condicionado</label>
+                                        </div>
+                                    </fieldset>
+
+                                    <!-- OUTROS -->
+                                    <fieldset class="cob-modern-fieldset">
+                                        <legend class="cob-modern-legend">Outros</legend>
+                                        <div class="cob-modern-group">
+                                            <label>GARANTIA ZERO KM:</label>
+                                            <select id="discAutoCobOutrosZeroKm">
+                                                <option value="Não">Não</option>
+                                                <option value="Sim">Sim</option>
+                                            </select>
+                                        </div>
+                                        <div class="cob-modern-group">
+                                            <label>DESPESAS EXTRAS:</label>
+                                            <select id="discAutoCobOutrosDespExtras">
+                                                <option value="Não">Não</option>
+                                                <option value="Sim">Sim</option>
+                                            </select>
+                                        </div>
+                                        <div class="cob-modern-group">
+                                            <label>REPARO RÁPIDO:</label>
+                                            <select id="discAutoCobOutrosReparo">
+                                                <option value="Não">Não</option>
+                                                <option value="Sim">Sim</option>
+                                            </select>
+                                        </div>
+                                        <div class="cob-modern-group">
+                                            <label>PROTEÇÃO BURACOS:</label>
+                                            <select id="discAutoCobOutrosBuracos">
+                                                <option value="Não">Não</option>
+                                                <option value="Sim">Sim</option>
+                                            </select>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- FIM: COBERTURAS -->
+
+                        <!-- INÍCIO: QUESTIONÁRIO AUTO -->
+                        <h4 style="margin: 15px 0 10px; color: #1e293b; border-bottom: 1px solid #e2e8f0; padding-bottom: 5px;"><i class="fas fa-clipboard-list" style="color: #64748b;"></i> Questionário</h4>
+                        <div class="form-row">
+                            <div class="form-group flex-1">
+                                <label>Garagem na Residência:</label>
+                                <select id="discAutoGaragemRes">
+                                    <option value="">Selecione</option>
+                                    <option value="Sim">Sim</option>
+                                    <option value="Não">Não</option>
+                                </select>
+                            </div>
+                            <div class="form-group flex-1">
+                                <label>Garagem no Trabalho:</label>
+                                <select id="discAutoGaragemTrab">
+                                    <option value="">Selecione</option>
+                                    <option value="Sim">Sim</option>
+                                    <option value="Não">Não</option>
+                                </select>
+                            </div>
+                            <div class="form-group flex-1">
+                                <label>Garagem Local de Estudo:</label>
+                                <select id="discAutoGaragemEst">
+                                    <option value="">Selecione</option>
+                                    <option value="Sim">Sim</option>
+                                    <option value="Não">Não</option>
+                                </select>
+                            </div>
+                            <div class="form-group flex-1">
+                                <label>Tipo de Uso:</label>
+                                <select id="discAutoTipoUso">
+                                    <option value="">Selecione</option>
+                                    <option value="Passeio">Passeio</option>
+                                    <option value="Aplicativo">Aplicativo</option>
+                                    <option value="Comercial">Comercial</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group flex-1">
+                                <label>Menores de 26 Anos:</label>
+                                <select id="discAutoMenores26">
+                                    <option value="">Selecione</option>
+                                    <option value="Sim">Sim</option>
+                                    <option value="Não">Não</option>
+                                </select>
+                            </div>
+                            <div class="form-group flex-1">
+                                <label>Faixa Etária Res.:</label>
+                                <select id="discAutoFaixaEtaria">
+                                    <option value="">Selecione</option>
+                                    <option value="18 a 25 anos">18 a 25 anos</option>
+                                    <option value="26 a 35 anos">26 a 35 anos</option>
+                                    <option value="Acima de 35 anos">Acima de 35 anos</option>
+                                </select>
+                            </div>
+                            <div class="form-group flex-1">
+                                <label>Tipo de Residência:</label>
+                                <select id="discAutoTipoRes">
+                                    <option value="">Selecione</option>
+                                    <option value="Casa">Casa</option>
+                                    <option value="Apartamento">Apartamento</option>
+                                    <option value="Casa em Condomínio">Casa em Condomínio</option>
+                                </select>
+                            </div>
+                            <div class="form-group" style="flex: 0.5;">
+                                <label>KM Mensal:</label>
+                                <input type="number" id="discAutoKm" placeholder="Ex: 500">
+                            </div>
+                            <div class="form-group" style="flex: 0.5;">
+                                <label>PCD:</label>
+                                <select id="discAutoPcd">
+                                    <option value="Não">Não</option>
+                                    <option value="Sim">Sim</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group flex-1" style="max-width: 25%;">
+                                <label>Isenção Fiscal:</label>
+                                <select id="discAutoIsencao">
+                                    <option value="Não">Não</option>
+                                    <option value="Sim">Sim</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- FIM: QUESTIONÁRIO AUTO -->
+
+                        <!-- INÍCIO: DADOS DO VEÍCULO -->
+                        <h4 style="margin: 15px 0 10px; color: #1e293b; border-bottom: 1px solid #e2e8f0; padding-bottom: 5px;"><i class="fas fa-car" style="color: #64748b;"></i> Dados do Veículo</h4>
+                        <div class="form-row">
+                            <div class="form-group flex-2"><label>Chassi:</label><input type="text" id="discAutoChassi" placeholder="Número do Chassi"></div>
+                            <div class="form-group flex-1"><label>Placa:</label><input type="text" id="discAutoPlaca" placeholder="ABC-1234"></div>
+                            <div class="form-group flex-1"><label>Ano Fab.:</label><input type="text" id="discAutoAnoFab" placeholder="YYYY"></div>
+                            <div class="form-group flex-1"><label>Ano Modelo:</label><input type="text" id="discAutoAnoModelo" placeholder="YYYY"></div>
+                            <div class="form-group flex-1">
+                                <label>Zero KM:</label>
+                                <select id="discAutoZeroKm">
+                                    <option value="">Selecione</option>
+                                    <option value="Sim">Sim</option>
+                                    <option value="Nao">Não</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group flex-1"><label>Código FIPE:</label><input type="text" id="discAutoFipe" placeholder="000000-0"></div>
+                            <div class="form-group flex-2"><label>Modelo:</label><input type="text" id="discAutoModelo" placeholder="Ex: Onix 1.0 MT"></div>
+                            <div class="form-group flex-1"><label>Marca:</label><input type="text" id="discAutoMarca" placeholder="Ex: Chevrolet"></div>
+                            <div class="form-group flex-1">
+                                <label>Combustível:</label>
+                                <select id="discAutoCombustivel">
+                                    <option value="">Selecione</option>
+                                    <option value="Flex">Flex</option>
+                                    <option value="Gasolina">Gasolina</option>
+                                    <option value="Etanol">Etanol</option>
+                                    <option value="Diesel">Diesel</option>
+                                    <option value="Eletrico">Elétrico</option>
+                                    <option value="Hibrido">Híbrido</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <h4 style="margin: 15px 0 10px; color: #1e293b; border-bottom: 1px solid #e2e8f0; padding-bottom: 5px;"><i class="fas fa-list-alt" style="color: #64748b;"></i> Informações Adicionais (Veículo)</h4>
+                        <div class="form-row">
+                            <div class="form-group flex-1"><label>CEP Pernoite:</label><input type="text" id="discAutoCepPernoite" placeholder="00000-000" maxlength="9"></div>
+                            <div class="form-group flex-1">
+                                <label>Kit Gás:</label>
+                                <select id="discAutoKitGas">
+                                    <option value="Nao">Não</option>
+                                    <option value="Sim">Sim</option>
+                                </select>
+                            </div>
+                            <div class="form-group flex-1">
+                                <label>Blindado:</label>
+                                <select id="discAutoBlindado">
+                                    <option value="Nao">Não</option>
+                                    <option value="Sim">Sim</option>
+                                </select>
+                            </div>
+                            <div class="form-group flex-1">
+                                <label>Alienado:</label>
+                                <select id="discAutoAlienado">
+                                    <option value="">Selecione</option>
+                                    <option value="Nao">Não</option>
+                                    <option value="Sim">Sim</option>
+                                </select>
+                            </div>
+                            <div class="form-group flex-1">
+                                <label>Rastreador:</label>
+                                <select id="discAutoRastreador">
+                                    <option value="Nao Possui">Não Possui</option>
+                                    <option value="Possui">Possui</option>
+                                </select>
+                            </div>
+                            <div class="form-group flex-1">
+                                <label>Antifurto:</label>
+                                <select id="discAutoAntifurto">
+                                    <option value="Nao Possui">Não Possui</option>
+                                    <option value="Possui">Possui</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group flex-1"><label>Uso do Veículo (Obs):</label><input type="text" id="discAutoUso" placeholder="Ex: Passeio / App"></div>
+                        </div>
+                        <!-- FIM: DADOS DO VEÍCULO -->
+
+                        <!-- INÍCIO: DADOS DO CONDUTOR -->
+                        <h4 style="margin: 15px 0 10px; color: #1e293b; border-bottom: 1px solid #e2e8f0; padding-bottom: 5px;"><i class="fas fa-user-alt" style="color: #64748b;"></i> Dados do Condutor</h4>
+                        <div class="form-row">
+                            <div class="form-group flex-1">
+                                <label>Relação com o Segurado:</label>
+                                <select id="discAutoCondutorRelacao">
+                                    <option value="">Selecione</option>
+                                    <option value="Proprio">Próprio</option>
+                                    <option value="Conjuge">Cônjuge</option>
+                                    <option value="Empregado(a)">Empregado(a)</option>
+                                    <option value="Irmao(a)">Irmão(ã)</option>
+                                    <option value="Filho(a)">Filho(a)</option>
+                                    <option value="Mae">Mãe</option>
+                                    <option value="Pai">Pai</option>
+                                    <option value="Outros">Outros</option>
+                                </select>
+                            </div>
+                            <div class="form-group flex-1"><label>CPF:</label><input type="text" id="discAutoCondutorCpf" placeholder="000.000.000-00"></div>
+                            <div class="form-group flex-2"><label>Nome:</label><input type="text" id="discAutoCondutorNome" placeholder="Nome do condutor"></div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group flex-1"><label>Nascimento:</label><input type="text" id="discAutoCondutorNascimento" placeholder="DD/MM/AAAA"></div>
+                            <div class="form-group flex-1">
+                                <label>Gênero:</label>
+                                <select id="discAutoCondutorGenero">
+                                    <option value="">Selecione</option>
+                                    <option value="Masculino">Masculino</option>
+                                    <option value="Feminino">Feminino</option>
+                                    <option value="Outro">Outro</option>
+                                </select>
+                            </div>
+                            <div class="form-group flex-1">
+                                <label>Estado Civil:</label>
+                                <select id="discAutoCondutorEstadoCivil">
+                                    <option value="">Selecione</option>
+                                    <option value="Solteiro(a)">Solteiro(a)</option>
+                                    <option value="Casado(a)">Casado(a)</option>
+                                    <option value="Divorciado(a)">Divorciado(a)</option>
+                                    <option value="Viuvo(a)">Viúvo(a)</option>
+                                    <option value="Uniao Estavel">União Estável</option>
+                                </select>
+                            </div>
+                            <div class="form-group flex-1">
+                                <label>Tempo de Habilitação:</label>
+                                <select id="discAutoCondutorTempoHab">
+                                    <option value="">Selecione</option>
+                                    <option value="Menos de 1 Ano">Menos de 1 Ano</option>
+                                    <option value="1 Ano">1 Ano</option>
+                                    <option value="2 Anos">2 Anos</option>
+                                    <option value="3 Anos ou mais">3 Anos ou mais</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- FIM: DADOS DO CONDUTOR -->
+                    </div>
+
+                    <!-- ABA: SEGURO RESIDENCIAL -->
+                    <div id="disc-aba-residencial" class="tab-content">
+                        <div class="status-bar-tab">
+                            <label class="chk-interesse"><input type="checkbox" id="chkInteresseResidencial"> <i class="fas fa-house-user"></i> Tem interesse?</label>
+                            <label class="chk-contrato"><input type="checkbox" id="chkContratoResidencial"> <i class="fas fa-check-circle"></i> Já contratado?</label>
+                        </div>
+
+                        <h4 style="margin: 5px 0 10px; color: #1e293b; border-bottom: 1px solid #e2e8f0; padding-bottom: 5px;"><i class="fas fa-home" style="color: #64748b;"></i> Imóvel</h4>
+                        <div class="form-row">
+                            <div class="form-group flex-1">
+                                <label>Tipo de Residência:</label>
+                                <select id="discResTipoResidencia">
+                                    <option value="">Selecione</option>
+                                    <option value="Casa">Casa</option>
+                                    <option value="Apartamento">Apartamento</option>
+                                </select>
+                            </div>
+                            <div class="form-group flex-1">
+                                <label>Tipo de Construção:</label>
+                                <select id="discResTipoConstrucao">
+                                    <option value="">Selecione</option>
+                                    <option value="Superior">Superior</option>
+                                    <option value="Sólida">Sólida</option>
+                                    <option value="Mista">Mista</option>
+                                    <option value="Inferior">Inferior</option>
+                                </select>
+                            </div>
+                            <div class="form-group flex-1">
+                                <label>Tipo de Ocupação:</label>
+                                <select id="discResTipoOcupacao">
+                                    <option value="">Selecione</option>
+                                    <option value="Habitual">Habitual</option>
+                                    <option value="Veraneio">Veraneio</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <h4 style="margin: 15px 0 10px; color: #1e293b; border-bottom: 1px solid #e2e8f0; padding-bottom: 5px;"><i class="fas fa-map-marker-alt" style="color: #64748b;"></i> Endereço do Imóvel</h4>
+                        <div class="form-row">
+                            <div class="form-group flex-1"><label>CEP:</label><input type="text" id="discResCep" placeholder="00000-000"></div>
+                            <div class="form-group flex-2"><label>Logradouro:</label><input type="text" id="discResLogradouro" placeholder="Rua, Av, etc."></div>
+                            <div class="form-group" style="flex: 0.5;"><label>Número:</label><input type="text" id="discResNumero" placeholder="123"></div>
+                            <div class="form-group flex-1"><label>Complemento:</label><input type="text" id="discResComplemento" placeholder="Apto, Bloco"></div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group flex-1"><label>Bairro:</label><input type="text" id="discResBairro" placeholder="Bairro"></div>
+                            <div class="form-group flex-1"><label>Cidade:</label><input type="text" id="discResCidade" placeholder="Cidade"></div>
+                            <div class="form-group" style="flex: 0.5;"><label>UF:</label><input type="text" id="discResUf" placeholder="UF"></div>
+                        </div>
+                    </div>
+
+                    <!-- ABA: SEGURO DE VIDA -->
+                    <div id="disc-aba-vida" class="tab-content">
+                        <div class="status-bar-tab">
+                            <label class="chk-interesse"><input type="checkbox" id="chkInteresseVida"> <i class="fas fa-user-shield"></i> Tem interesse?</label>
+                            <label class="chk-contrato"><input type="checkbox" id="chkContratoVida"> <i class="fas fa-check-circle"></i> Já contratado?</label>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group flex-1"><label>Capital Segurado Desejado:</label><input type="text" id="discVidaCapital" placeholder="R$ 0,00"></div>
+                            <div class="form-group flex-1"><label>Profissão Específica (Risco):</label><input type="text" id="discVidaProfissao" placeholder="Ex: Motoboy, Médico"></div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group flex-1">
+                                <label>Estado Civil:</label>
+                                <select id="discVidaEstadoCivil">
+                                    <option value="">Selecione...</option>
+                                    <option value="solteiro">Solteiro(a)</option>
+                                    <option value="casado">Casado(a)</option>
+                                    <option value="divorciado">Divorciado(a)</option>
+                                    <option value="viuvo">Viúvo(a)</option>
+                                    <option value="uniao_estavel">União Estável</option>
+                                </select>
+                            </div>
+                            <div class="form-group flex-1">
+                                <label>Ocupação Atual:</label>
+                                <input type="text" id="discVidaOcupacao" placeholder="Ex: Empresário, Autônomo...">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group flex-1">
+                                <label>Peso (kg):</label>
+                                <input type="text" id="discVidaPeso" placeholder="Ex: 80">
+                            </div>
+                            <div class="form-group flex-1">
+                                <label>Altura (m):</label>
+                                <input type="text" id="discVidaAltura" placeholder="Ex: 1.75">
+                            </div>
+                            <div class="form-group flex-1">
+                                <label>Fumante:</label>
+                                <select id="discVidaFumante">
+                                    <option value="">Selecione</option>
+                                    <option value="nao">Não</option>
+                                    <option value="sim">Sim</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group flex-1">
+                                <label>Renda Média Mensal:</label>
+                                <input type="text" id="discVidaRenda" placeholder="R$ 0,00">
+                            </div>
+                            <div class="form-group flex-1">
+                                <label>Qtd. Dependentes Financeiros:</label>
+                                <input type="number" id="discVidaDependentes" placeholder="Ex: 2">
+                            </div>
+                            <div class="form-group flex-1">
+                                <label>Aposentado:</label>
+                                <select id="discVidaAposentado">
+                                    <option value="nao">Não</option>
+                                    <option value="tempo_idade">Tempo/Idade</option>
+                                    <option value="invalidez">Invalidez</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group flex-1">
+                                <label>Seguros Vigentes Atualmente:</label>
+                                <input type="text" id="discVidaSegurosVigentes" placeholder="Ex: Seguro de empresa, apólice individual...">
+                            </div>
+                            <div class="form-group flex-1">
+                                <label>Objetivo Principal com o Seguro:</label>
+                                <input type="text" id="discVidaObjetivo" placeholder="Ex: Proteção familiar, sucessão, invalidez...">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group flex-1">
+                                <label>Pratica atividades físicas regularmente?</label>
+                                <select id="discVidaAtividadesFisicas">
+                                    <option value="">Selecione...</option>
+                                    <option value="sim">Sim</option>
+                                    <option value="nao">Não</option>
+                                </select>
+                            </div>
+                            <div class="form-group flex-1">
+                                <label>Esporte:</label>
+                                <input type="text" id="discVidaEsporte" placeholder="Qual esporte?">
+                            </div>
+                            <div class="form-group flex-1">
+                                <label>Histórico de doenças na família:</label>
+                                <input type="text" id="discVidaHistoricoDoencas" placeholder="Ex: Diabetes, hipertensão, câncer...">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group flex-1">
+                                <label>Vigência Inicial:</label>
+                                <input type="date" id="discVidaVigencia">
+                            </div>
+                            <div class="form-group flex-1">
+                                <label>Comissão (%):</label>
+                                <div style="display: flex; align-items: center; gap: 8px;">
+                                    <input type="number" id="discVidaComissao" placeholder="0" min="0" step="0.01" style="width: 100%;">
+                                    <span style="color: #64748b; font-weight: 700; font-size: 16px;">%</span>
+                                </div>
+                            </div>
+                            <div class="form-group flex-1">
+                                <label>Agenciamento (%):</label>
+                                <div style="display: flex; align-items: center; gap: 8px;">
+                                    <input type="number" id="discVidaAgenciamento" placeholder="0" min="0" step="0.01" style="width: 100%;">
+                                    <span style="color: #64748b; font-weight: 700; font-size: 16px;">%</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- NOVOS CAMPOS: COTAÇÕES DE VIDA (PF, PME, PJ) -->
+                        <div class="form-row">
+                            <div class="form-group flex-1">
+                                <label>Cotação PF:</label>
+                                <div style="display: flex; gap: 5px;">
+                                    <input type="text" id="discVidaCotacaoPF" placeholder="Link PF" style="width: 100%;">
+                                    <button type="button" id="btnAbrirVidaCotacaoPF" class="btn-modal-secundario" style="padding: 0 12px; cursor: pointer;" title="Abrir Link PF"><i class="fas fa-external-link-alt"></i></button>
+                                </div>
+                            </div>
+                            <div class="form-group flex-1">
+                                <label>Cotação PME:</label>
+                                <div style="display: flex; gap: 5px;">
+                                    <input type="text" id="discVidaCotacaoPME" placeholder="Link PME" style="width: 100%;">
+                                    <button type="button" id="btnAbrirVidaCotacaoPME" class="btn-modal-secundario" style="padding: 0 12px; cursor: pointer;" title="Abrir Link PME"><i class="fas fa-external-link-alt"></i></button>
+                                </div>
+                            </div>
+                            <div class="form-group flex-1">
+                                <label>Cotação PJ:</label>
+                                <div style="display: flex; gap: 5px;">
+                                    <input type="text" id="discVidaCotacaoPJ" placeholder="Link PJ" style="width: 100%;">
+                                    <button type="button" id="btnAbrirVidaCotacaoPJ" class="btn-modal-secundario" style="padding: 0 12px; cursor: pointer;" title="Abrir Link PJ"><i class="fas fa-external-link-alt"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ABA: CONSÓRCIO -->
+                    <div id="disc-aba-consorcio" class="tab-content">
+                        <div class="status-bar-tab">
+                            <label class="chk-interesse"><input type="checkbox" id="chkInteresseConsorcio"> <i class="fas fa-home"></i> Tem interesse?</label>
+                            <label class="chk-contrato"><input type="checkbox" id="chkContratoConsorcio"> <i class="fas fa-check-circle"></i> Já contratado?</label>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group flex-1"><label>Tipo de Consórcio:</label>
+                                <select id="discConsorcioTipo">
+                                    <option value="">Selecione...</option>
+                                    <option value="imovel">Imóvel</option>
+                                    <option value="automovel">Automóvel</option>
+                                    <option value="servicos">Serviços</option>
+                                </select>
+                            </div>
+                            <div class="form-group flex-1"><label>Carta de Crédito:</label><input type="text" id="discConsorcioCarta" placeholder="R$ 0,00"></div>
+                        </div>
+                    </div>
+
+                    <!-- ABA: PET -->
+                    <div id="disc-aba-pet" class="tab-content">
+                        <p style="padding: 20px; color: #64748b; text-align: center; font-weight: 500;">Campos em construção...</p>
+                    </div>
+
+                    <!-- ABA: VIAGEM -->
+                    <div id="disc-aba-viagem" class="tab-content">
+                        <p style="padding: 20px; color: #64748b; text-align: center; font-weight: 500;">Campos em construção...</p>
+                    </div>
+
+                    <!-- ABA: EMPRESARIAL -->
+                    <div id="disc-aba-empresarial" class="tab-content">
+                        <p style="padding: 20px; color: #64748b; text-align: center; font-weight: 500;">Campos em construção...</p>
+                    </div>
+
+                    <!-- ABA: OUTROS SEGUROS -->
+                    <div id="disc-aba-outros" class="tab-content">
+                        <div class="status-bar-tab">
+                            <label class="chk-interesse"><input type="checkbox" id="chkInteresseOutros"> <i class="fas fa-box-open"></i> Tem interesse?</label>
+                            <label class="chk-contrato"><input type="checkbox" id="chkContratoOutros"> <i class="fas fa-check-circle"></i> Já contratado?</label>
+                        </div>
+
+                        <div class="form-row" style="margin-bottom: 0;">
+                            <div class="form-group flex-1"><label>Tipo de Seguro (Ex: Residencial, Fiança):</label><input type="text" id="discOutrosTipo" placeholder="Ex: Empresarial"></div>
+                            <div class="form-group flex-2"><label>Detalhes Específicos / Coberturas:</label><input type="text" id="discOutrosDetalhes" placeholder="Metragem, coberturas..."></div>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; justify-content: flex-end; margin-top: 30px; border-top: 1px solid var(--color-border); padding-top: 20px;">
+                        <button type="button" class="btn-modal-salvar" id="btnSalvarEdicao" onclick="salvarEdicaoLead()">
+                            <i class="fas fa-save"></i> Salvar Alterações
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Script do Supabase e Lógica -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        const supabaseUrl = 'https://flbxxsttexpxumbfqaxv.supabase.co'; // Corrigido (sem /rest/v1/)
+        const supabaseKey = 'sb_publishable_OqPx1lTVT1XTGbMkDfc0MQ_vAXVltis'; // Chave atualizada
+        const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+        let todosOsLeads = []; 
+        let leadAtualDiscador = null;
+        let modoAtual = 'ligacao'; 
+        let leadsPuladosTemporariamente = []; 
+        let NOME_VENDEDOR_LOGADO = null; 
+
+        // --- MÁSCARAS ---
+        function mascaraTelefoneFixo(valor) {
+            if (!valor) return '';
+            valor = String(valor).replace(/\D/g, ""); 
+            valor = valor.substring(0, 11);  
+            valor = valor.replace(/^(\d{2})(\d)/g, "($1) $2"); 
+            valor = valor.replace(/(\d)(\d{4})$/, "$1-$2");    
+            return valor;
+        }
+
+        document.getElementById('discTelefoneFixo').addEventListener('input', function(e) {
+            e.target.value = mascaraTelefoneFixo(e.target.value);
+        });
+
+        document.getElementById('discCep').addEventListener('input', function(e) {
+            let valor = e.target.value.replace(/\D/g, "");
+            valor = valor.substring(0, 8); 
+            valor = valor.replace(/^(\d{5})(\d)/, "$1-$2"); 
+            e.target.value = valor;
+        });
+
+        document.getElementById('discAutoCepPernoite').addEventListener('input', function(e) {
+            let valor = e.target.value.replace(/\D/g, "");
+            valor = valor.substring(0, 8);
+            valor = valor.replace(/^(\d{5})(\d)/, "$1-$2");
+            e.target.value = valor;
+        });
+
+        document.getElementById('discResCep').addEventListener('input', function(e) {
+            let valor = e.target.value.replace(/\D/g, "");
+            valor = valor.substring(0, 8);
+            valor = valor.replace(/^(\d{5})(\d)/, "$1-$2");
+            e.target.value = valor;
+        });
+
+        // --- MÁSCARA PARA CPF DO CONDUTOR ---
+        document.getElementById('discAutoCondutorCpf').addEventListener('input', function(e) {
+            let valor = e.target.value.replace(/\D/g, "");
+            valor = valor.substring(0, 11); 
+            valor = valor.replace(/(\d{3})(\d)/, "$1.$2");
+            valor = valor.replace(/(\d{3})(\d)/, "$1.$2");
+            valor = valor.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+            e.target.value = valor;
+        });
+
+        function mudarAbaDiscador(event, idAba) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+            document.getElementById(idAba).classList.add('active');
+        }
+
+        window.addEventListener('load', iniciarSistema);
+
+        async function iniciarSistema() {
+            const { data: { session }, error } = await supabaseClient.auth.getSession();
+            
+            if (error || !session) {
+                window.location.href = '../index.html'; 
+                return;
+            }
+
+            const emailLogado = session.user.email;
+
+            const { data: usuarioData, error: dbError } = await supabaseClient
+                .from('usuarios')
+                .select('nome')
+                .eq('email', emailLogado)
+                .single();
+
+            if (usuarioData && usuarioData.nome) {
+                NOME_VENDEDOR_LOGADO = usuarioData.nome;
+                document.getElementById('nomeVendedorLogado').textContent = NOME_VENDEDOR_LOGADO;
+            } else {
+                NOME_VENDEDOR_LOGADO = emailLogado;
+                document.getElementById('nomeVendedorLogado').textContent = emailLogado;
+            }
+
+            await carregarLeads();
+        }
+
+        async function fazerLogout() {
+            await supabaseClient.auth.signOut();
+            window.location.href = '../index.html';
+        }
+
+        function setModo(modo) {
+            modoAtual = modo;
+            if(modo === 'ligacao') {
+                document.getElementById('btnModoLigacao').classList.add('ativo');
+                document.getElementById('btnModoWhats').classList.remove('ativo');
+            } else {
+                document.getElementById('btnModoWhats').classList.add('ativo');
+                document.getElementById('btnModoLigacao').classList.remove('ativo');
+            }
+        }
+
+        async function carregarLeads() {
+            let query = supabaseClient
+                .from('leads')
+                .select('*')
+                .order('id', { ascending: false })
+                .or(`vendedor.eq.${NOME_VENDEDOR_LOGADO},vendedor.is.null,vendedor.eq.`);
+
+            const { data: leads, error } = await query;
+
+            if (!error) {
+                todosOsLeads = leads; 
+                puxarLeadAleatorio(); 
+                atualizarNotificacoes(); 
+            } else {
+                console.error("Erro ao carregar leads:", error);
+            }
+        }
+
+        function puxarLeadAleatorio() {
+            let hoje = new Date();
+            hoje.setMinutes(hoje.getMinutes() - hoje.getTimezoneOffset());
+            hoje = hoje.toISOString().split('T')[0];
+
+            let leadsPrioridade = [];
+            let leadsNormais = [];
+
+            todosOsLeads.forEach(l => {
+                if (l.status === 'Sem Interesse') return;
+                if (leadsPuladosTemporariamente.includes(l.id)) return;
+
+                let hasData = l.data_prioridade && l.data_prioridade !== '';
+
+                if (hasData) {
+                    if (l.data_prioridade <= hoje && l.vendedor === NOME_VENDEDOR_LOGADO) {
+                        leadsPrioridade.push(l);
+                    }
+                    return; 
+                }
+
+                let st = l.status ? l.status.toLowerCase() : '';
+                if (st === 'fechados' || st === 'fechado' || st === 'perdido') return; 
+                if (st === 'interessado' || st === 'interesse') {
+                    leadsPrioridade.push(l); 
+                    return;
+                }
+
+                const numLigacao = l.tentativas_ligacao || 0;
+                const numWhats = l.tentativas_whatsapp || 0;
+                if (numLigacao >= 4 && numWhats >= 4) return; 
+
+                leadsNormais.push(l);
+            });
+            
+            if (leadsPrioridade.length > 0) {
+                leadAtualDiscador = leadsPrioridade[0]; 
+                document.getElementById('discUltimoContato').textContent = "⭐ PRIORIDADE AGENDADA ⭐";
+            } else if (leadsNormais.length > 0) {
+                const randomIndex = Math.floor(Math.random() * leadsNormais.length);
+                leadAtualDiscador = leadsNormais[randomIndex];
+                document.getElementById('discUltimoContato').textContent = "Pronto para o contato!";
+            } else {
+                document.getElementById('discUltimoContato').textContent = "Nenhum lead livre ou na sua carteira para ligar!";
+                leadAtualDiscador = null;
+                limparTelaDiscador();
+                return;
+            }
+
+            renderizarLeadAtual();
+        }
+
+        function renderizarLeadAtual() {
+            if (!leadAtualDiscador) return;
+
+            document.getElementById('discNumero').textContent = leadAtualDiscador.numero || '---';
+            document.getElementById('discNome').textContent = leadAtualDiscador.nome || 'Sem Nome';
+            document.getElementById('discContLigacao').textContent = leadAtualDiscador.tentativas_ligacao || 0;
+            document.getElementById('discContWhats').textContent = leadAtualDiscador.tentativas_whatsapp || 0;
+            document.getElementById('discDonoLead').textContent = leadAtualDiscador.vendedor ? leadAtualDiscador.vendedor : 'Livre (Sem dono)';
+
+            // DADOS GERAIS
+            document.getElementById('discTelefoneFixo').value = leadAtualDiscador.telefone_fixo ? mascaraTelefoneFixo(String(leadAtualDiscador.telefone_fixo)) : '';
+            document.getElementById('discCep').value = leadAtualDiscador.cep || '';
+            document.getElementById('discGenero').value = leadAtualDiscador.genero || '';
+            document.getElementById('discEstadoCivil').value = leadAtualDiscador.estado_civil || '';
+
+            document.getElementById('discEmail').value = leadAtualDiscador.email || '';
+            document.getElementById('discCpf').value = leadAtualDiscador.cpf_cnpj || '';
+            document.getElementById('discNascimento').value = leadAtualDiscador.data_nascimento || '';
+            document.getElementById('discIdade').value = leadAtualDiscador.idade || '';
+            document.getElementById('discCidade').value = leadAtualDiscador.cidade || '';
+            document.getElementById('discProfissao').value = leadAtualDiscador.profissao || '';
+            document.getElementById('discOrigem').value = leadAtualDiscador.origem_lead || '';
+            document.getElementById('discTipo').value = leadAtualDiscador.tipo_lead || '';
+            document.getElementById('discValorEsp').value = leadAtualDiscador.valor_esperado || '';
+            document.getElementById('discValorAtual').value = leadAtualDiscador.valor_atual || '';
+            document.getElementById('discObs').value = leadAtualDiscador.obs || '';
+            
+            document.getElementById('discPlanoAnt').value = leadAtualDiscador.plano_anterior || '';
+            document.getElementById('discPlanoInt').value = leadAtualDiscador.plano_interesse || '';
+            document.getElementById('discDataPrioridade').value = leadAtualDiscador.data_prioridade || '';
+            
+            document.getElementById('discLinkCotacaoPF').value = leadAtualDiscador.link_cotacao_pf || '';
+            document.getElementById('discLinkCotacaoPME').value = leadAtualDiscador.link_cotacao_pme || '';
+            document.getElementById('discLinkCotacaoAdesao').value = leadAtualDiscador.link_cotacao_adesao || '';
+            
+            document.getElementById('discPlanoOdontoInteresse').value = leadAtualDiscador.plano_odonto_interesse || '';
+            document.getElementById('discValorOdonto').value = leadAtualDiscador.valor_odonto || '';
+            document.getElementById('discLinkCotacaoOdonto').value = leadAtualDiscador.link_cotacao_odonto || '';
+
+            // CARREGA AUTO - COTAÇÕES (NOVOS CAMPOS)
+            document.getElementById('discAutoCotacaoCPF').value = leadAtualDiscador.auto_cotacao_pf || '';
+            document.getElementById('discAutoCotacaoCNPJ').value = leadAtualDiscador.auto_cotacao_cnpj || '';
+            document.getElementById('discAutoCotacaoFrota').value = leadAtualDiscador.auto_cotacao_frota || '';
+
+            // CARREGA AUTO - SEGURO 
+            document.getElementById('discAutoTipoSeguro').value = leadAtualDiscador.auto_tipo_seguro || 'Novo';
+            document.getElementById('discAutoVigenciaInicial').value = leadAtualDiscador.auto_vigencia_inicial || '';
+            document.getElementById('discAutoVigenciaFinal').value = leadAtualDiscador.auto_vigencia_final || '';
+            document.getElementById('discAutoComissao').value = leadAtualDiscador.auto_comissao || '';
+            document.getElementById('discAutoBancoRelacionamento').value = leadAtualDiscador.auto_banco_relacionamento || 'Não Informado';
+            
+            // CARREGA AUTO - COBERTURAS
+            document.getElementById('discAutoCobTipo').value = leadAtualDiscador.auto_cob_tipo || 'Compreensiva';
+            document.getElementById('discAutoCobFrqTipo').value = leadAtualDiscador.auto_cob_frq_tipo || 'Normal';
+            document.getElementById('discAutoCobFrqPerc').value = leadAtualDiscador.auto_cob_frq_perc || '100%';
+            document.getElementById('discAutoCobFatorAjuste').value = leadAtualDiscador.auto_cob_fator_ajuste || '';
+            document.getElementById('discAutoCobValorRef').value = leadAtualDiscador.auto_cob_valor_ref || '';
+            document.getElementById('discAutoCobRcfMat').value = leadAtualDiscador.auto_cob_rcf_mat || '';
+            document.getElementById('discAutoCobRcfCorp').value = leadAtualDiscador.auto_cob_rcf_corp || '';
+            document.getElementById('discAutoCobRcfMorais').value = leadAtualDiscador.auto_cob_rcf_morais || '';
+            document.getElementById('discAutoCobAppMorte').value = leadAtualDiscador.auto_cob_app_morte || '';
+            document.getElementById('discAutoCobAcessGas').value = leadAtualDiscador.auto_cob_acess_gas || '';
+            document.getElementById('discAutoCobAcessBlind').value = leadAtualDiscador.auto_cob_acess_blind || '';
+            document.getElementById('discAutoCobServAssist').value = leadAtualDiscador.auto_cob_serv_assist || 'Básica';
+            document.getElementById('discAutoCobServVidros').value = leadAtualDiscador.auto_cob_serv_vidros || 'Básico';
+            document.getElementById('discAutoCobServCarro').value = leadAtualDiscador.auto_cob_serv_carro || '7 Dias';
+            document.getElementById('discAutoCobServCarroAr').checked = leadAtualDiscador.auto_cob_serv_carro_ar || false;
+            document.getElementById('discAutoCobOutrosZeroKm').value = leadAtualDiscador.auto_cob_outros_zero_km || 'Não';
+            document.getElementById('discAutoCobOutrosDespExtras').value = leadAtualDiscador.auto_cob_outros_desp_extras || 'Não';
+            document.getElementById('discAutoCobOutrosReparo').value = leadAtualDiscador.auto_cob_outros_reparo || 'Não';
+            document.getElementById('discAutoCobOutrosBuracos').value = leadAtualDiscador.auto_cob_outros_buracos || 'Não';
+
+            // QUESTIONÁRIO AUTO
+            document.getElementById('discAutoGaragemRes').value = leadAtualDiscador.auto_garagem_res || '';
+            document.getElementById('discAutoGaragemTrab').value = leadAtualDiscador.auto_garagem_trab || '';
+            document.getElementById('discAutoGaragemEst').value = leadAtualDiscador.auto_garagem_est || '';
+            document.getElementById('discAutoTipoUso').value = leadAtualDiscador.auto_tipo_uso || '';
+            document.getElementById('discAutoMenores26').value = leadAtualDiscador.auto_menores_26 || '';
+            document.getElementById('discAutoFaixaEtaria').value = leadAtualDiscador.auto_faixa_etaria || '';
+            document.getElementById('discAutoTipoRes').value = leadAtualDiscador.auto_tipo_res || '';
+            document.getElementById('discAutoKm').value = leadAtualDiscador.auto_km || '';
+            document.getElementById('discAutoPcd').value = leadAtualDiscador.auto_pcd || 'Não';
+            document.getElementById('discAutoIsencao').value = leadAtualDiscador.auto_isencao || 'Não';
+
+            // DADOS AUTO E CONDUTOR
+            document.getElementById('discAutoChassi').value = leadAtualDiscador.auto_chassi || '';
+            document.getElementById('discAutoPlaca').value = leadAtualDiscador.auto_placa || '';
+            document.getElementById('discAutoAnoFab').value = leadAtualDiscador.auto_ano_fab || '';
+            document.getElementById('discAutoAnoModelo').value = leadAtualDiscador.auto_ano_modelo || '';
+            document.getElementById('discAutoZeroKm').value = leadAtualDiscador.auto_zero_km || '';
+            document.getElementById('discAutoFipe').value = leadAtualDiscador.auto_fipe || '';
+            document.getElementById('discAutoModelo').value = leadAtualDiscador.auto_modelo || '';
+            document.getElementById('discAutoMarca').value = leadAtualDiscador.auto_marca || '';
+            document.getElementById('discAutoCombustivel').value = leadAtualDiscador.auto_combustivel || '';
+            
+            document.getElementById('discAutoCepPernoite').value = leadAtualDiscador.auto_cep_pernoite || '';
+            document.getElementById('discAutoKitGas').value = leadAtualDiscador.auto_kit_gas || 'Nao';
+            document.getElementById('discAutoBlindado').value = leadAtualDiscador.auto_blindado || 'Nao';
+            document.getElementById('discAutoAlienado').value = leadAtualDiscador.auto_alienado || '';
+            document.getElementById('discAutoRastreador').value = leadAtualDiscador.auto_rastreador || 'Nao Possui';
+            document.getElementById('discAutoAntifurto').value = leadAtualDiscador.auto_antifurto || 'Nao Possui';
+            document.getElementById('discAutoUso').value = leadAtualDiscador.auto_uso || '';
+
+            document.getElementById('discAutoCondutorRelacao').value = leadAtualDiscador.auto_condutor_relacao || '';
+            document.getElementById('discAutoCondutorCpf').value = leadAtualDiscador.auto_condutor_cpf || '';
+            document.getElementById('discAutoCondutorNome').value = leadAtualDiscador.auto_condutor_nome || '';
+            document.getElementById('discAutoCondutorNascimento').value = leadAtualDiscador.auto_condutor_nascimento || '';
+            document.getElementById('discAutoCondutorGenero').value = leadAtualDiscador.auto_condutor_genero || '';
+            document.getElementById('discAutoCondutorEstadoCivil').value = leadAtualDiscador.auto_condutor_estado_civil || '';
+            document.getElementById('discAutoCondutorTempoHab').value = leadAtualDiscador.auto_condutor_tempo_hab || '';
+
+            // CARREGA RESIDENCIAL
+            document.getElementById('discResTipoResidencia').value = leadAtualDiscador.res_tipo_residencia || '';
+            document.getElementById('discResTipoConstrucao').value = leadAtualDiscador.res_tipo_construcao || '';
+            document.getElementById('discResTipoOcupacao').value = leadAtualDiscador.res_tipo_ocupacao || '';
+            document.getElementById('discResCep').value = leadAtualDiscador.res_cep || '';
+            document.getElementById('discResLogradouro').value = leadAtualDiscador.res_logradouro || '';
+            document.getElementById('discResNumero').value = leadAtualDiscador.res_numero || '';
+            document.getElementById('discResComplemento').value = leadAtualDiscador.res_complemento || '';
+            document.getElementById('discResBairro').value = leadAtualDiscador.res_bairro || '';
+            document.getElementById('discResCidade').value = leadAtualDiscador.res_cidade || '';
+            document.getElementById('discResUf').value = leadAtualDiscador.res_uf || '';
+
+            // VIDA
+            document.getElementById('discVidaCapital').value = leadAtualDiscador.vida_capital || '';
+            document.getElementById('discVidaProfissao').value = leadAtualDiscador.vida_profissao || '';
+            document.getElementById('discVidaEstadoCivil').value = leadAtualDiscador.vida_estado_civil || '';
+            document.getElementById('discVidaOcupacao').value = leadAtualDiscador.vida_ocupacao_atual || '';
+            document.getElementById('discVidaPeso').value = leadAtualDiscador.vida_peso || '';
+            document.getElementById('discVidaAltura').value = leadAtualDiscador.vida_altura || '';
+            document.getElementById('discVidaFumante').value = leadAtualDiscador.vida_fumante || ''; 
+            document.getElementById('discVidaEsporte').value = leadAtualDiscador.vida_esporte || ''; 
+            document.getElementById('discVidaRenda').value = leadAtualDiscador.vida_renda_media || '';
+            document.getElementById('discVidaDependentes').value = leadAtualDiscador.vida_dependentes || '';
+            document.getElementById('discVidaAposentado').value = leadAtualDiscador.vida_aposentado || 'nao'; 
+            document.getElementById('discVidaSegurosVigentes').value = leadAtualDiscador.vida_seguros_vigentes || '';
+            document.getElementById('discVidaObjetivo').value = leadAtualDiscador.vida_objetivo_principal || '';
+            document.getElementById('discVidaAtividadesFisicas').value = leadAtualDiscador.vida_atividades_fisicas || '';
+            document.getElementById('discVidaHistoricoDoencas').value = leadAtualDiscador.vida_historico_doencas || '';
+            document.getElementById('discVidaVigencia').value = leadAtualDiscador.vida_vigencia_inicial || null;
+            document.getElementById('discVidaComissao').value = leadAtualDiscador.vida_comissao || ''; 
+            document.getElementById('discVidaAgenciamento').value = leadAtualDiscador.vida_agenciamento || ''; 
+            
+            // CARREGA OS LINKS DE COTAÇÃO VIDA
+            document.getElementById('discVidaCotacaoPF').value = leadAtualDiscador.vida_cotacao_pf || '';
+            document.getElementById('discVidaCotacaoPME').value = leadAtualDiscador.vida_cotacao_pme || '';
+            document.getElementById('discVidaCotacaoPJ').value = leadAtualDiscador.vida_cotacao_pj || '';
+
+            document.getElementById('discConsorcioTipo').value = leadAtualDiscador.consorcio_tipo || '';
+            document.getElementById('discConsorcioCarta').value = leadAtualDiscador.consorcio_carta || '';
+            document.getElementById('discOutrosTipo').value = leadAtualDiscador.outros_tipo || '';
+            document.getElementById('discOutrosDetalhes').value = leadAtualDiscador.outros_detalhes || '';
+            
+            let cAtivos = leadAtualDiscador.contratos_ativos || '';
+            document.getElementById('chkContratoSaude').checked = cAtivos.includes('saude');
+            document.getElementById('chkContratoOdonto').checked = cAtivos.includes('odonto');
+            document.getElementById('chkContratoAuto').checked = cAtivos.includes('auto');
+            document.getElementById('chkContratoResidencial').checked = cAtivos.includes('residencial');
+            document.getElementById('chkContratoVida').checked = cAtivos.includes('vida');
+            document.getElementById('chkContratoConsorcio').checked = cAtivos.includes('consorcio');
+            document.getElementById('chkContratoOutros').checked = cAtivos.includes('outros');
+
+            let iAtivos = leadAtualDiscador.interesses_ativos || '';
+            document.getElementById('chkInteresseSaude').checked = iAtivos.includes('saude');
+            document.getElementById('chkInteresseOdonto').checked = iAtivos.includes('odonto');
+            document.getElementById('chkInteresseAuto').checked = iAtivos.includes('auto');
+            document.getElementById('chkInteresseResidencial').checked = iAtivos.includes('residencial');
+            document.getElementById('chkInteresseVida').checked = iAtivos.includes('vida');
+            document.getElementById('chkInteresseConsorcio').checked = iAtivos.includes('consorcio');
+            document.getElementById('chkInteresseOutros').checked = iAtivos.includes('outros');
+
+            document.querySelectorAll('.tab-btn')[0].click(); 
+        }
+
+        async function salvarEdicaoLead() {
+            if (!leadAtualDiscador) {
+                alert("Nenhum lead carregado para salvar!");
+                return;
+            }
+
+            const btnSalvar = document.getElementById('btnSalvarEdicao');
+            btnSalvar.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Salvando...';
+            btnSalvar.disabled = true;
+
+            let arrContratos = [];
+            if(document.getElementById('chkContratoSaude').checked) arrContratos.push('saude');
+            if(document.getElementById('chkContratoOdonto').checked) arrContratos.push('odonto');
+            if(document.getElementById('chkContratoAuto').checked) arrContratos.push('auto');
+            if(document.getElementById('chkContratoResidencial').checked) arrContratos.push('residencial');
+            if(document.getElementById('chkContratoVida').checked) arrContratos.push('vida');
+            if(document.getElementById('chkContratoConsorcio').checked) arrContratos.push('consorcio');
+            if(document.getElementById('chkContratoOutros').checked) arrContratos.push('outros');
+
+            let arrInteresses = [];
+            if(document.getElementById('chkInteresseSaude').checked) arrInteresses.push('saude');
+            if(document.getElementById('chkInteresseOdonto').checked) arrInteresses.push('odonto');
+            if(document.getElementById('chkInteresseAuto').checked) arrInteresses.push('auto');
+            if(document.getElementById('chkInteresseResidencial').checked) arrInteresses.push('residencial');
+            if(document.getElementById('chkInteresseVida').checked) arrInteresses.push('vida');
+            if(document.getElementById('chkInteresseConsorcio').checked) arrInteresses.push('consorcio');
+            if(document.getElementById('chkInteresseOutros').checked) arrInteresses.push('outros');
+
+            let telefoneFixoApenasDigitos = document.getElementById('discTelefoneFixo').value.replace(/\D/g, '');
+
+            const dadosUpdate = {
+                telefone_fixo: telefoneFixoApenasDigitos ? telefoneFixoApenasDigitos : null,
+                cep: document.getElementById('discCep').value,
+                genero: document.getElementById('discGenero').value,
+                estado_civil: document.getElementById('discEstadoCivil').value,
+
+                email: document.getElementById('discEmail').value,
+                cpf_cnpj: document.getElementById('discCpf').value,
+                data_nascimento: document.getElementById('discNascimento').value || null,
+                idade: document.getElementById('discIdade').value,
+                cidade: document.getElementById('discCidade').value,
+                profissao: document.getElementById('discProfissao').value,
+                origem_lead: document.getElementById('discOrigem').value,
+                tipo_lead: document.getElementById('discTipo').value,
+                valor_esperado: document.getElementById('discValorEsp').value,
+                valor_atual: document.getElementById('discValorAtual').value,
+                obs: document.getElementById('discObs').value,
+                
+                contratos_ativos: arrContratos.join(','),
+                interesses_ativos: arrInteresses.join(','),
+
+                plano_anterior: document.getElementById('discPlanoAnt').value,
+                plano_interesse: document.getElementById('discPlanoInt').value,
+                data_prioridade: document.getElementById('discDataPrioridade').value || null,
+                
+                link_cotacao_pf: document.getElementById('discLinkCotacaoPF').value,
+                link_cotacao_pme: document.getElementById('discLinkCotacaoPME').value,
+                link_cotacao_adesao: document.getElementById('discLinkCotacaoAdesao').value,
+                
+                plano_odonto_interesse: document.getElementById('discPlanoOdontoInteresse').value,
+                valor_odonto: document.getElementById('discValorOdonto').value,
+                link_cotacao_odonto: document.getElementById('discLinkCotacaoOdonto').value,
+
+                // AUTO COTAÇÕES
+                auto_cotacao_pf: document.getElementById('discAutoCotacaoCPF').value,
+                auto_cotacao_cnpj: document.getElementById('discAutoCotacaoCNPJ').value,
+                auto_cotacao_frota: document.getElementById('discAutoCotacaoFrota').value,
+
+                // AUTO SEGURO E COBERTURAS
+                auto_tipo_seguro: document.getElementById('discAutoTipoSeguro').value,
+                auto_vigencia_inicial: document.getElementById('discAutoVigenciaInicial').value || null,
+                auto_vigencia_final: document.getElementById('discAutoVigenciaFinal').value || null,
+                auto_comissao: document.getElementById('discAutoComissao').value || null,
+                auto_banco_relacionamento: document.getElementById('discAutoBancoRelacionamento').value,
+
+                auto_cob_tipo: document.getElementById('discAutoCobTipo').value,
+                auto_cob_frq_tipo: document.getElementById('discAutoCobFrqTipo').value,
+                auto_cob_frq_perc: document.getElementById('discAutoCobFrqPerc').value,
+                auto_cob_fator_ajuste: document.getElementById('discAutoCobFatorAjuste').value,
+                auto_cob_valor_ref: document.getElementById('discAutoCobValorRef').value,
+                auto_cob_rcf_mat: document.getElementById('discAutoCobRcfMat').value,
+                auto_cob_rcf_corp: document.getElementById('discAutoCobRcfCorp').value,
+                auto_cob_rcf_morais: document.getElementById('discAutoCobRcfMorais').value,
+                auto_cob_app_morte: document.getElementById('discAutoCobAppMorte').value,
+                auto_cob_acess_gas: document.getElementById('discAutoCobAcessGas').value,
+                auto_cob_acess_blind: document.getElementById('discAutoCobAcessBlind').value,
+                auto_cob_serv_assist: document.getElementById('discAutoCobServAssist').value,
+                auto_cob_serv_vidros: document.getElementById('discAutoCobServVidros').value,
+                auto_cob_serv_carro: document.getElementById('discAutoCobServCarro').value,
+                auto_cob_serv_carro_ar: document.getElementById('discAutoCobServCarroAr').checked,
+                auto_cob_outros_zero_km: document.getElementById('discAutoCobOutrosZeroKm').value,
+                auto_cob_outros_desp_extras: document.getElementById('discAutoCobOutrosDespExtras').value,
+                auto_cob_outros_reparo: document.getElementById('discAutoCobOutrosReparo').value,
+                auto_cob_outros_buracos: document.getElementById('discAutoCobOutrosBuracos').value,
+
+                // AUTO QUESTIONARIO E CONDUTOR
+                auto_garagem_res: document.getElementById('discAutoGaragemRes').value,
+                auto_garagem_trab: document.getElementById('discAutoGaragemTrab').value,
+                auto_garagem_est: document.getElementById('discAutoGaragemEst').value,
+                auto_tipo_uso: document.getElementById('discAutoTipoUso').value,
+                auto_menores_26: document.getElementById('discAutoMenores26').value,
+                auto_faixa_etaria: document.getElementById('discAutoFaixaEtaria').value,
+                auto_tipo_res: document.getElementById('discAutoTipoRes').value,
+                auto_km: document.getElementById('discAutoKm').value,
+                auto_pcd: document.getElementById('discAutoPcd').value,
+                auto_isencao: document.getElementById('discAutoIsencao').value,
+
+                auto_chassi: document.getElementById('discAutoChassi').value,
+                auto_placa: document.getElementById('discAutoPlaca').value,
+                auto_ano_fab: document.getElementById('discAutoAnoFab').value,
+                auto_ano_modelo: document.getElementById('discAutoAnoModelo').value,
+                auto_zero_km: document.getElementById('discAutoZeroKm').value,
+                auto_fipe: document.getElementById('discAutoFipe').value,
+                auto_modelo: document.getElementById('discAutoModelo').value,
+                auto_marca: document.getElementById('discAutoMarca').value,
+                auto_combustivel: document.getElementById('discAutoCombustivel').value,
+                
+                auto_cep_pernoite: document.getElementById('discAutoCepPernoite').value,
+                auto_kit_gas: document.getElementById('discAutoKitGas').value,
+                auto_blindado: document.getElementById('discAutoBlindado').value,
+                auto_alienado: document.getElementById('discAutoAlienado').value,
+                auto_rastreador: document.getElementById('discAutoRastreador').value,
+                auto_antifurto: document.getElementById('discAutoAntifurto').value,
+                auto_uso: document.getElementById('discAutoUso').value,
+
+                auto_condutor_relacao: document.getElementById('discAutoCondutorRelacao').value,
+                auto_condutor_cpf: document.getElementById('discAutoCondutorCpf').value,
+                auto_condutor_nome: document.getElementById('discAutoCondutorNome').value,
+                auto_condutor_nascimento: document.getElementById('discAutoCondutorNascimento').value,
+                auto_condutor_genero: document.getElementById('discAutoCondutorGenero').value,
+                auto_condutor_estado_civil: document.getElementById('discAutoCondutorEstadoCivil').value,
+                auto_condutor_tempo_hab: document.getElementById('discAutoCondutorTempoHab').value,
+
+                // RESIDENCIAL
+                res_tipo_residencia: document.getElementById('discResTipoResidencia').value,
+                res_tipo_construcao: document.getElementById('discResTipoConstrucao').value,
+                res_tipo_ocupacao: document.getElementById('discResTipoOcupacao').value,
+                res_cep: document.getElementById('discResCep').value,
+                res_logradouro: document.getElementById('discResLogradouro').value,
+                res_numero: document.getElementById('discResNumero').value,
+                res_complemento: document.getElementById('discResComplemento').value,
+                res_bairro: document.getElementById('discResBairro').value,
+                res_cidade: document.getElementById('discResCidade').value,
+                res_uf: document.getElementById('discResUf').value,
+
+                vida_capital: document.getElementById('discVidaCapital').value,
+                vida_profissao: document.getElementById('discVidaProfissao').value,
+                vida_estado_civil: document.getElementById('discVidaEstadoCivil').value, 
+                vida_ocupacao_atual: document.getElementById('discVidaOcupacao').value,
+                vida_peso: document.getElementById('discVidaPeso').value,
+                vida_altura: document.getElementById('discVidaAltura').value,
+                vida_fumante: document.getElementById('discVidaFumante').value,
+                vida_esporte: document.getElementById('discVidaEsporte').value, 
+                vida_renda_media: document.getElementById('discVidaRenda').value,
+                vida_dependentes: document.getElementById('discVidaDependentes').value ? parseInt(document.getElementById('discVidaDependentes').value) : null,
+                vida_aposentado: document.getElementById('discVidaAposentado').value,
+                vida_seguros_vigentes: document.getElementById('discVidaSegurosVigentes').value,
+                vida_objetivo_principal: document.getElementById('discVidaObjetivo').value,
+                vida_atividades_fisicas: document.getElementById('discVidaAtividadesFisicas').value,
+                vida_historico_doencas: document.getElementById('discVidaHistoricoDoencas').value,
+                vida_vigencia_inicial: document.getElementById('discVidaVigencia').value || null,
+                vida_comissao: document.getElementById('discVidaComissao').value || null, 
+                vida_agenciamento: document.getElementById('discVidaAgenciamento').value || null, 
+                vida_cotacao_pf: document.getElementById('discVidaCotacaoPF').value, 
+                vida_cotacao_pme: document.getElementById('discVidaCotacaoPME').value, 
+                vida_cotacao_pj: document.getElementById('discVidaCotacaoPJ').value, 
+
+                consorcio_tipo: document.getElementById('discConsorcioTipo').value,
+                consorcio_carta: document.getElementById('discConsorcioCarta').value,
+
+                outros_tipo: document.getElementById('discOutrosTipo').value,
+                outros_detalhes: document.getElementById('discOutrosDetalhes').value
+            };
+
+            const { error } = await supabaseClient.from('leads').update(dadosUpdate).eq('id', leadAtualDiscador.id);
+
+            if (error) {
+                alert("Erro ao salvar: " + error.message);
+            } else {
+                Object.assign(leadAtualDiscador, dadosUpdate);
+                atualizarNotificacoes(); 
+                alert("Informações atualizadas com sucesso!");
+            }
+
+            btnSalvar.innerHTML = '<i class="fas fa-save"></i> Salvar Alterações';
+            btnSalvar.disabled = false;
+        }
+
+        function checarApropriacaoLead(dadosUpdate) {
+            if (!leadAtualDiscador.vendedor || leadAtualDiscador.vendedor.trim() === '') {
+                dadosUpdate.vendedor = NOME_VENDEDOR_LOGADO; 
+                leadAtualDiscador.vendedor = NOME_VENDEDOR_LOGADO; 
+                document.getElementById('discDonoLead').textContent = NOME_VENDEDOR_LOGADO;
+            }
+            return dadosUpdate;
+        }
+
+        async function abrirJanelaWhatsApp() {
+            if (!leadAtualDiscador || !leadAtualDiscador.numero) return;
+            
+            let dadosUpdate = {};
+            dadosUpdate = checarApropriacaoLead(dadosUpdate);
+            
+            if(Object.keys(dadosUpdate).length > 0) {
+                await supabaseClient.from('leads').update(dadosUpdate).eq('id', leadAtualDiscador.id);
+            }
+
+            const numeroLimpo = leadAtualDiscador.numero.replace(/\D/g, '');
+            if(numeroLimpo) window.open(`https://api.whatsapp.com/send?phone=55${numeroLimpo}`, '_blank');
+        }
+
+        function pularLead() {
+            if (leadAtualDiscador) {
+                leadsPuladosTemporariamente.push(leadAtualDiscador.id);
+                puxarLeadAleatorio();
+            }
+        }
+
+        async function salvarStatusEPular(acaoBotao) {
+            if (!leadAtualDiscador) return;
+            document.getElementById('discUltimoContato').textContent = "Salvando e rolando a roleta...";
+
+            let updateData = {};
+            
+            let numWhats = leadAtualDiscador.tentativas_whatsapp || 0;
+            let numLigacao = leadAtualDiscador.tentativas_ligacao || 0;
+            let statusAtual = leadAtualDiscador.status || 'Leads para contato'; 
+
+            if (acaoBotao === 'Interessado') {
+                updateData.status = 'Interessado';
+                updateData.tentativas_whatsapp = 0; 
+                updateData.tentativas_ligacao = 0;  
+                let amanha = new Date();
+                amanha.setDate(amanha.getDate() + 1);
+                updateData.data_prioridade = amanha.toISOString().split('T')[0]; 
+            } 
+            else if (acaoBotao === 'Sem resposta') {
+                let limiteAtingido = false;
+
+                if (modoAtual === 'ligacao') {
+                    if (numLigacao < 4) numLigacao++;
+                    updateData.tentativas_ligacao = numLigacao;
+                    if (numLigacao >= 4) limiteAtingido = true;
+                } else if (modoAtual === 'whatsapp') {
+                    if (numWhats < 4) numWhats++;
+                    updateData.tentativas_whatsapp = numWhats;
+                    if (numWhats >= 4) limiteAtingido = true;
+                }
+
+                if (limiteAtingido) {
+                    if (statusAtual.toLowerCase() === 'interessado') {
+                        updateData.status = 'Perdidos'; 
+                    } else {
+                        updateData.status = 'Sem resposta';
+                    }
+                } else {
+                    updateData.status = statusAtual; 
+                }
+            } 
+            else {
+                updateData.status = acaoBotao;
+                
+                if (modoAtual === 'ligacao') {
+                    if (numLigacao < 4) numLigacao++;
+                    updateData.tentativas_ligacao = numLigacao;
+                } else if (modoAtual === 'whatsapp') {
+                    if (numWhats < 4) numWhats++;
+                    updateData.tentativas_whatsapp = numWhats;
+                }
+            }
+
+            updateData = checarApropriacaoLead(updateData);
+
+            await supabaseClient.from('leads').update(updateData).eq('id', leadAtualDiscador.id);
+            
+            await carregarLeads(); 
+        }
+
+        function limparTelaDiscador() {
+            document.getElementById('discDonoLead').textContent = '---';
+            document.getElementById('discNumero').textContent = '---';
+            document.getElementById('discNome').textContent = '---';
+            document.getElementById('discContLigacao').textContent = '0';
+            document.getElementById('discContWhats').textContent = '0';
+            
+            document.querySelectorAll('.tab-content input[type="text"], .tab-content input[type="date"], .tab-content input[type="number"]').forEach(input => input.value = '');
+            document.querySelectorAll('.tab-content select').forEach(select => select.value = '');
+            document.querySelectorAll('.tab-content input[type="checkbox"]').forEach(chk => chk.checked = false);
+        }
+
+        function abrirLinkDiscador(inputId) {
+            let link = document.getElementById(inputId).value.trim();
+            if (link) {
+                if (!link.match(/^https?:\/\//i)) { link = 'https://' + link; }
+                window.open(link, '_blank');
+            } else {
+                alert('O lead atual não possui este link de cotação registrado.');
+            }
+        }
+
+        // BOTOES DE ABRIR LINK (MODAL E DISCADOR)
+        document.getElementById('btnAbrirLinkCotacaoPF')?.addEventListener('click', () => abrirLinkDiscador('detalheLinkCotacaoPF'));
+        document.getElementById('btnAbrirLinkCotacaoPME')?.addEventListener('click', () => abrirLinkDiscador('detalheLinkCotacaoPME'));
+        document.getElementById('btnAbrirLinkCotacaoAdesao')?.addEventListener('click', () => abrirLinkDiscador('detalheLinkCotacaoAdesao'));
+        document.getElementById('btnAbrirLinkCotacaoOdonto')?.addEventListener('click', () => abrirLinkDiscador('detalheLinkCotacaoOdonto'));
+        
+        document.getElementById('btnAbrirAutoCotacaoCPFDisc')?.addEventListener('click', () => abrirLinkDiscador('discAutoCotacaoCPF'));
+        document.getElementById('btnAbrirAutoCotacaoCNPJDisc')?.addEventListener('click', () => abrirLinkDiscador('discAutoCotacaoCNPJ'));
+        document.getElementById('btnAbrirAutoCotacaoFrotaDisc')?.addEventListener('click', () => abrirLinkDiscador('discAutoCotacaoFrota'));
+
+        document.getElementById('btnAbrirAutoCotacaoCPF')?.addEventListener('click', () => abrirLinkDiscador('detalheAutoCotacaoCPF'));
+        document.getElementById('btnAbrirAutoCotacaoCNPJ')?.addEventListener('click', () => abrirLinkDiscador('detalheAutoCotacaoCNPJ'));
+        document.getElementById('btnAbrirAutoCotacaoFrota')?.addEventListener('click', () => abrirLinkDiscador('detalheAutoCotacaoFrota'));
+
+        document.getElementById('btnAbrirVidaCotacaoPF')?.addEventListener('click', () => abrirLinkDiscador('discVidaCotacaoPF'));
+        document.getElementById('btnAbrirVidaCotacaoPME')?.addEventListener('click', () => abrirLinkDiscador('discVidaCotacaoPME'));
+        document.getElementById('btnAbrirVidaCotacaoPJ')?.addEventListener('click', () => abrirLinkDiscador('discVidaCotacaoPJ'));
+
+        const listaDeCorretoras = [
+            { nome: "Aticare", link: "https://app.vendasplanoonline.com.br/aticare" },
+            { nome: "Biovida Saúde", link: "https://biovidasaude.planium.io/web/login/entrar" },
+            { nome: "Porto Seguro", link: "https://corretor.portoseguro.com.br/novocol/homepage?code=d59892f7-a084-4125-b600-618cac8c7294&state=rAnDoMtExT" },
+            { nome: "Bradesco", link: "https://login.bradescoseguros.com.br/nidp/saml2/idpsend?PID=https://wwwn.bradescoseguros.com.br/samlsps/pnegocios" },
+            { nome: "Sulamerica", link: "https://corretor.sulamericaseguros.com.br/?logout=true" },
+            { nome: "Unimed Odonto", link: "https://www.corretoraunimed.com.br/painel" },
+        ];
+
+        const ulListaCorretoras = document.getElementById('listaCorretoras');
+        const inputBuscaCorretora = document.getElementById('searchCorretora');
+
+        function renderizarCorretoras(filtro = '') {
+            if(!ulListaCorretoras) return;
+            ulListaCorretoras.innerHTML = '';
+            
+            const corretorasFiltradas = listaDeCorretoras.filter(corretora => 
+                corretora.nome.toLowerCase().includes(filtro.toLowerCase())
+            );
+            
+            corretorasFiltradas.forEach(corretora => {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <a href="${corretora.link}" target="_blank" title="Abrir portal da ${corretora.nome}">
+                        ${corretora.nome} 
+                        <i class="fas fa-external-link-alt"></i>
+                    </a>
+                `;
+                ulListaCorretoras.appendChild(li);
+            });
+
+            if (corretorasFiltradas.length === 0) {
+                ulListaCorretoras.innerHTML = '<li style="padding: 10px 15px; color: rgba(255,255,255,0.4); font-size: 12px;">Nenhuma encontrada...</li>';
+            }
+        }
+        renderizarCorretoras();
+
+        if(inputBuscaCorretora) {
+            inputBuscaCorretora.addEventListener('input', (event) => {
+                renderizarCorretoras(event.target.value);
+            });
+        }
+
+        const btnNotificacoes = document.getElementById('btnNotificacoes');
+        const dropdownNotificacoes = document.getElementById('dropdownNotificacoes');
+        const listaNotificacoes = document.getElementById('listaNotificacoes');
+        const badgeNotificacao = document.getElementById('badgeNotificacao');
+
+        btnNotificacoes.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const isOpen = dropdownNotificacoes.style.display === 'block';
+            dropdownNotificacoes.style.display = isOpen ? 'none' : 'block';
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!dropdownNotificacoes.contains(e.target) && !btnNotificacoes.contains(e.target)) {
+                dropdownNotificacoes.style.display = 'none';
+            }
+        });
+
+        function atualizarNotificacoes() {
+            const hoje = new Date();
+            const ano = hoje.getFullYear();
+            const mes = String(hoje.getMonth() + 1).padStart(2, '0');
+            const dia = String(hoje.getDate()).padStart(2, '0');
+            const dataHojeStr = `${ano}-${mes}-${dia}`;
+            const diaMesAtual = `${dia}/${mes}`;
+
+            // RETORNOS PENDENTES DO CORRETOR LOGADO
+            const leadsPendentes = todosOsLeads.filter(lead => {
+                if (lead.vendedor !== NOME_VENDEDOR_LOGADO) return false;
+                if (!lead.data_prioridade) return false;
+
+                const status = String(lead.status).toLowerCase();
+                if (status === 'finalizado' || status === 'perdido' || status === 'sem interesse') return false;
+
+                return lead.data_prioridade <= dataHojeStr;
+            });
+
+            // ANIVERSARIANTES DE HOJE DO CORRETOR LOGADO
+            const leadsAniversario = todosOsLeads.filter(lead => {
+                if (lead.vendedor !== NOME_VENDEDOR_LOGADO) return false;
+                if (!lead.data_nascimento) return false;
+
+                const nascimento = String(lead.data_nascimento).trim();
+                let diaNascimento = '';
+                let mesNascimento = '';
+
+                // Aceita DD/MM/AAAA
+                if (nascimento.includes('/')) {
+                    const partes = nascimento.split('/');
+                    diaNascimento = String(partes[0]).padStart(2, '0');
+                    mesNascimento = String(partes[1]).padStart(2, '0');
+                }
+                // Aceita AAAA-MM-DD
+                else if (nascimento.includes('-')) {
+                    const partes = nascimento.split('-');
+                    if (partes.length >= 3) {
+                        diaNascimento = String(partes[2]).padStart(2, '0');
+                        mesNascimento = String(partes[1]).padStart(2, '0');
+                    }
+                }
+
+                return `${diaNascimento}/${mesNascimento}` === diaMesAtual;
+            });
+
+            const totalAvisos = leadsPendentes.length + leadsAniversario.length;
+
+            if (totalAvisos > 0) {
+                badgeNotificacao.textContent = totalAvisos > 99 ? '99+' : totalAvisos;
+                badgeNotificacao.style.display = 'block';
+            } else {
+                badgeNotificacao.style.display = 'none';
+            }
+
+            listaNotificacoes.innerHTML = '';
+
+            if (totalAvisos === 0) {
+                listaNotificacoes.innerHTML = `
+                    <div style="text-align:center;color:#64748b;font-size:13px;padding:25px 15px;">
+                        <i class="fas fa-check-circle" style="font-size:24px;color:#94a3b8;margin-bottom:8px;display:block;"></i>
+                        Nenhum aviso para hoje! 🎉
+                    </div>
+                `;
+                return;
+            }
+
+            // ANIVERSÁRIOS PRIMEIRO
+            if (leadsAniversario.length > 0) {
+                const tituloAniversarios = document.createElement('div');
+                tituloAniversarios.className = 'notification-section-title';
+                tituloAniversarios.innerHTML = '<i class="fas fa-birthday-cake"></i> Aniversários de hoje';
+                listaNotificacoes.appendChild(tituloAniversarios);
+
+                leadsAniversario.forEach(lead => {
+                    const item = document.createElement('div');
+                    item.className = 'notification-item notification-birthday';
+
+                    const numeroLimpo = String(lead.numero || lead.telefone || lead.celular || '').replace(/\D/g, '');
+                    const nome = lead.nome || 'cliente';
+                    const mensagemZap = encodeURIComponent(
+                        `Olá, ${nome}! A equipe da BV Pinho deseja a você um feliz aniversário! 🎂 Muitas felicidades, saúde e sucesso!`
+                    );
+
+                    const botaoWhatsApp = numeroLimpo
+                        ? `
+                            <button type="button" class="btn-birthday-whatsapp" title="Abrir conversa no WhatsApp">
+                                <i class="fab fa-whatsapp" style="font-size:17px;"></i>
+                                Enviar parabéns pelo WhatsApp
+                            </button>
+                        `
+                        : `
+                            <div class="birthday-no-phone">
+                                <i class="fas fa-phone-slash"></i> Sem telefone cadastrado
+                            </div>
+                        `;
+
+                    item.innerHTML = `
+                        <div class="birthday-top">
+                            <div class="birthday-icon">
+                                <i class="fas fa-birthday-cake"></i>
+                            </div>
+                            <div class="birthday-info">
+                                <span class="birthday-label">🎉 Aniversário hoje</span>
+                                <span class="birthday-name">${nome}</span>
+                            </div>
+                        </div>
+                        <div class="birthday-message">
+                            Aproveite para enviar uma mensagem especial para o cliente.
+                        </div>
+                        ${botaoWhatsApp}
+                    `;
+
+                    const btnWhats = item.querySelector('.btn-birthday-whatsapp');
+
+                    if (btnWhats) {
+                        btnWhats.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            window.open(
+                                `https://api.whatsapp.com/send?phone=55${numeroLimpo}&text=${mensagemZap}`,
+                                '_blank'
+                            );
+                        });
+                    }
+
+                    // Clicar fora do botão abre o lead no discador
+                    item.addEventListener('click', (e) => {
+                        if (e.target.closest('.btn-birthday-whatsapp')) return;
+
+                        leadAtualDiscador = lead;
+                        document.getElementById('discUltimoContato').textContent = "🎂 ANIVERSARIANTE DE HOJE 🎂";
+                        renderizarLeadAtual();
+                        dropdownNotificacoes.style.display = 'none';
+                    });
+
+                    listaNotificacoes.appendChild(item);
+                });
+            }
+
+            // RETORNOS
+            if (leadsPendentes.length > 0) {
+                const tituloRetornos = document.createElement('div');
+                tituloRetornos.className = 'notification-section-title';
+                tituloRetornos.innerHTML = '<i class="fas fa-calendar-check"></i> Retornos pendentes';
+                listaNotificacoes.appendChild(tituloRetornos);
+            }
+
+            leadsPendentes.forEach(lead => {
+                const item = document.createElement('div');
+                item.className = 'notification-item';
+
+                const partesData = String(lead.data_prioridade).split('-');
+                const dataFormatada = partesData.length >= 3
+                    ? `${partesData[2]}/${partesData[1]}/${partesData[0]}`
+                    : lead.data_prioridade;
+
+                item.innerHTML = `
+                    <span class="notif-nome">${lead.nome || 'Sem Nome'}</span>
+                    <span class="notif-data"><i class="fas fa-calendar-alt"></i> Agendado: ${dataFormatada}</span>
+                `;
+
+                item.addEventListener('click', () => {
+                    leadAtualDiscador = lead;
+                    document.getElementById('discUltimoContato').textContent = "⭐ LEAD SELECIONADO DA NOTIFICAÇÃO ⭐";
+                    renderizarLeadAtual();
+                    dropdownNotificacoes.style.display = 'none';
+                });
+
+                listaNotificacoes.appendChild(item);
+            });
+        }
+    </script>
+</body>
+</html>

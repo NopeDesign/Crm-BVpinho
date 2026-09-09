@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - BV Pinho</title>
+    <!-- Ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS Embutido e Unificado -->
+    <style>
+        /* ==========================================
+            RESET E VARIÁVEIS (Paleta Clean & Premium BV Pinho)
+            ========================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            /* Paleta Azul Petróleo */
+            --color-primary: #3a6e85;       
+            --color-primary-hover: #2c5466; 
+            --color-primary-dark: #1e3b48;
+            
+            /* Paleta Dourada para Destaques */
+            --color-gold: #bb8e44;
+            --color-gold-hover: #9c7536;
+            --color-gold-light: #cda259;
+            
+            --color-bg-app: #f4f6f8;        /* Cinza ultra-claro para o fundo geral */
+            --color-card: #ffffff;          /* Branco puro para cards e gráficos */
+            --color-text-main: #1e293b;     /* Escuro elegante para leitura */
+            --color-text-muted: #64748b;    /* Cinza para subtítulos */
+            --color-border: #e2e8f0;        /* Bordas super sutis */
+            
+            /* Sombras Flutuantes */
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.02);
+            --shadow-md: 0 8px 25px rgba(0,0,0,0.05);
+            --shadow-lg: 0 15px 35px rgba(58, 110, 133, 0.15); /* Sombra baseada no Azul */
+        }
+
+        body {
+            background-color: var(--color-bg-app); 
+            color: var(--color-text-main);
+            overflow: hidden;
+        }
+
+        .dashboard-layout {
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* ==========================================
+            SIDEBAR (MENU LATERAL)
+            ========================================== */
+        .sidebar {
+            width: 240px; 
+            background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+            display: flex;
+            flex-direction: column;
+            box-shadow: 4px 0 20px rgba(0, 0, 0, 0.08);
+            z-index: 10;
+            padding: 30px 0;
+        }
+
+        .sidebar-logo {
+            padding: 0 25px;
+            text-align: left;
+            margin-bottom: 40px;
+        }
+
+        .sidebar-logo img {
+            max-width: 140px;
+        }
+
+        .sidebar-menu ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            padding: 0 15px;
+        }
+
+        .sidebar-menu ul li a {
+            display: block;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            padding: 14px 20px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-menu ul li a:hover {
+            color: #ffffff;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar-menu ul li.active a {
+            background-color: rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+            box-shadow: inset 4px 0 0 var(--color-gold); /* Detalhe Dourado */
+        }
+
+        /* =========================================
+            SIDEBAR - ÁREA DE CORRETORAS
+            ========================================= */
+        .sidebar-corretoras {
+            margin-top: 30px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            overflow: hidden; 
+        }
+
+        .corretoras-titulo {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 0 25px;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .corretoras-search {
+            position: relative;
+            padding: 0 15px;
+            margin-bottom: 15px;
+        }
+
+        .corretoras-search i {
+            position: absolute;
+            left: 25px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 12px;
+        }
+
+        .corretoras-search input {
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            border-radius: 8px;
+            padding: 10px 10px 10px 32px;
+            font-size: 13px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .corretoras-search input:focus {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .corretoras-list {
+            list-style: none;
+            padding: 0 10px;
+            margin: 0;
+            overflow-y: auto;
+            flex: 1; 
+        }
+
+        .corretoras-list::-webkit-scrollbar { width: 4px; }
+        .corretoras-list::-webkit-scrollbar-thumb { background-color: rgba(255, 255, 255, 0.2); border-radius: 10px; }
+
+        .corretoras-list li a {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 13px;
+            padding: 10px 15px;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            margin-bottom: 4px;
+        }
+
+        .corretoras-list li a i {
+            font-size: 10px;
+            opacity: 0; 
+            transition: opacity 0.2s;
+        }
+
+        .corretoras-list li:hover a {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+        }
+
+        .corretoras-list li:hover a i { opacity: 1; }
+
+        /* ==========================================
+            CONTEÚDO PRINCIPAL E DASHBOARD
+            ========================================== */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 40px 60px;
+            overflow-y: auto;
+            background-color: var(--color-bg-app);
+        }
+
+        .dashboard-header {
+            margin-bottom: 35px;
+        }
+
+        .dashboard-header h2 {
+            color: var(--color-text-main);
+            font-size: 26px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        /* ==========================================
+            CARDS DE RESUMO
+            ========================================== */
+        .cards-resumo {
+            display: flex;
+            gap: 24px;
+            margin-bottom: 35px;
+            flex-wrap: wrap;
+        }
+
+        .card-resumo {
+            background-color: var(--color-card); 
+            flex: 1;
+            min-width: 220px;
+            padding: 24px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--color-border);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card-resumo:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+            border-color: #cbd5e1;
+        }
+
+        .card-resumo i {
+            font-size: 24px;
+            color: var(--color-primary); 
+            background-color: #f0f4f6;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 16px;
+        }
+
+        .card-resumo-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-resumo-info h4 {
+            margin: 0 0 4px 0;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+            color: var(--color-text-muted);
+        }
+
+        .card-resumo-info h2 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--color-text-main); 
+        }
+
+        /* ==========================================
+            GRÁFICOS (Containers Brancos)
+            ========================================== */
+        .graficos-container {
+            display: flex;
+            gap: 24px;
+            margin-bottom: 35px;
+            flex-wrap: wrap;
+        }
+
+        .grafico-box {
+            background-color: var(--color-card);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--color-border);
+            flex: 1;
+            min-width: 320px;
+            height: 420px; 
+            position: relative;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .grafico-box:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .grafico-box h3 {
+            color: var(--color-primary); 
+            margin-top: 0;
+            margin-bottom: 25px;
+            text-align: left;
+            font-size: 14px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* ==========================================
+            ESTILOS DA NOTIFICAÇÃO (SINO) E ANIVERSÁRIO
+            ========================================== */
+        .notification-wrapper { position: relative; }
+        .notification-bell { background: white; border: 1px solid var(--color-border); padding: 6px 12px; border-radius: 12px; cursor: pointer; position: relative; font-size: 20px; color: var(--color-text-muted); height: 100%; transition: 0.3s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+        .notification-bell:hover { background: #f8fafc; color: var(--color-text-main); }
+        .notification-badge { position: absolute; top: -6px; right: -6px; background: #ef4444; color: white; font-size: 10px; font-weight: bold; padding: 2px 6px; border-radius: 50%; display: none; }
+        .notification-dropdown { display: none; position: absolute; right: 0; top: 120%; width: 390px; background: white; border: 1px solid var(--color-border); border-radius: 14px; box-shadow: 0 18px 45px rgba(15, 23, 42, 0.16); z-index: 1000; max-height: 500px; overflow-y: auto; text-align: left; }
+        .notification-header { padding: 14px 17px; border-bottom: 1px solid var(--color-border); font-weight: 800; color: var(--color-text-main); background: #f8fafc; border-radius: 14px 14px 0 0; display: flex; align-items: center; gap: 8px; }
+        .notification-item { padding: 12px 15px; border-bottom: 1px solid #f1f5f9; cursor: pointer; transition: 0.2s; display: flex; flex-direction: column; gap: 5px; }
+        .notification-item:hover { background-color: #f8fafc; }
+        .notification-item:last-child { border-bottom: none; }
+        .notif-nome { font-weight: bold; color: var(--color-text-main); font-size: 14px; }
+        .notif-data { font-size: 12px; color: #ef4444; font-weight: 600; }
+
+        /* CARD DE ANIVERSÁRIO NAS NOTIFICAÇÕES */
+        .notification-birthday {
+            margin: 8px 10px;
+            padding: 14px;
+            border: 1px solid #f3d6a0;
+            border-radius: 13px;
+            background: linear-gradient(135deg, #fffaf0 0%, #fff 100%);
+            box-shadow: 0 3px 10px rgba(187, 142, 68, 0.08);
+            cursor: default;
+        }
+        .notification-birthday:hover { background: linear-gradient(135deg, #fff8e8 0%, #fff 100%); }
+        .birthday-top { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+        .birthday-icon {
+            width: 42px; height: 42px; min-width: 42px;
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            background: #fff0cf;
+            color: #bb8e44;
+            font-size: 20px;
+        }
+        .birthday-info { min-width: 0; }
+        .birthday-label {
+            display: block;
+            color: #bb8e44;
+            font-size: 10px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: .8px;
+            margin-bottom: 2px;
+        }
+        .birthday-name {
+            display: block;
+            color: #1e293b;
+            font-size: 15px;
+            font-weight: 800;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .birthday-message {
+            color: #64748b;
+            font-size: 12px;
+            line-height: 1.4;
+            margin-bottom: 11px;
+        }
+        .btn-birthday-whatsapp {
+            width: 100%;
+            border: none;
+            border-radius: 10px;
+            padding: 11px 12px;
+            background: #25D366;
+            color: #fff;
+            font-size: 12px;
+            font-weight: 800;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 4px 10px rgba(37, 211, 102, 0.20);
+            transition: .2s ease;
+        }
+        .btn-birthday-whatsapp:hover {
+            background: #1ebd5a;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 14px rgba(37, 211, 102, 0.25);
+        }
+        .birthday-no-phone {
+            width: 100%;
+            padding: 9px;
+            border-radius: 9px;
+            background: #f1f5f9;
+            color: #64748b;
+            font-size: 11px;
+            font-weight: 700;
+            text-align: center;
+        }
+        .notification-section-title {
+            padding: 10px 15px 5px;
+            color: #94a3b8;
+            font-size: 10px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: .8px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="dashboard-layout">
+        
+        <!-- ================= SIDEBAR (MENU LATERAL) ================= -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <img src="/src/logo.svg" alt="Logo BV Pinho" style="max-width: 140px; display: block; margin: 0 auto;">
+            </div>
+            <nav class="sidebar-menu">
+                <ul>
+                    <li><a href="../painel/index.html">Painel / Kanban</a></li>
+                    <li class="active"><a href="./index.html">Dashboard</a></li>
+                    <li><a href="../discador/index.html">Discador</a></li>
+                    <li><a href="#" onclick="fazerLogout()" style="margin-top: 40px; color: #fca5a5;"><i class="fas fa-sign-out-alt"></i> Sair</a></li>
+                </ul>
+            </nav>
+
+            <div class="sidebar-corretoras">
+                <h4 class="corretoras-titulo">Links Rápidos</h4>
+                <div class="corretoras-search">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchCorretora" placeholder="Buscar corretora...">
+                </div>
+                <ul id="listaCorretoras" class="corretoras-list"></ul>
+            </div>
+        </aside>
+
+        <!-- ================= CONTEÚDO PRINCIPAL ================= -->
+        <main class="main-content">
+            
+            <!-- HEADER COM INFO LOGADO -->
+            <header class="top-actions" style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 20px; margin-bottom: 30px;">
+                
+                <div class="dashboard-header" style="margin-bottom: 0;">
+                    <h2>Visão Geral de Desempenho</h2>
+                    <p style="color: #64748b; font-weight: 500; font-size: 15px;">Acompanhe os resultados globais e a distribuição dos leads da equipe.</p>
+                </div>
+
+                <!-- ÁREA DE NOTIFICAÇÕES E USUÁRIO LOGADO -->
+                <div style="display: flex; gap: 15px; align-items: center; flex-shrink: 0;">
+                    
+                    <!-- Sino de Notificações -->
+                    <div class="notification-wrapper">
+                        <button id="btnNotificacoes" class="notification-bell" title="Leads Agendados">
+                            <i class="fas fa-bell"></i>
+                            <span id="badgeNotificacao" class="notification-badge">0</span>
+                        </button>
+
+                        <div id="dropdownNotificacoes" class="notification-dropdown">
+                            <div class="notification-header"><i class="fas fa-bell"></i> Avisos para Hoje</div>
+                            <div id="listaNotificacoes" style="padding: 5px 0;">
+                                <!-- Leads aparecerão aqui -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Vendedor Logado -->
+                    <div style="display: flex; align-items: center; gap: 10px; background: white; padding: 8px 16px; border-radius: 12px; box-shadow: var(--shadow-sm); border: 1px solid var(--color-border);">
+                        <i class="fas fa-user-circle" style="color: var(--color-primary); font-size: 24px;"></i>
+                        <div style="display: flex; flex-direction: column;">
+                            <span style="font-size: 11px; color: var(--color-text-muted); font-weight: bold; text-transform: uppercase;">Corretor Logado:</span>
+                            <span id="nomeVendedorLogado" style="font-weight: 800; color: var(--color-text-main); font-size: 14px;">Carregando...</span>
+                        </div>
+                    </div>
+
+                </div>
+            </header>
+
+            <!-- CARDS DE RESUMO -->
+            <div class="cards-resumo">
+                <div class="card-resumo">
+                    <i class="fas fa-users"></i>
+                    <div class="card-resumo-info">
+                        <h4>Total de Leads</h4>
+                        <h2 id="totalLeads">0</h2>
+                    </div>
+                </div>
+                <div class="card-resumo">
+                    <i class="fas fa-handshake" style="color: #10b981; background-color: #d1fae5;"></i>
+                    <div class="card-resumo-info">
+                        <h4>Fechados</h4>
+                        <h2 id="totalFechados">0</h2>
+                    </div>
+                </div>
+                <div class="card-resumo">
+                    <i class="fas fa-times-circle" style="color: #ef4444; background-color: #fee2e2;"></i>
+                    <div class="card-resumo-info">
+                        <h4>Perdidos</h4>
+                        <h2 id="totalPerdidos">0</h2>
+                    </div>
+                </div>
+                <div class="card-resumo">
+                    <i class="fas fa-fire" style="color: var(--color-gold); background-color: #fdf5e6;"></i>
+                    <div class="card-resumo-info">
+                        <h4>Com Interesse</h4>
+                        <h2 id="totalInteresse">0</h2>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ================= GRÁFICO: DESEMPENHO DA EQUIPE ================= -->
+            <div class="grafico-box" style="width: 100%; margin-bottom: 35px; height: auto;">
+                <h3>Ranking / Desempenho da Equipe</h3>
+                <p style="font-size: 13px; color: var(--color-text-muted); margin-top: -20px; margin-bottom: 25px;">Comparativo de todos os vendedores simultaneamente.</p>
+                <div style="position: relative; height: 350px; width: 100%;">
+                    <canvas id="graficoVendedores"></canvas>
+                </div>
+            </div>
+
+            <!-- GRÁFICOS PARTE 1 (Lado a lado) -->
+            <div class="graficos-container">
+                <div class="grafico-box">
+                    <h3>Funil de Status</h3>
+                    <div style="position: relative; height: 320px; width: 100%;">
+                        <canvas id="graficoStatus"></canvas>
+                    </div>
+                </div>
+                <div class="grafico-box">
+                    <h3>Top Planos de Interesse</h3>
+                    <div style="position: relative; height: 320px; width: 100%;">
+                        <canvas id="graficoPlanos"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GRÁFICOS PARTE 2 -->
+            <div class="grafico-box" style="margin-bottom: 40px;">
+                <h3>Distribuição por Cidades (Top 10)</h3>
+                <div style="position: relative; height: 350px; width: 100%;">
+                    <canvas id="graficoCidades"></canvas>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Bibliotecas Necessárias -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        const supabaseUrl = 'https://flbxxsttexpxumbfqaxv.supabase.co';
+        const supabaseKey = 'sb_publishable_OqPx1lTVT1XTGbMkDfc0MQ_vAXVltis';
+        const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+        let dadosLeadsGlobais = [];
+        let NOME_VENDEDOR_LOGADO = null; 
+        let IS_ADMIN = false;
+
+        const TODOS_STATUS = [
+            'LEADS PARA CONTATO', 'RESPONDEU', 'INTERESSADO', 'DOCUMENTOS', 
+            'PAGAR BOLETO', 'FINALIZADO', 'PÓS VENDA', 'SEM RESPOSTA', 
+            'SEM INTERESSE', 'PERDIDO'
+        ];
+
+        const CORES_STATUS = {
+            'LEADS PARA CONTATO': '#94a3b8', 
+            'RESPONDEU': '#3b82f6',          
+            'INTERESSADO': '#f59e0b',        
+            'DOCUMENTOS': '#8b5cf6',         
+            'PAGAR BOLETO': '#10b981',       
+            'FINALIZADO': '#059669',         
+            'PÓS VENDA': '#0284c7',          
+            'SEM RESPOSTA': '#fb923c',       
+            'SEM INTERESSE': '#f43f5e',      
+            'PERDIDO': '#dc2626'             
+        };
+
+        function normalizarStatusDashboard(lead) {
+            let statusBanco = lead.status ? String(lead.status).trim().toLowerCase() : 'contato';
+            const ligacoes = lead.tentativas_ligacao || 0;
+            const wpps = lead.tentativas_whatsapp || 0;
+            
+            if ((statusBanco === 'sem resposta' || statusBanco === 'não atendeu') && (ligacoes < 4 || wpps < 4)) {
+                statusBanco = 'contato';
+            } else if (statusBanco === 'não atendeu' && (ligacoes >= 4 || wpps >= 4)) {
+                statusBanco = 'sem resposta';
+            }
+            
+            const mapa = {
+                'contato': 'LEADS PARA CONTATO',
+                'leads para contato': 'LEADS PARA CONTATO',
+                'respondeu': 'RESPONDEU',
+                'interessado': 'INTERESSADO',
+                'interesse': 'INTERESSADO',
+                'documentos': 'DOCUMENTOS',
+                'documento': 'DOCUMENTOS',
+                'pagar boleto': 'PAGAR BOLETO',
+                'boleto': 'PAGAR BOLETO',
+                'finalizado': 'FINALIZADO',
+                'fechado': 'FINALIZADO',
+                'fechados': 'FINALIZADO',
+                'pos venda': 'PÓS VENDA',
+                'pós venda': 'PÓS VENDA',
+                'sem resposta': 'SEM RESPOSTA',
+                'sem-resposta': 'SEM RESPOSTA',
+                'sem interesse': 'SEM INTERESSE',
+                'sem-interesse': 'SEM INTERESSE',
+                'perdido': 'PERDIDO',
+                'perdidos': 'PERDIDO'
+            };
+
+            return mapa[statusBanco] || 'LEADS PARA CONTATO'; 
+        }
+
+        window.addEventListener('load', iniciarSistema);
+
+        async function iniciarSistema() {
+            const { data: { session }, error } = await supabaseClient.auth.getSession();
+            
+            if (error || !session) {
+                window.location.href = '../index.html'; 
+                return;
+            }
+
+            const emailLogado = session.user.email;
+            
+            const { data: usuarioData } = await supabaseClient.from('usuarios').select('nome, perfil').eq('email', emailLogado).single();
+
+            if (usuarioData) {
+                NOME_VENDEDOR_LOGADO = usuarioData.nome || emailLogado;
+                let perfil = usuarioData.perfil ? String(usuarioData.perfil).toLowerCase().trim() : '';
+                IS_ADMIN = (perfil === 'adm' || perfil === 'admin' || perfil === 'dona');
+                
+                document.getElementById('nomeVendedorLogado').textContent = NOME_VENDEDOR_LOGADO + (IS_ADMIN ? ' (Gestão)' : '');
+            } else {
+                NOME_VENDEDOR_LOGADO = emailLogado;
+                document.getElementById('nomeVendedorLogado').textContent = emailLogado;
+            }
+
+            if (!IS_ADMIN) {
+                const canvasVendedores = document.getElementById('graficoVendedores');
+                if (canvasVendedores) {
+                    canvasVendedores.closest('.grafico-box').style.display = 'none';
+                }
+                
+                const tituloH2 = document.querySelector('.dashboard-header h2');
+                const subTituloP = document.querySelector('.dashboard-header p');
+                if (tituloH2) tituloH2.innerText = "Meu Desempenho";
+                if (subTituloP) subTituloP.innerText = "Acompanhe os seus resultados e métricas exclusivas.";
+            }
+
+            await carregarDadosBanco();
+        }
+
+        async function fazerLogout() {
+            await supabaseClient.auth.signOut();
+            window.location.href = '../index.html';
+        }
+
+        async function carregarDadosBanco() {
+            let query = supabaseClient.from('leads').select('*');
+            
+            if (!IS_ADMIN) {
+                query = query.eq('vendedor', NOME_VENDEDOR_LOGADO);
+            }
+
+            const { data: leads, error } = await query;
+            if (error) {
+                console.error("Erro ao buscar leads:", error);
+                return;
+            }
+            
+            dadosLeadsGlobais = leads;
+            renderizarTudo();
+            atualizarNotificacoes(); 
+        }
+
+        function renderizarTudo() {
+            processarCards(dadosLeadsGlobais);
+            gerarGraficoStatus(dadosLeadsGlobais);
+            gerarGraficoPlanos(dadosLeadsGlobais);
+            gerarGraficoCidades(dadosLeadsGlobais);
+            
+            if (IS_ADMIN) {
+                gerarGraficoVendedores(dadosLeadsGlobais);
+            }
+        }
+
+        window.addEventListener('resize', renderizarTudo);
+
+        function processarCards(leads) {
+            document.getElementById('totalLeads').innerText = leads.length;
+            
+            let fechados = 0, perdidos = 0, interesse = 0;
+
+            leads.forEach(l => {
+                let st = normalizarStatusDashboard(l);
+                if (st === 'FINALIZADO' || st === 'PAGAR BOLETO') fechados++;
+                if (st === 'PERDIDO') perdidos++;
+                if (st === 'INTERESSADO') interesse++;
+            });
+
+            document.getElementById('totalFechados').innerText = fechados;
+            document.getElementById('totalPerdidos').innerText = perdidos;
+            document.getElementById('totalInteresse').innerText = interesse;
+        }
+
+        let chartStatusInstance = null;
+        let chartPlanosInstance = null;
+        let chartCidadesInstance = null; 
+        let chartVendedoresInstance = null; 
+
+        function gerarGraficoVendedores(todosOsLeads) {
+            let corretores = {};
+            
+            todosOsLeads.forEach(l => {
+                let nomeCorretor = (l.vendedor && l.vendedor.trim() !== '' && l.vendedor.toLowerCase() !== 'livre') ? l.vendedor : 'Livre (Sem Dono)';
+                
+                if (!corretores[nomeCorretor]) {
+                    corretores[nomeCorretor] = {};
+                    TODOS_STATUS.forEach(s => corretores[nomeCorretor][s] = 0);
+                }
+                
+                let st = normalizarStatusDashboard(l);
+                corretores[nomeCorretor][st]++;
+            });
+
+            const nomesVendedores = Object.keys(corretores);
+
+            const datasets = TODOS_STATUS.map(statusNome => {
+                return {
+                    label: statusNome,
+                    data: nomesVendedores.map(n => corretores[n][statusNome]),
+                    backgroundColor: CORES_STATUS[statusNome],
+                    maxBarThickness: 60
+                };
+            });
+
+            const ctx = document.getElementById('graficoVendedores').getContext('2d');
+            if (chartVendedoresInstance) chartVendedoresInstance.destroy();
+
+            chartVendedoresInstance = new Chart(ctx, {
+                type: 'bar',
+                data: { labels: nomesVendedores, datasets: datasets },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    plugins: { 
+                        legend: { position: 'top', labels: { usePointStyle: true, padding: 15, font: { family: "'Segoe UI', sans-serif", size: 11, weight: '600' }, color: '#64748b' } },
+                        tooltip: { backgroundColor: 'rgba(15, 23, 42, 0.9)', padding: 12, cornerRadius: 8, mode: 'index', intersect: false }
+                    },
+                    scales: {
+                        x: { stacked: true, grid: { display: false }, ticks: { font: { family: "'Segoe UI', sans-serif", weight: '600' }, color: '#1e293b' } },
+                        y: { stacked: true, beginAtZero: true, ticks: { stepSize: 1, font: { family: "'Segoe UI', sans-serif" }, color: '#64748b' }, grid: { color: '#f1f5f9', drawBorder: false } }
+                    }
+                }
+            });
+        }
+
+        function gerarGraficoStatus(leads) {
+            let contagem = {};
+            TODOS_STATUS.forEach(s => contagem[s] = 0);
+
+            leads.forEach(l => {
+                let st = normalizarStatusDashboard(l);
+                contagem[st]++;
+            });
+
+            const labels = Object.keys(contagem);
+            const data = Object.values(contagem);
+            const coresDeFundo = labels.map(label => CORES_STATUS[label]);
+
+            const ctx = document.getElementById('graficoStatus').getContext('2d');
+            if (chartStatusInstance) chartStatusInstance.destroy();
+            
+            chartStatusInstance = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: labels,
+                    datasets: [{ data: data, backgroundColor: coresDeFundo, borderWidth: 0 }]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false, cutout: '70%',
+                    plugins: { 
+                        legend: { position: 'right', labels: { usePointStyle: true, padding: 15, font: { family: "'Segoe UI', sans-serif", size: 11 }, color: '#64748b' } },
+                        tooltip: { backgroundColor: 'rgba(15, 23, 42, 0.9)', padding: 12, cornerRadius: 8 }
+                    }
+                }
+            });
+        }
+
+        function gerarGraficoPlanos(leads) {
+            let contagem = {};
+            leads.forEach(l => {
+                if (l.plano_interesse && l.plano_interesse.trim() !== '') {
+                    let plano = l.plano_interesse.toUpperCase().trim();
+                    contagem[plano] = (contagem[plano] || 0) + 1;
+                }
+            });
+
+            let sortedPlanos = Object.entries(contagem).sort((a, b) => b[1] - a[1]).slice(0, 5);
+            if(sortedPlanos.length === 0) sortedPlanos = [['Nenhum Plano', 0]];
+
+            const ctx = document.getElementById('graficoPlanos').getContext('2d');
+            if (chartPlanosInstance) chartPlanosInstance.destroy();
+
+            chartPlanosInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: sortedPlanos.map(item => item[0]),
+                    datasets: [{ label: 'Leads', data: sortedPlanos.map(item => item[1]), backgroundColor: '#3a6e85', borderRadius: 6, maxBarThickness: 45 }]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    plugins: { legend: { display: false }, tooltip: { backgroundColor: 'rgba(15, 23, 42, 0.9)', padding: 12, cornerRadius: 8 } },
+                    scales: { 
+                        x: { grid: { display: false }, ticks: { font: { family: "'Segoe UI', sans-serif" }, color: '#64748b' } },
+                        y: { beginAtZero: true, ticks: { stepSize: 1, font: { family: "'Segoe UI', sans-serif" }, color: '#64748b' }, grid: { color: '#f1f5f9', drawBorder: false } } 
+                    }
+                }
+            });
+        }
+
+        function gerarGraficoCidades(leads) {
+            let contagem = {};
+            leads.forEach(l => {
+                if (l.cidade && l.cidade.trim() !== '') {
+                    let cidade = l.cidade.trim().toUpperCase();
+                    contagem[cidade] = (contagem[cidade] || 0) + 1;
+                }
+            });
+
+            let sortedCidades = Object.entries(contagem).sort((a, b) => b[1] - a[1]).slice(0, 10);
+            if(sortedCidades.length === 0) sortedCidades = [['Nenhuma cidade', 0]];
+
+            const ctx = document.getElementById('graficoCidades').getContext('2d');
+            if (chartCidadesInstance) chartCidadesInstance.destroy();
+
+            chartCidadesInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: sortedCidades.map(item => item[0]),
+                    datasets: [{ label: 'Leads por Local', data: sortedCidades.map(item => item[1]), backgroundColor: '#3a6e85', borderRadius: 6, maxBarThickness: 35 }]
+                },
+                options: {
+                    indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+                    plugins: { legend: { display: false }, tooltip: { backgroundColor: 'rgba(15, 23, 42, 0.9)', padding: 12, cornerRadius: 8 } }, 
+                    scales: { 
+                        x: { beginAtZero: true, ticks: { stepSize: 1, font: { family: "'Segoe UI', sans-serif" }, color: '#64748b' }, grid: { color: '#f1f5f9', drawBorder: false } },
+                        y: { grid: { display: false }, ticks: { font: { family: "'Segoe UI', sans-serif", weight: '600' }, color: '#1e293b' } }
+                    }
+                }
+            });
+        }
+
+        const listaDeCorretoras = [
+            { nome: "Aticare", link: "https://app.vendasplanoonline.com.br/aticare" },
+            { nome: "Biovida Saúde", link: "https://biovidasaude.planium.io/web/login/entrar" },
+            { nome: "Porto Seguro", link: "https://corretor.portoseguro.com.br/novocol/homepage?code=d59892f7-a084-4125-b600-618cac8c7294&state=rAnDoMtExT" },
+            { nome: "Bradesco", link: "https://login.bradescoseguros.com.br/nidp/saml2/idpsend?PID=https://wwwn.bradescoseguros.com.br/samlsps/pnegocios" },
+            { nome: "Sulamerica", link: "https://corretor.sulamericaseguros.com.br/?logout=true" },
+            { nome: "Unimed Odonto", link: "https://www.corretoraunimed.com.br/painel" },
+        ];
+
+        function renderizarCorretoras(filtro = '') {
+            const ul = document.getElementById('listaCorretoras');
+            if(!ul) return;
+            ul.innerHTML = '';
+            const corretorasFiltradas = listaDeCorretoras.filter(c => c.nome.toLowerCase().includes(filtro.toLowerCase()));
+            corretorasFiltradas.forEach(c => { ul.innerHTML += `<li><a href="${c.link}" target="_blank">${c.nome} <i class="fas fa-external-link-alt"></i></a></li>`; });
+            if (corretorasFiltradas.length === 0) { ul.innerHTML = '<li style="padding: 10px 15px; color: rgba(255,255,255,0.4); font-size: 12px;">Nenhuma encontrada...</li>'; }
+        }
+        
+        renderizarCorretoras();
+        const searchInput = document.getElementById('searchCorretora');
+        if(searchInput) { searchInput.addEventListener('input', (e) => renderizarCorretoras(e.target.value)); }
+
+        const btnNotificacoes = document.getElementById('btnNotificacoes');
+        const dropdownNotificacoes = document.getElementById('dropdownNotificacoes');
+        const listaNotificacoes = document.getElementById('listaNotificacoes');
+        const badgeNotificacao = document.getElementById('badgeNotificacao');
+
+        btnNotificacoes.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const isOpen = dropdownNotificacoes.style.display === 'block';
+            dropdownNotificacoes.style.display = isOpen ? 'none' : 'block';
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!dropdownNotificacoes.contains(e.target) && !btnNotificacoes.contains(e.target)) {
+                dropdownNotificacoes.style.display = 'none';
+            }
+        });
+
+        function atualizarNotificacoes() {
+            const hoje = new Date();
+            const ano = hoje.getFullYear();
+            const mes = String(hoje.getMonth() + 1).padStart(2, '0');
+            const dia = String(hoje.getDate()).padStart(2, '0');
+            const dataHojeStr = `${ano}-${mes}-${dia}`;
+            const diaMesAtual = `${dia}/${mes}`;
+
+            // RETORNOS PENDENTES DO CORRETOR LOGADO
+            const leadsPendentes = dadosLeadsGlobais.filter(lead => {
+                if (lead.vendedor !== NOME_VENDEDOR_LOGADO) return false;
+                if (!lead.data_prioridade) return false;
+
+                const status = String(lead.status).toLowerCase();
+                if (status === 'finalizado' || status === 'perdido' || status === 'sem interesse') return false;
+
+                return lead.data_prioridade <= dataHojeStr;
+            });
+
+            // ANIVERSARIANTES DE HOJE DO CORRETOR LOGADO
+            const leadsAniversario = dadosLeadsGlobais.filter(lead => {
+                if (lead.vendedor !== NOME_VENDEDOR_LOGADO) return false;
+                if (!lead.data_nascimento) return false;
+
+                const nascimento = String(lead.data_nascimento).trim();
+                let diaNascimento = '';
+                let mesNascimento = '';
+
+                if (nascimento.includes('/')) {
+                    const partes = nascimento.split('/');
+                    diaNascimento = String(partes[0]).padStart(2, '0');
+                    mesNascimento = String(partes[1]).padStart(2, '0');
+                } else if (nascimento.includes('-')) {
+                    const partes = nascimento.split('-');
+                    if (partes.length >= 3) {
+                        diaNascimento = String(partes[2]).padStart(2, '0');
+                        mesNascimento = String(partes[1]).padStart(2, '0');
+                    }
+                }
+
+                return `${diaNascimento}/${mesNascimento}` === diaMesAtual;
+            });
+
+            const totalAvisos = leadsPendentes.length + leadsAniversario.length;
+
+            if (totalAvisos > 0) {
+                badgeNotificacao.textContent = totalAvisos > 99 ? '99+' : totalAvisos;
+                badgeNotificacao.style.display = 'block';
+            } else {
+                badgeNotificacao.style.display = 'none';
+            }
+
+            listaNotificacoes.innerHTML = '';
+
+            if (totalAvisos === 0) {
+                listaNotificacoes.innerHTML = `
+                    <div style="text-align:center;color:#64748b;font-size:13px;padding:25px 15px;">
+                        <i class="fas fa-check-circle" style="font-size:24px;color:#94a3b8;margin-bottom:8px;display:block;"></i>
+                        Nenhum aviso para hoje! 🎉
+                    </div>
+                `;
+                return;
+            }
+
+            // ANIVERSÁRIOS PRIMEIRO
+            if (leadsAniversario.length > 0) {
+                const tituloAniversarios = document.createElement('div');
+                tituloAniversarios.className = 'notification-section-title';
+                tituloAniversarios.innerHTML = '<i class="fas fa-birthday-cake"></i> Aniversários de hoje';
+                listaNotificacoes.appendChild(tituloAniversarios);
+
+                leadsAniversario.forEach(lead => {
+                    const item = document.createElement('div');
+                    item.className = 'notification-item notification-birthday';
+
+                    const numeroLimpo = String(lead.numero || lead.telefone || lead.celular || '').replace(/\D/g, '');
+                    const nome = lead.nome || 'cliente';
+                    const mensagemZap = encodeURIComponent(
+                        `Olá, ${nome}! A equipe da BV Pinho deseja a você um feliz aniversário! 🎂 Muitas felicidades, saúde e sucesso!`
+                    );
+
+                    const botaoWhatsApp = numeroLimpo
+                        ? `
+                            <button type="button" class="btn-birthday-whatsapp" title="Abrir conversa no WhatsApp">
+                                <i class="fab fa-whatsapp" style="font-size:17px;"></i>
+                                Enviar parabéns pelo WhatsApp
+                            </button>
+                        `
+                        : `
+                            <div class="birthday-no-phone">
+                                <i class="fas fa-phone-slash"></i> Sem telefone cadastrado
+                            </div>
+                          `;
+
+                    item.innerHTML = `
+                        <div class="birthday-top">
+                            <div class="birthday-icon">
+                                <i class="fas fa-birthday-cake"></i>
+                            </div>
+                            <div class="birthday-info">
+                                <span class="birthday-label">🎉 Aniversário hoje</span>
+                                <span class="birthday-name">${nome}</span>
+                            </div>
+                        </div>
+                        <div class="birthday-message">
+                            Aproveite para enviar uma mensagem especial para o cliente.
+                        </div>
+                        ${botaoWhatsApp}
+                    `;
+
+                    const btnWhats = item.querySelector('.btn-birthday-whatsapp');
+                    if (btnWhats) {
+                        btnWhats.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            window.open(
+                                `https://api.whatsapp.com/send?phone=55${numeroLimpo}&text=${mensagemZap}`,
+                                '_blank'
+                            );
+                        });
+                    }
+
+                    item.addEventListener('click', () => {
+                        window.location.href = '../painel/index.html';
+                    });
+
+                    listaNotificacoes.appendChild(item);
+                });
+            }
+
+            // RETORNOS
+            if (leadsPendentes.length > 0) {
+                const tituloRetornos = document.createElement('div');
+                tituloRetornos.className = 'notification-section-title';
+                tituloRetornos.innerHTML = '<i class="fas fa-calendar-check"></i> Retornos pendentes';
+                listaNotificacoes.appendChild(tituloRetornos);
+            }
+
+            leadsPendentes.forEach(lead => {
+                const item = document.createElement('div');
+                item.className = 'notification-item';
+
+                const partesData = String(lead.data_prioridade).split('-');
+                const dataFormatada = partesData.length >= 3
+                    ? `${partesData[2]}/${partesData[1]}/${partesData[0]}`
+                    : lead.data_prioridade;
+
+                item.innerHTML = `
+                    <span class="notif-nome">${lead.nome || 'Sem Nome'}</span>
+                    <span class="notif-data"><i class="fas fa-calendar-alt"></i> Agendado: ${dataFormatada}</span>
+                `;
+
+                item.addEventListener('click', () => {
+                    window.location.href = '../painel/index.html';
+                });
+
+                listaNotificacoes.appendChild(item);
+            });
+        }
+    </script>
+</body>
+</html>

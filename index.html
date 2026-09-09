@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tela de Login - BV Pinho</title>
+    
+    <style>
+        /* =========================================
+           RESET E CONFIGURAÇÕES GERAIS
+           ========================================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Fundo da tela em gradiente Azul Petróleo */
+        body {
+            background: radial-gradient(circle at center, #3a6e85 0%, #1e3b48 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+        }
+
+        /* Container central */
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            padding: 20px;
+        }
+
+        /* =========================================
+           CAIXA PRINCIPAL DO LOGIN (Ultra Clean)
+           ========================================= */
+        .login-box {
+            background: #ffffff;
+            width: 100%;
+            max-width: 420px;
+            padding: 50px 40px;
+            border-radius: 24px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+            margin-bottom: 30px;
+        }
+
+        /* =========================================
+           CADEADO E ÍCONES
+           ========================================= */
+        .icon-circle {
+            width: 80px;
+            height: 80px;
+            background-color: #f2f7f9; /* Fundo sutil azulado */
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 30px auto;
+            box-shadow: 0 4px 10px rgba(58, 110, 133, 0.08);
+        }
+
+        .icon-circle svg {
+            width: 40px;
+            height: 40px;
+        }
+
+        /* =========================================
+           CAMPOS DE TEXTO E LABELS
+           ========================================= */
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 24px;
+        }
+
+        /* Títulos dos campos na cor Azul Petróleo */
+        label {
+            color: #3a6e85;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            margin-left: 4px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            opacity: 0.9;
+        }
+
+        .password-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+
+        /* Estilo dos inputs */
+        input {
+            width: 100%;
+            background-color: #f8f9fa;
+            color: #1e3b48;
+            border: 2px solid transparent;
+            border-radius: 12px;
+            padding: 16px 20px;
+            font-size: 15px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .password-wrapper input {
+            padding-right: 50px;
+        }
+
+        /* Efeito ao clicar no input (Focus) */
+        input:focus {
+            background-color: #ffffff;
+            border-color: #3a6e85;
+            box-shadow: 0 0 0 4px rgba(58, 110, 133, 0.15);
+        }
+
+        input::placeholder {
+            color: #adb5bd;
+            font-weight: 400;
+        }
+
+        /* Olhinho da Senha */
+        .toggle-password {
+            position: absolute;
+            right: 15px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        .toggle-password:hover {
+            opacity: 0.6;
+            transform: scale(1.1);
+        }
+
+        /* Mensagem de Erro */
+        .error-message {
+            color: #dc3545;
+            font-size: 14px;
+            font-weight: 600;
+            text-align: center;
+            margin-top: -5px;
+            margin-bottom: 15px;
+            min-height: 20px;
+        }
+
+        /* =========================================
+           BOTÃO DE ENTRAR E LOGO (Dourado BV Pinho)
+           ========================================= */
+        .btn-submit {
+            background: linear-gradient(135deg, #bb8e44, #9c7536); /* Degradê Dourado */
+            color: #ffffff;
+            border: none;
+            border-radius: 12px;
+            padding: 16px;
+            width: 100%;
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(187, 142, 68, 0.3);
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        /* Efeito de flutuação ao passar o mouse */
+        .btn-submit:hover {
+            background: linear-gradient(135deg, #cda259, #ab823f);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(187, 142, 68, 0.4);
+        }
+
+        .btn-submit:active {
+            transform: translateY(0);
+            box-shadow: 0 4px 10px rgba(187, 142, 68, 0.2);
+        }
+
+        .logo {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .logo img {
+            width: 100%;
+            max-width: 260px;
+            height: auto;
+            opacity: 0.95;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2));
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Caixa de Login Principal -->
+        <div class="login-box">
+            
+            <!-- Círculo com o Ícone do Cadeado (Azul) -->
+            <div class="icon-circle">
+                <svg viewBox="0 0 24 24" width="60" height="60">
+                    <path fill="#3a6e85" d="M12,17A2,2 0 0,0 14,15C14,13.89 13.1,13 12,13A2,2 0 0,0 10,15A2,2 0 0,0 12,17M18,8A2,2 0 0,1 20,10V20A2,2 0 0,1 18,22H6A2,2 0 0,1 4,20V10C4,8.89 4.9,8 6,8H7V6A5,5 0 0,1 12,1A5,5 0 0,1 17,6V8H18M12,3A3,3 0 0,0 9,6V8H15V6A3,3 0 0,0 12,3Z" />
+                </svg>
+            </div>
+
+            <!-- Campos de Entrada e Botão -->
+            <form action="#">
+                
+                <div class="input-group">
+                    <label for="usuario">USUÁRIO</label>
+                    <input type="email" id="usuario" placeholder="Digite seu usuário (e-mail)..." required>
+                </div>
+
+                <div class="input-group">
+                    <label for="senha">SENHA</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="senha" placeholder="Digite sua senha..." required>
+                        <button type="button" id="toggleSenha" class="toggle-password" aria-label="Mostrar/ocultar senha">
+                            <svg id="eyeIcon" viewBox="0 0 24 24" width="22" height="22">
+                                <path fill="#3a6e85" d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Mensagem de erro -->
+                <p id="mensagem-erro" class="error-message"></p>
+
+                <button type="submit" class="btn-submit">Entrar</button>
+
+            </form>
+            
+        </div>
+
+        <!-- Logotipo -->
+        <div class="logo">
+            <img src="/src/logo.svg" alt="Logo BV Pinho Plano de Saúde">
+        </div>
+    </div>
+
+    <!-- 1. Importando a biblioteca do Supabase via CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- 2. Script do seu projeto -->
+    <script>
+        // ==========================================
+        // CONFIGURAÇÃO DO SUPABASE (CORRIGIDO)
+        // ==========================================
+        const supabaseUrl = 'https://flbxxsttexpxumbfqaxv.supabase.co'; // URL corrigida
+        const supabaseKey = 'sb_publishable_OqPx1lTVT1XTGbMkDfc0MQ_vAXVltis'; // Chave atualizada
+        
+        const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
+
+        // ==========================================
+        // LÓGICA DO OLHINHO (MOSTRAR/OCULTAR SENHA)
+        // ==========================================
+        const toggleSenhaBtn = document.getElementById('toggleSenha');
+        const senhaInput = document.getElementById('senha');
+        const eyeIcon = document.getElementById('eyeIcon');
+
+        const eyeOpenPath = "M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z";
+        const eyeClosedPath = "M12 7c2.76 0 5 2.24 5 5 0 .65-.13 1.26-.36 1.83l2.92 2.92c1.51-1.26 2.7-2.89 3.44-4.75-1.73-4.39-6-7.5-11-7.5-1.4 0-2.74.25-3.98.7l2.16 2.16C10.74 7.13 11.35 7 12 7zM2 4.27l2.28 2.28.46.46C3.08 8.3 1.78 10.02 1 12c1.73 4.39 6 7.5 11 7.5 1.55 0 3.03-.3 4.38-.84l.42.42L19.73 22 21 20.73 3.27 3 2 4.27zM7.53 9.8l1.55 1.55c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3 .22 0 .44-.03.65-.08l1.55 1.55c-.67.33-1.41.53-2.2.53-2.76 0-5-2.24-5-5 0-.79.2-1.53.53-2.2zm4.31-.78l3.15 3.15.02-.17c0-1.66-1.34-3-3-3l-.17.02z";
+
+        toggleSenhaBtn.addEventListener('click', () => {
+            const isPassword = senhaInput.type === 'password';
+            senhaInput.type = isPassword ? 'text' : 'password';
+            eyeIcon.querySelector('path').setAttribute('d', isPassword ? eyeClosedPath : eyeOpenPath);
+        });
+
+        // ==========================================
+        // LÓGICA DE LOGIN COM O SUPABASE
+        // ==========================================
+        const loginForm = document.querySelector('form');
+        const usuarioInput = document.getElementById('usuario');
+        const btnSubmit = document.querySelector('.btn-submit');
+        const mensagemErro = document.getElementById('mensagem-erro');
+
+        loginForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const email = usuarioInput.value;
+            const password = senhaInput.value;
+
+            mensagemErro.textContent = '';
+            btnSubmit.textContent = 'Carregando...';
+
+            const { data, error } = await supabaseClient.auth.signInWithPassword({
+                email: email,
+                password: password,
+            });
+
+            btnSubmit.textContent = 'Entrar';
+
+            if (error) {
+                // Aqui mostramos a mensagem de erro específica para ajudar a debugar se houver problema
+                mensagemErro.textContent = 'Login ou senha incorreta.';
+                console.error("Erro do Supabase:", error.message);
+            } else {
+                window.location.href = '/carregamento/index.html';
+            }
+        });
+    </script>
+</body>
+</html>
