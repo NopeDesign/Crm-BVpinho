@@ -19,12 +19,10 @@
         }
 
         :root {
-            /* Paleta Azul Petróleo */
             --color-primary: #3a6e85;        
             --color-primary-hover: #2c5466; 
             --color-primary-dark: #1e3b48;
             
-            /* Paleta Dourada para Botões de Ação */
             --color-gold: #bb8e44;
             --color-gold-hover: #9c7536;
             --color-gold-light: #cda259;
@@ -73,7 +71,7 @@
         .sidebar-logo {
             padding: 0 25px;
             text-align: left;
-            margin-bottom: 40px; 
+            margin-bottom: 35px; 
         }
 
         .sidebar-logo img {
@@ -91,12 +89,14 @@
         }
 
         .sidebar-menu li a {
-            display: block;
+            display: flex;
+            align-items: center;
+            gap: 10px;
             color: rgba(255, 255, 255, 0.7);
             text-decoration: none;
             font-weight: 600;
-            font-size: 15px;
-            padding: 14px 20px;
+            font-size: 14px;
+            padding: 13px 18px;
             border-radius: 12px;
             transition: all 0.3s ease;
         }
@@ -113,7 +113,7 @@
         }
 
         .sidebar-corretoras {
-            margin-top: 30px;
+            margin-top: 25px;
             display: flex;
             flex-direction: column;
             flex: 1;
@@ -126,14 +126,14 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             padding: 0 25px;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             font-weight: 700;
         }
 
         .corretoras-search {
             position: relative;
             padding: 0 15px;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
 
         .corretoras-search i {
@@ -151,7 +151,7 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
             color: #ffffff;
             border-radius: 8px;
-            padding: 10px 10px 10px 32px;
+            padding: 9px 10px 9px 32px;
             font-size: 13px;
             outline: none;
             transition: all 0.3s ease;
@@ -201,13 +201,13 @@
         .corretoras-list li:hover a i { opacity: 1; }
 
         /* =========================================
-            3. CONTEÚDO PRINCIPAL E BOTÕES
+            3. CONTEÚDO PRINCIPAL, TOPO E ABAS DO FUNIL
             ========================================= */
         .main-content {
             flex: 1;
             display: flex;
             flex-direction: column;
-            padding: 30px 40px;
+            padding: 24px 35px;
             background-color: var(--color-bg-app);
             overflow: hidden; 
         }
@@ -218,8 +218,8 @@
             align-items: center;
             flex-wrap: wrap; 
             gap: 15px;
-            margin-bottom: 20px;
-            min-height: 60px; 
+            margin-bottom: 16px;
+            min-height: 50px; 
         }
 
         .btn-primary {
@@ -227,12 +227,15 @@
             color: var(--color-text-light);
             border: none;
             border-radius: 12px;
-            padding: 12px 24px;
-            font-size: 14px;
+            padding: 11px 20px;
+            font-size: 13px;
             font-weight: 700;
             cursor: pointer;
             box-shadow: 0 4px 10px rgba(187, 142, 68, 0.3);
             transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .btn-primary:hover {
@@ -242,15 +245,18 @@
         }
 
         .btn-outline {
-            background-color: #f1f5f9;
+            background-color: #ffffff;
             color: var(--color-text-main);
             border: 1px solid var(--color-border);
             border-radius: 12px;
-            padding: 12px 24px;
-            font-size: 14px;
+            padding: 11px 20px;
+            font-size: 13px;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .btn-outline:hover {
@@ -263,9 +269,9 @@
             background-color: #ffffff;
             border: 1px solid var(--color-border);
             border-radius: 10px;
-            padding: 8px 16px;
+            padding: 7px 16px;
             width: 100%;
-            max-width: 450px;
+            max-width: 460px;
             box-shadow: var(--shadow-sm);
             flex-grow: 1; 
         }
@@ -275,15 +281,15 @@
             border: none;
             color: var(--color-text-main);
             outline: none;
-            padding: 6px 5px;
+            padding: 5px;
             flex: 1;
-            font-size: 14px;
+            font-size: 13px;
             min-width: 100px;
         }
 
         .search-divider {
             width: 1px;
-            height: 24px;
+            height: 22px;
             background-color: var(--color-border);
             margin: 0 10px;
         }
@@ -299,15 +305,65 @@
         }
         .filtro-vendedor-select:focus { color: var(--color-primary); }
 
+        /* ABAS DE NAVEGAÇÃO DO KANBAN */
+        .funnel-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 16px;
+            border-bottom: 1px solid var(--color-border);
+            padding-bottom: 12px;
+            overflow-x: auto;
+        }
+
+        .funnel-tab-btn {
+            background-color: #ffffff;
+            color: var(--color-text-muted);
+            border: 1px solid var(--color-border);
+            padding: 8px 16px;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .funnel-tab-btn:hover {
+            background-color: #f1f5f9;
+            color: var(--color-text-main);
+        }
+
+        .funnel-tab-btn.active {
+            background-color: var(--color-primary);
+            color: #ffffff;
+            border-color: var(--color-primary);
+            box-shadow: 0 4px 10px rgba(58, 110, 133, 0.2);
+        }
+
+        .funnel-tab-badge {
+            background-color: rgba(0, 0, 0, 0.08);
+            padding: 2px 7px;
+            border-radius: 10px;
+            font-size: 11px;
+        }
+
+        .funnel-tab-btn.active .funnel-tab-badge {
+            background-color: rgba(255, 255, 255, 0.22);
+            color: #ffffff;
+        }
+
         /* =========================================
-            4. TELA KANBAN (BOARD E COLUNAS)
+            4. TELA KANBAN (BOARD, COLUNAS E CARDS COMPACTOS)
             ========================================= */
         .board {
             display: flex;
-            gap: 20px;
+            gap: 18px;
             flex: 1;
             overflow-x: auto;
-            padding-bottom: 15px;
+            padding-bottom: 12px;
         }
 
         .board::-webkit-scrollbar { height: 8px; }
@@ -316,12 +372,20 @@
         .column {
             background-color: var(--color-bg-column);
             border-radius: 12px;
-            width: 320px; 
-            min-width: 320px;
+            width: 310px; 
+            min-width: 310px;
             display: flex;
             flex-direction: column;
-            padding: 15px;
+            padding: 14px;
             border: 1px solid #d1d5db;
+        }
+
+        .column-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            padding: 0 4px;
         }
 
         .column-title {
@@ -329,9 +393,16 @@
             font-size: 12px;
             font-weight: 800;
             color: var(--color-primary);
-            margin-bottom: 15px;
             text-transform: uppercase;
-            padding-left: 5px;
+        }
+
+        .column-count {
+            background-color: rgba(58, 110, 133, 0.15);
+            color: var(--color-primary-dark);
+            font-size: 11px;
+            font-weight: 800;
+            padding: 2px 8px;
+            border-radius: 12px;
         }
 
         .column-content {
@@ -339,8 +410,8 @@
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            gap: 12px; 
-            padding-right: 5px;
+            gap: 10px; 
+            padding-right: 4px;
         }
 
         .column-content::-webkit-scrollbar { width: 4px; }
@@ -348,15 +419,15 @@
 
         .board .lead-card {
             background-color: var(--color-card);
-            border-radius: 8px;
-            padding: 16px;
+            border-radius: 10px;
+            padding: 12px 14px;
             text-align: left;
             box-shadow: var(--shadow-sm);
             border: 1px solid #e2e8f0;
             border-left: 4px solid var(--color-primary);
             display: flex;
             flex-direction: column;
-            gap: 10px; 
+            gap: 6px; 
             transition: transform 0.2s ease, box-shadow 0.2s ease;
             cursor: grab;
         }
@@ -369,7 +440,7 @@
         .board .lead-info {
             display: flex;
             flex-direction: column; 
-            gap: 8px; 
+            gap: 2px; 
             font-size: 12px;
             color: var(--color-text-muted);
         }
@@ -377,29 +448,116 @@
         .board .lead-info div {
             overflow-wrap: break-word;
             word-break: break-word;
-            line-height: 1.4;
-        }
-
-        .board .lead-info strong {
-            display: block; 
-            color: var(--color-text-main);
-            font-size: 14px;
-            margin-top: 2px;
-            font-weight: 600;
+            line-height: 1.3;
         }
 
         .vendedor-badge {
             align-self: flex-start;
-            font-size: 11px;
+            font-size: 10.5px;
             background-color: #f1f5f9;
-            padding: 4px 8px;
+            padding: 2px 7px;
             border-radius: 6px;
             color: var(--color-primary);
             font-weight: 700;
             border: 1px solid #e2e8f0;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .retorno-badge {
+            align-self: flex-start;
+            font-size: 10.5px;
+            background-color: #fef2f2;
+            padding: 2px 7px;
+            border-radius: 6px;
+            color: #ef4444;
+            font-weight: 700;
+            border: 1px solid #fecaca;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* TAGS DE INTERESSE E CONTRATADO NO CARD */
+        .tag-interesse {
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 5px;
+            background-color: #e0f2fe;
+            color: #0369a1;
+            border: 1px solid #bae6fd;
+            display: inline-flex;
+            align-items: center;
+            gap: 3px;
+        }
+
+        .tag-contratado {
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 5px;
+            background-color: #dcfce7;
+            color: #15803d;
+            border: 1px solid #86efac;
+            display: inline-flex;
+            align-items: center;
+            gap: 3px;
+        }
+
+        /* BLOCO DE PLANO E VALOR COMPACTO NO CARD */
+        .card-plano-box {
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 5px 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 6px;
+            font-size: 11px;
+        }
+
+        .card-plano-nome {
+            color: #1e293b;
+            font-weight: 700;
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 165px;
+        }
+
+        .card-plano-valor {
+            color: #047857;
+            font-weight: 800;
+            font-size: 11.5px;
+            display: flex;
+            align-items: center;
+            gap: 3px;
+        }
+
+        /* BLOCO DE RESUMO CONTROLADO NO CARD (MÁXIMO 2 LINHAS) */
+        .card-obs-box {
+            background-color: #fffbeb;
+            border: 1px solid #fde68a;
+            border-left: 3px solid #f59e0b;
+            border-radius: 6px;
+            padding: 5px 8px;
+            font-size: 11px;
+            color: #92400e;
+            line-height: 1.3;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            word-break: break-word;
+            max-height: 38px;
         }
 
         .board .lead-actions {
@@ -407,7 +565,7 @@
             justify-content: flex-end; 
             align-items: center;
             gap: 12px;
-            padding-top: 10px;
+            padding-top: 6px;
             border-top: 1px dashed var(--color-border); 
             margin-top: auto; 
         }
@@ -421,9 +579,12 @@
             color: var(--color-text-muted);
             cursor: pointer;
             transition: color 0.2s;
+            background: none;
+            border: none;
         }
 
         .board .action-item:hover { color: var(--color-primary); }
+        .board .action-item.zap-btn:hover { color: var(--color-whatsapp); }
 
         /* =========================================
             5. NOTIFICAÇÕES (SINO)
@@ -432,16 +593,14 @@
         .notification-bell { background: white; border: 1px solid #cbd5e1; padding: 6px 12px; border-radius: 12px; cursor: pointer; position: relative; font-size: 20px; color: #64748b; height: 100%; transition: 0.3s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
         .notification-bell:hover { background: #f8fafc; color: var(--color-text-main); }
         .notification-badge { position: absolute; top: -6px; right: -6px; background: #ef4444; color: white; font-size: 10px; font-weight: bold; padding: 2px 6px; border-radius: 50%; display: none; }
-        .notification-dropdown { display: none; position: absolute; right: 0; top: 120%; width: 320px; background: white; border: 1px solid #e2e8f0; border-radius: 8px; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); z-index: 1000; max-height: 400px; overflow-y: auto; }
-        .notification-header { padding: 12px 15px; border-bottom: 1px solid #e2e8f0; font-weight: bold; color: #1e293b; background: #f8fafc; border-radius: 8px 8px 0 0; }
-        .notification-item { padding: 12px 15px; border-bottom: 1px solid #f1f5f9; cursor: pointer; transition: 0.2s; display: flex; flex-direction: column; gap: 6px; }
+        .notification-dropdown { display: none; position: absolute; right: 0; top: 120%; width: 340px; background: white; border: 1px solid #e2e8f0; border-radius: 12px; box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.15); z-index: 1000; max-height: 450px; overflow-y: auto; }
+        .notification-header { padding: 12px 15px; border-bottom: 1px solid #e2e8f0; font-weight: bold; color: #1e293b; background: #f8fafc; border-radius: 12px 12px 0 0; display: flex; justify-content: space-between; align-items: center; }
+        .notification-item { padding: 12px 15px; border-bottom: 1px solid #f1f5f9; cursor: pointer; transition: 0.2s; display: flex; flex-direction: column; gap: 4px; }
         .notification-item:hover { background-color: #f8fafc; }
         .notification-item:last-child { border-bottom: none; }
         .notif-nome { font-weight: bold; color: #1e293b; font-size: 14px; }
-        .notif-data { font-size: 12px; color: #ef4444; font-weight: 600; }
-        .notif-aniversario { font-size: 12px; color: #d97706; font-weight: 600; }
+        .notif-data { font-size: 12px; color: #ef4444; font-weight: 600; display: flex; align-items: center; gap: 5px; }
 
-        /* Card de aniversário - estilo da referência */
         .birthday-section-title { padding: 12px 15px 8px; color: #8a94a6; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .5px; display: flex; align-items: center; gap: 6px; }
         .birthday-notification { margin: 0 10px 10px; padding: 14px; background: #fff; border: 1px solid #f3c978; border-radius: 14px; cursor: default; display: flex; flex-direction: column; gap: 12px; box-shadow: 0 2px 5px rgba(15,23,42,.03); }
         .birthday-notification:hover { background: #fff; border-color: #efbd55; }
@@ -450,15 +609,12 @@
         .birthday-text { display: flex; flex-direction: column; min-width: 0; flex: 1; }
         .birthday-label { font-size: 10px; font-weight: 800; color: #b7791f; text-transform: uppercase; letter-spacing: .55px; margin-bottom: 3px; }
         .birthday-name { font-weight: 800; color: #172033; font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .birthday-message { margin: 0; color: #667085; font-size: 12px; line-height: 1.45; }
-        .btn-whatsapp-aniversario { width: 100%; min-height: 40px; border: 0; border-radius: 10px; background: #20cf68; color: #fff; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 12px; font-weight: 800; font-family: inherit; text-decoration: none; cursor: pointer; box-shadow: 0 4px 10px rgba(32,207,104,.18); transition: transform .15s ease, box-shadow .15s ease, filter .15s ease; }
+        .btn-whatsapp-aniversario { width: 100%; min-height: 38px; border: 0; border-radius: 10px; background: #20cf68; color: #fff; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 12px; font-weight: 800; font-family: inherit; text-decoration: none; cursor: pointer; box-shadow: 0 4px 10px rgba(32,207,104,.18); transition: transform .15s ease, box-shadow .15s ease, filter .15s ease; }
         .btn-whatsapp-aniversario:hover { filter: brightness(.96); transform: translateY(-1px); box-shadow: 0 6px 14px rgba(32,207,104,.25); }
-        .btn-whatsapp-aniversario:active { transform: translateY(0); }
-        .btn-whatsapp-aniversario i { font-size: 16px; }
         .birthday-no-phone { font-size: 11px; color: #94a3b8; font-style: italic; }
 
         /* =========================================
-            6. MODAL (TELA DE CADASTRO/EDIÇÃO) E ABAS
+            6. MODAL COM LAYOUT DIVIDIDO (AGENDA LATERAL + PAINEL CARD)
             ========================================= */
         .modal-overlay {
             position: fixed;
@@ -467,52 +623,284 @@
             backdrop-filter: blur(4px); 
             display: flex; justify-content: center; align-items: center;
             z-index: 1000;
+            padding: 15px;
         }
 
         .modal-card {
             background-color: var(--color-card); 
-            width: 100%; max-width: 800px; padding: 40px;
-            border-radius: 24px; box-shadow: var(--shadow-lg);
-            max-height: 90vh; overflow-y: auto;
+            width: 100%; 
+            max-width: 1240px; 
+            padding: 26px 32px;
+            border-radius: 24px; 
+            box-shadow: var(--shadow-lg);
+            max-height: 94vh; 
+            overflow-y: auto;
         }
 
-        .form-row { display: flex; gap: 20px; margin-bottom: 20px; flex-wrap: wrap; }
-        .form-group { display: flex; flex-direction: column; flex: 1; min-width: 150px; }
+        .modal-split-layout {
+            display: flex;
+            gap: 24px;
+            align-items: stretch;
+        }
+
+        .modal-left-main {
+            flex: 1.75;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-right-agenda {
+            flex: 1;
+            min-width: 340px;
+            max-width: 400px;
+            background: linear-gradient(180deg, #fffbeb 0%, #fef3c7 100%);
+            border: 1px solid #fcd34d;
+            border-top: 5px solid #d97706;
+            border-radius: 16px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            box-shadow: 0 8px 20px rgba(217, 119, 6, 0.08);
+        }
+
+        .agenda-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px dashed #f59e0b;
+            padding-bottom: 8px;
+        }
+
+        .agenda-title {
+            font-size: 13.5px;
+            font-weight: 800;
+            color: #92400e;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+        }
+
+        .btn-carimbar-data {
+            background-color: #ffffff;
+            color: #b45309;
+            border: 1px solid #f59e0b;
+            border-radius: 8px;
+            padding: 4px 9px;
+            font-size: 11px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .btn-carimbar-data:hover {
+            background-color: #fef3c7;
+            transform: translateY(-1px);
+        }
+
+        .agenda-retorno-box {
+            background-color: rgba(255, 255, 255, 0.9);
+            border: 1px solid #fde68a;
+            border-radius: 12px;
+            padding: 10px 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        /* NOVA CAIXA DE CONTROLE DO QUE APARECE NO CARD DO KANBAN */
+        .card-display-config-box {
+            background-color: #ffffff;
+            border: 1.5px solid #3a6e85;
+            border-radius: 12px;
+            padding: 11px 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            box-shadow: 0 2px 6px rgba(58, 110, 133, 0.08);
+        }
+
+        .card-display-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 11px;
+            font-weight: 800;
+            color: var(--color-primary-dark);
+            text-transform: uppercase;
+        }
+
+        .char-counter {
+            font-size: 10.5px;
+            font-weight: 700;
+            color: #64748b;
+            background: #f1f5f9;
+            padding: 2px 6px;
+            border-radius: 6px;
+        }
+
+        .card-toggles-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px;
+            background: #f8fafc;
+            padding: 7px 9px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .card-toggle-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11.5px;
+            font-weight: 600;
+            color: #334155;
+            cursor: pointer;
+        }
+
+        .card-toggle-item input {
+            width: 15px;
+            height: 15px;
+            accent-color: var(--color-primary);
+            cursor: pointer;
+        }
+
+        .resumo-card-textarea {
+            width: 100%;
+            height: 54px;
+            background-color: #f8fafc !important;
+            border: 1px solid #cbd5e1 !important;
+            border-radius: 8px !important;
+            padding: 8px 10px !important;
+            font-size: 12.5px !important;
+            line-height: 1.35 !important;
+            color: #1e293b !important;
+            resize: none;
+            outline: none;
+        }
+
+        .resumo-card-textarea:focus {
+            background-color: #ffffff !important;
+            border-color: var(--color-primary) !important;
+        }
+
+        .agenda-textarea-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .agenda-textarea {
+            flex: 1;
+            width: 100%;
+            min-height: 185px;
+            background-color: #ffffff !important;
+            border: 1px solid #fcd34d !important;
+            border-radius: 12px !important;
+            padding: 12px !important;
+            font-size: 13.5px !important;
+            line-height: 1.55 !important;
+            color: #1e293b !important;
+            resize: none;
+            outline: none;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.03);
+            background-image: linear-gradient(transparent, transparent 26px, #f1f5f9 27px);
+            background-size: 100% 27px;
+        }
+
+        .agenda-textarea:focus {
+            border-color: #d97706 !important;
+            box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.15) !important;
+        }
+
+        .status-autosave {
+            font-size: 11px;
+            font-weight: 700;
+            color: #15803d;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        @media (max-width: 980px) {
+            .modal-split-layout {
+                flex-direction: column;
+            }
+            .modal-right-agenda {
+                max-width: 100%;
+            }
+        }
+
+        .btn-fechar-x {
+            position: absolute;
+            top: 22px;
+            right: 25px;
+            background: none;
+            border: none;
+            font-size: 22px;
+            color: #94a3b8;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 5px;
+            border-radius: 50%;
+        }
+        
+        .btn-fechar-x:hover {
+            color: var(--color-primary);
+            background-color: #f1f5f9;
+            transform: scale(1.1);
+        }
+
+        .form-row { display: flex; gap: 14px; margin-bottom: 13px; flex-wrap: wrap; }
+        .form-group { display: flex; flex-direction: column; flex: 1; min-width: 135px; }
         .form-group.flex-2 { flex: 2; }
         .form-group.flex-3 { flex: 3; }
 
         .form-group label {
             color: var(--color-text-muted);
             font-size: 11px; font-weight: 700;
-            text-transform: uppercase; margin-bottom: 8px; margin-left: 4px;
+            text-transform: uppercase; margin-bottom: 5px; margin-left: 4px;
         }
 
-        .form-group input, .form-group select {
+        .form-group input, .form-group select, .form-group textarea {
             background-color: #f8fafc; 
             color: var(--color-text-main);
             border: 1px solid var(--color-border);
-            border-radius: 12px; padding: 14px 16px;
-            font-size: 15px; font-weight: 500; outline: none;
+            border-radius: 10px; padding: 10px 12px;
+            font-size: 13.5px; font-weight: 500; outline: none;
             transition: all 0.3s ease;
             font-family: inherit;
         }
 
-        .form-group input:focus, .form-group select:focus {
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
             background-color: #ffffff;
             border-color: var(--color-primary);
-            box-shadow: 0 0 0 4px rgba(58, 110, 133, 0.15); 
+            box-shadow: 0 0 0 3px rgba(58, 110, 133, 0.15); 
         }
 
         .status-bar-tab { display: flex; gap: 25px; background: #f8fafc; padding: 12px 15px; border-radius: 8px; margin-bottom: 15px; border: 1px solid var(--color-border); }
-        .chk-interesse { cursor: pointer; display: flex; align-items: center; gap: 8px; font-weight: 700; color: #64748b; font-size: 14px; }
-        .chk-interesse input { cursor: pointer; width: 18px; height: 18px; accent-color: #64748b; }
-        .chk-contrato { cursor: pointer; display: flex; align-items: center; gap: 8px; font-weight: 700; color: var(--color-primary); font-size: 14px; }
-        .chk-contrato input { cursor: pointer; width: 18px; height: 18px; accent-color: var(--color-primary); }
+        .chk-interesse { cursor: pointer; display: flex; align-items: center; gap: 8px; font-weight: 700; color: #0369a1; font-size: 14px; }
+        .chk-interesse input { cursor: pointer; width: 18px; height: 18px; accent-color: #0369a1; }
+        .chk-contrato { cursor: pointer; display: flex; align-items: center; gap: 8px; font-weight: 700; color: #15803d; font-size: 14px; }
+        .chk-contrato input { cursor: pointer; width: 18px; height: 18px; accent-color: #15803d; }
 
         .tabs-container {
             display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
+            gap: 6px;
+            margin-top: 6px;
+            margin-bottom: 16px;
             border-bottom: 2px solid var(--color-border);
             padding-bottom: 10px;
             overflow-x: auto; 
@@ -520,75 +908,145 @@
         .tab-btn {
             background: none;
             border: none;
-            padding: 10px 15px;
-            font-size: 14px;
+            padding: 8px 12px;
+            font-size: 12.5px;
             font-weight: 700;
             color: #64748b;
             cursor: pointer;
-            border-radius: 6px;
-            transition: all 0.3s ease;
+            border-radius: 8px;
+            transition: all 0.2s ease;
             white-space: nowrap;
         }
         .tab-btn:hover { background: #f1f5f9; color: #1e293b; }
-        .tab-btn.active { background: rgba(58, 110, 133, 0.1); color: var(--color-primary); }
+        .tab-btn.active { background: rgba(58, 110, 133, 0.12); color: var(--color-primary); }
 
-        .tab-content { display: none; animation: fadeIn 0.3s ease; }
+        .tab-content { display: none; animation: fadeIn 0.25s ease; }
         .tab-content.active { display: block; }
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(5px); }
+            from { opacity: 0; transform: translateY(4px); }
             to { opacity: 1; transform: translateY(0); }
-        }
-
-        .cob-modern-section { margin-top: 20px; margin-bottom: 25px;}
-        .cob-modern-row { display: flex; gap: 15px; margin-bottom: 15px; flex-wrap: wrap; }
-        .cob-modern-group { display: flex; flex-direction: column; gap: 6px; flex: 1; min-width: 130px; }
-        .cob-modern-group label { font-size: 11px; font-weight: 800; color: #475569; text-transform: uppercase; letter-spacing: 0.5px; margin: 0; }
-        .cob-modern-group input[type="text"], 
-        .cob-modern-group input[type="number"], 
-        .cob-modern-group select { border: 1px solid var(--color-border); border-radius: 8px; padding: 10px 12px; font-size: 14px; color: var(--color-text-main); width: 100%; box-sizing: border-box; background-color: #fff; transition: 0.2s; outline: none; }
-        .cob-modern-group input:focus, 
-        .cob-modern-group select:focus { border-color: var(--color-primary); box-shadow: 0 0 0 3px rgba(58, 110, 133, 0.15); }
-        
-        .cob-modern-grid-wrapper { width: 100%; overflow-x: auto; padding-bottom: 15px; }
-        .cob-modern-grid-wrapper::-webkit-scrollbar { height: 8px; }
-        .cob-modern-grid-wrapper::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 4px; }
-        .cob-modern-grid-wrapper::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 4px; }
-        .cob-modern-grid-wrapper::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
-
-        .cob-modern-grid { display: grid; grid-template-columns: repeat(4, minmax(230px, 1fr)); gap: 15px; min-width: 950px; }
-        .cob-modern-fieldset { border: 1px solid var(--color-border); border-radius: 8px; padding: 15px 15px 20px; margin: 0; display: flex; flex-direction: column; gap: 15px; background: transparent; }
-        .cob-modern-legend { color: var(--color-primary); font-weight: 800; font-size: 14px; padding: 0 8px; background: white; border-radius: 4px; margin-left: -5px; }
-        .cob-modern-col { display: flex; flex-direction: column; gap: 15px; }
-
-        .modal-actions {
-            display: flex; justify-content: flex-end; gap: 12px;
-            margin-top: 30px; padding-top: 20px;
-            border-top: 1px solid var(--color-border); flex-wrap: wrap;
         }
 
         .btn-modal-secundario {
             background-color: #f1f5f9; color: var(--color-text-main);
-            border: none; border-radius: 12px; padding: 12px 24px;
-            font-size: 14px; font-weight: 700; cursor: pointer; transition: 0.2s;
+            border: none; border-radius: 12px; padding: 11px 18px;
+            font-size: 13px; font-weight: 700; cursor: pointer; transition: 0.2s;
+            display: flex; align-items: center; gap: 8px;
         }
         .btn-modal-secundario:hover { background-color: #e2e8f0; }
 
         .btn-modal-salvar {
             background: linear-gradient(135deg, var(--color-gold), var(--color-gold-hover)); color: #ffffff;
-            border: none; border-radius: 12px; padding: 12px 30px;
+            border: none; border-radius: 12px; padding: 11px 24px;
             font-size: 14px; font-weight: 700; cursor: pointer;
             box-shadow: 0 4px 10px rgba(187, 142, 68, 0.2); transition: 0.2s;
+            display: flex; align-items: center; gap: 8px;
         }
         .btn-modal-salvar:hover { background: linear-gradient(135deg, var(--color-gold-light), var(--color-gold)); transform: translateY(-1px); }
 
         .btn-modal-whatsapp {
             background-color: var(--color-whatsapp); color: #ffffff;
-            border: none; border-radius: 12px; padding: 12px 24px;
-            font-size: 14px; font-weight: 700; cursor: pointer;
+            border: none; border-radius: 12px; padding: 11px 18px;
+            font-size: 13px; font-weight: 700; cursor: pointer;
             display: flex; align-items: center; gap: 8px;
             box-shadow: 0 4px 10px rgba(37, 211, 102, 0.2); transition: 0.2s;
         }
         .btn-modal-whatsapp:hover { background-color: #1ebd5a; transform: translateY(-1px); }
+
+        /* =========================================
+            7. MODAL DE COTAÇÃO PDF
+            ========================================= */
+        .modal-cotacao-box {
+            background: #f8fafc;
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .btn-adicionar-opcao {
+            background-color: var(--color-primary);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 20px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 10px;
+            width: 100%;
+            justify-content: center;
+        }
+        .btn-adicionar-opcao:hover {
+            background-color: var(--color-primary-hover);
+        }
+
+        .cotacao-lista {
+            margin-top: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-height: 250px;
+            overflow-y: auto;
+            padding-right: 5px;
+        }
+        
+        .cotacao-lista::-webkit-scrollbar { width: 4px; }
+        .cotacao-lista::-webkit-scrollbar-thumb { background-color: var(--color-border); border-radius: 10px; }
+
+        .cotacao-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #fff;
+            padding: 12px 15px;
+            border: 1px solid #e2e8f0;
+            border-left: 4px solid var(--color-gold);
+            border-radius: 8px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .cotacao-item-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .cotacao-item-title {
+            font-size: 14px;
+            font-weight: 800;
+            color: var(--color-primary-dark);
+        }
+
+        .cotacao-item-details {
+            font-size: 12px;
+            color: var(--color-text-muted);
+        }
+
+        .btn-remover-opcao {
+            background: none;
+            border: none;
+            color: #ef4444;
+            font-size: 16px;
+            cursor: pointer;
+            padding: 5px;
+            transition: 0.2s;
+        }
+        .btn-remover-opcao:hover {
+            transform: scale(1.1);
+        }
+        
+        .empty-cotacao {
+            text-align: center;
+            color: #94a3b8;
+            font-size: 13px;
+            padding: 20px 0;
+            font-style: italic;
+        }
     </style>
 </head>
 <body>
@@ -597,15 +1055,16 @@
         
         <aside class="sidebar">
             <div class="sidebar-logo">
-                <img src="/src/logo.svg" alt="Logo BV Pinho" style="max-width: 140px; display: block; margin: 0 auto;">
+                <img src="/src/logo.svg" alt="Logo BV Pinho" onerror="this.style.display='none'">
             </div>
             
             <nav class="sidebar-menu">
                 <ul>
-                    <li class="active"><a href="./index.html">Painel / Kanban</a></li>
-                    <li><a href="../dashboard/index.html">Dashboard</a></li>
-                    <li><a href="../discador/index.html">Discador</a></li>
-                    <li><a href="#" onclick="fazerLogout()" style="margin-top: 40px; color: #fca5a5;"><i class="fas fa-sign-out-alt"></i> Sair</a></li>
+                    <li class="active"><a href="./index.html"><i class="fas fa-columns"></i> Painel / Kanban</a></li>
+                    <li><a href="../dashboard/index.html"><i class="fas fa-chart-pie"></i> Dashboard</a></li>
+                    <li><a href="../discador/index.html"><i class="fas fa-phone-volume"></i> Discador</a></li>
+                    <li><a href="#" id="btnAbrirPainelMensagens"><i class="fas fa-robot"></i> Textos Automáticos</a></li>
+                    <li><a href="#" onclick="fazerLogout()" style="margin-top: 35px; color: #fca5a5;"><i class="fas fa-sign-out-alt"></i> Sair</a></li>
                 </ul>
             </nav>
 
@@ -616,10 +1075,33 @@
                     <input type="text" id="searchCorretora" placeholder="Buscar corretora...">
                 </div>
                 <ul id="listaCorretoras" class="corretoras-list">
-                    <!-- Link Rápido da Porto Seguro adicionado abaixo -->
                     <li>
-                        <a href="https://corretor.portoseguro.com.br/novocol/homepage?code=d59892f7-a084-4125-b600-618cac8c7294&state=rAnDoMtExT" target="_blank" rel="noopener noreferrer">
+                        <a href="https://corretor.portoseguro.com.br/novocol/homepage" target="_blank" rel="noopener noreferrer">
                             <span>Porto Seguro</span>
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://portal.sulamericaseguros.com.br/" target="_blank" rel="noopener noreferrer">
+                            <span>SulAmérica</span>
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.amil.com.br/portal/web/servicos/corretor" target="_blank" rel="noopener noreferrer">
+                            <span>Amil</span>
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.bradescoseguros.com.br/" target="_blank" rel="noopener noreferrer">
+                            <span>Bradesco Seguros</span>
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.gndi.com.br/corretor" target="_blank" rel="noopener noreferrer">
+                            <span>NotreDame Intermédica</span>
                             <i class="fas fa-external-link-alt"></i>
                         </a>
                     </li>
@@ -632,14 +1114,14 @@
             <header class="top-actions">
                 
                 <div style="display: flex; gap: 10px; flex-shrink: 0;">
-                    <button class="btn-primary" id="btnNovoLead">Adicionar Lead Manual</button>
-                    <button class="btn-outline" id="btnImportar">Importar Planilha</button>
-                    <input type="file" id="inputExcel" accept=".xlsx, .xls" style="display: none;">
+                    <button class="btn-primary" id="btnNovoLead"><i class="fas fa-plus"></i> Adicionar Lead Manual</button>
+                    <button class="btn-outline" id="btnImportar"><i class="fas fa-file-excel"></i> Importar Planilha</button>
+                    <input type="file" id="inputExcel" accept=".xlsx, .xls, .csv" style="display: none;">
                 </div>
 
                 <div class="search-container">
                     <i class="fas fa-search search-icon" style="color: #64748b; margin-right: 8px;"></i>
-                    <input type="text" id="inputBuscaGlobal" class="search-input" placeholder="Buscar lead...">
+                    <input type="text" id="inputBuscaGlobal" class="search-input" placeholder="Buscar por nome, telefone, plano, resumo ou vendedor...">
                     <div class="search-divider"></div>
                     <select id="filtroVendedor" class="filtro-vendedor-select" title="Filtrar por Vendedor">
                         <option value="todos">Toda a equipe</option>
@@ -655,7 +1137,10 @@
                         </button>
 
                         <div id="dropdownNotificacoes" class="notification-dropdown">
-                            <div class="notification-header">Avisos para Hoje</div>
+                            <div class="notification-header">
+                                <span>Avisos e Retornos</span>
+                                <small id="dataHojeNotif" style="color: #64748b; font-weight: 600; font-size: 11px;"></small>
+                            </div>
                             <div id="listaNotificacoes" style="padding: 5px 0;"></div>
                         </div>
                     </div>
@@ -671,264 +1156,841 @@
 
             </header>
 
+            <!-- ABAS DE VISUALIZAÇÃO DO FUNIL KANBAN -->
+            <div class="funnel-tabs">
+                <button type="button" class="funnel-tab-btn active" onclick="filtrarColunasKanban(event, 'todas')">
+                    <i class="fas fa-th-large"></i> Todas as Colunas <span class="funnel-tab-badge" id="tab-count-todas">0</span>
+                </button>
+                <button type="button" class="funnel-tab-btn" onclick="filtrarColunasKanban(event, 'vendas')">
+                    <i class="fas fa-funnel-dollar"></i> Funil Comercial (Ativos) <span class="funnel-tab-badge" id="tab-count-vendas">0</span>
+                </button>
+                <button type="button" class="funnel-tab-btn" onclick="filtrarColunasKanban(event, 'posvenda')">
+                    <i class="fas fa-check-double"></i> Fechados / Agger / Pós-Venda <span class="funnel-tab-badge" id="tab-count-posvenda">0</span>
+                </button>
+                <button type="button" class="funnel-tab-btn" onclick="filtrarColunasKanban(event, 'arquivados')">
+                    <i class="fas fa-archive"></i> Repescagem / Sem Resposta / Perdidos <span class="funnel-tab-badge" id="tab-count-arquivados">0</span>
+                </button>
+            </div>
+
             <div class="board">
-                <div class="column"><h3 class="column-title">LEADS PARA CONTATO</h3><div class="column-content" id="leads-contato" ondragover="onDragOver(event)" ondrop="onDrop(event, 'contato')"></div></div>
-                <div class="column"><h3 class="column-title">RESPONDEU</h3><div class="column-content" id="leads-respondeu" ondragover="onDragOver(event)" ondrop="onDrop(event, 'respondeu')"></div></div>
-                <div class="column"><h3 class="column-title">INTERESSADO</h3><div class="column-content" id="leads-interessado" ondragover="onDragOver(event)" ondrop="onDrop(event, 'interessado')"></div></div>
-                <div class="column"><h3 class="column-title">DOCUMENTOS</h3><div class="column-content" id="leads-documentos" ondragover="onDragOver(event)" ondrop="onDrop(event, 'documentos')"></div></div>
-                <div class="column"><h3 class="column-title">PAGAR BOLETO</h3><div class="column-content" id="leads-pagar-boleto" ondragover="onDragOver(event)" ondrop="onDrop(event, 'pagar boleto')"></div></div>
-                <div class="column"><h3 class="column-title">FINALIZADO</h3><div class="column-content" id="leads-finalizado" ondragover="onDragOver(event)" ondrop="onDrop(event, 'finalizado')"></div></div>
-                <div class="column"><h3 class="column-title">PRÉ CADASTRO AGGER</h3><div class="column-content" id="leads-pre-cadastro-agger" ondragover="onDragOver(event)" ondrop="onDrop(event, 'pré cadastro agger')"></div></div>
-                <div class="column"><h3 class="column-title">PÓS VENDA</h3><div class="column-content" id="leads-pos-venda" ondragover="onDragOver(event)" ondrop="onDrop(event, 'pos venda')"></div></div>
-                <div class="column"><h3 class="column-title">SEM RESPOSTA</h3><div class="column-content" id="leads-sem-resposta" ondragover="onDragOver(event)" ondrop="onDrop(event, 'sem resposta')"></div></div>
-                <div class="column"><h3 class="column-title">SEM INTERESSE</h3><div class="column-content" id="leads-sem-interesse" ondragover="onDragOver(event)" ondrop="onDrop(event, 'sem interesse')"></div></div>
-                <div class="column"><h3 class="column-title">PERDIDO</h3><div class="column-content" id="leads-perdido" ondragover="onDragOver(event)" ondrop="onDrop(event, 'perdido')"></div></div>
+                <div class="column">
+                    <div class="column-header"><h3 class="column-title">LEADS PARA CONTATO</h3><span class="column-count" id="count-contato">0</span></div>
+                    <div class="column-content" id="leads-contato" ondragover="onDragOver(event)" ondrop="onDrop(event, 'contato')"></div>
+                </div>
+                <div class="column">
+                    <div class="column-header"><h3 class="column-title">RESPONDEU</h3><span class="column-count" id="count-respondeu">0</span></div>
+                    <div class="column-content" id="leads-respondeu" ondragover="onDragOver(event)" ondrop="onDrop(event, 'respondeu')"></div>
+                </div>
+                <div class="column">
+                    <div class="column-header"><h3 class="column-title">INTERESSADO</h3><span class="column-count" id="count-interessado">0</span></div>
+                    <div class="column-content" id="leads-interessado" ondragover="onDragOver(event)" ondrop="onDrop(event, 'interessado')"></div>
+                </div>
+                <div class="column">
+                    <div class="column-header"><h3 class="column-title">DOCUMENTOS</h3><span class="column-count" id="count-documentos">0</span></div>
+                    <div class="column-content" id="leads-documentos" ondragover="onDragOver(event)" ondrop="onDrop(event, 'documentos')"></div>
+                </div>
+                <div class="column">
+                    <div class="column-header"><h3 class="column-title">PAGAR BOLETO</h3><span class="column-count" id="count-pagar-boleto">0</span></div>
+                    <div class="column-content" id="leads-pagar-boleto" ondragover="onDragOver(event)" ondrop="onDrop(event, 'pagar boleto')"></div>
+                </div>
+                <div class="column">
+                    <div class="column-header"><h3 class="column-title">FINALIZADO</h3><span class="column-count" id="count-finalizado">0</span></div>
+                    <div class="column-content" id="leads-finalizado" ondragover="onDragOver(event)" ondrop="onDrop(event, 'finalizado')"></div>
+                </div>
+                <div class="column">
+                    <div class="column-header"><h3 class="column-title">PRÉ CADASTRO AGGER</h3><span class="column-count" id="count-pre-cadastro-agger">0</span></div>
+                    <div class="column-content" id="leads-pre-cadastro-agger" ondragover="onDragOver(event)" ondrop="onDrop(event, 'pré cadastro agger')"></div>
+                </div>
+                <div class="column">
+                    <div class="column-header"><h3 class="column-title">PÓS VENDA</h3><span class="column-count" id="count-pos-venda">0</span></div>
+                    <div class="column-content" id="leads-pos-venda" ondragover="onDragOver(event)" ondrop="onDrop(event, 'pos venda')"></div>
+                </div>
+                <div class="column">
+                    <div class="column-header"><h3 class="column-title">SEM RESPOSTA</h3><span class="column-count" id="count-sem-resposta">0</span></div>
+                    <div class="column-content" id="leads-sem-resposta" ondragover="onDragOver(event)" ondrop="onDrop(event, 'sem resposta')"></div>
+                </div>
+                <div class="column">
+                    <div class="column-header"><h3 class="column-title">SEM INTERESSE</h3><span class="column-count" id="count-sem-interesse">0</span></div>
+                    <div class="column-content" id="leads-sem-interesse" ondragover="onDragOver(event)" ondrop="onDrop(event, 'sem interesse')"></div>
+                </div>
+                <div class="column">
+                    <div class="column-header"><h3 class="column-title">PERDIDO</h3><span class="column-count" id="count-perdido">0</span></div>
+                    <div class="column-content" id="leads-perdido" ondragover="onDragOver(event)" ondrop="onDrop(event, 'perdido')"></div>
+                </div>
             </div>
         </main>
     </div>
 
+    <!-- MODAL PRINCIPAL DO LEAD -->
     <div id="modalLead" class="modal-overlay" style="display: none;">
-        <div class="modal-card">
-            <h2 id="modalTitulo" style="margin-bottom: 20px; font-size: 20px; font-weight: 800; color: #1e293b;">Detalhes do Lead</h2>
+        <div class="modal-card" style="position: relative;">
+            
+            <button type="button" id="btnFecharX" class="btn-fechar-x" title="Salvar e Fechar">
+                <i class="fas fa-times"></i>
+            </button>
+
+            <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 16px;">
+                <h2 id="modalTitulo" style="font-size: 20px; font-weight: 800; color: #1e293b;">Detalhes do Lead</h2>
+                <span id="badgeAutoSave" class="status-autosave"><i class="fas fa-check-circle"></i> Salvo automaticamente!</span>
+            </div>
             
             <form id="formLeadDetalhes">
                 <input type="hidden" id="leadId">
+                <input type="hidden" id="leadStatusAtual">
 
-                <div class="form-row">
-                    <div class="form-group flex-2"><label>Nome:</label><input type="text" id="detalheNome" required></div>
-                    <div class="form-group flex-1"><label>WhatsApp:</label><input type="text" id="detalheNumero" required></div>
-                    <div class="form-group flex-1"><label>Telefone Fixo:</label><input type="text" id="detalheTelefoneFixo" placeholder="(00) 0000-0000"></div>
-                    <div class="form-group flex-2"><label>Email:</label><input type="email" id="detalheEmail"></div>
-                </div>
+                <div class="modal-split-layout">
+                    
+                    <!-- COLUNA ESQUERDA: DADOS CADASTRAIS E ABAS DE PRODUTOS -->
+                    <div class="modal-left-main">
+                        <div class="form-row">
+                            <div class="form-group flex-2"><label>Nome:</label><input type="text" id="detalheNome" required></div>
+                            <div class="form-group flex-1"><label>WhatsApp:</label><input type="text" id="detalheNumero" required></div>
+                            <div class="form-group flex-1"><label>Telefone Fixo:</label><input type="text" id="detalheTelefoneFixo" placeholder="(00) 0000-0000"></div>
+                            <div class="form-group flex-2"><label>Email:</label><input type="email" id="detalheEmail"></div>
+                        </div>
 
-                <div class="form-row">
-                    <div class="form-group"><label>CPF ou CNPJ:</label><input type="text" id="detalheCpf"></div>
-                    <div class="form-group"><label>Data de Nascimento:</label><input type="text" id="detalheNascimento" placeholder="DD/MM/AAAA"></div>
-                    <div class="form-group" style="flex: 0.5;"><label>Idades:</label><input type="text" id="detalheIdade" placeholder="Ex: 35, 32, 10"></div>
-                </div>
+                        <div class="form-row">
+                            <div class="form-group"><label>CPF ou CNPJ:</label><input type="text" id="detalheCpf" placeholder="000.000.000-00"></div>
+                            <div class="form-group"><label>Data de Nascimento:</label><input type="text" id="detalheNascimento" placeholder="DD/MM/AAAA" maxlength="10"></div>
+                            <div class="form-group" style="flex: 0.8;"><label>Idades:</label><input type="text" id="detalheIdade" placeholder="Ex: 35, 32, 10"></div>
+                        </div>
 
-                <div class="form-row">
-                    <div class="form-group flex-1">
-                        <label>Gênero:</label>
-                        <select id="detalheGenero">
-                            <option value="">Selecione</option>
-                            <option value="masculino">Masculino</option>
-                            <option value="feminino">Feminino</option>
-                            <option value="outro">Outro</option>
-                        </select>
-                    </div>
-                    <div class="form-group flex-1">
-                        <label>Estado Civil:</label>
-                        <select id="detalheEstadoCivil">
-                            <option value="">Selecione</option>
-                            <option value="solteiro">Solteiro(a)</option>
-                            <option value="casado">Casado(a)</option>
-                            <option value="divorciado">Divorciado(a)</option>
-                            <option value="viuvo">Viúvo(a)</option>
-                            <option value="uniao_estavel">União Estável</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group"><label>CEP:</label><input type="text" id="detalheCep" placeholder="00000-000" maxlength="9"></div>
-                    <div class="form-group">
-                        <label>Cidade:</label>
-                        <input type="text" id="detalheCidade" list="listaCidades" placeholder="Digite a cidade...">
-                        <datalist id="listaCidades"></datalist>
-                    </div>
-                    <div class="form-group"><label>Profissão:</label><input type="text" id="detalheProfissao"></div>
-                    <div class="form-group"><label>Origem do Lead:</label><input type="text" id="detalheOrigem" placeholder="Ex: Face Ads, Indicação..."></div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group flex-1"><label>Tipo de Leads:</label><input type="text" id="detalheTipoLead"></div>
-                    <div class="form-group flex-1">
-                        <label>Vendedor / Dono:</label>
-                        <select id="detalheVendedor" required>
-                            <option value="livre">Sem dono (Livre)</option>
-                        </select>
-                    </div>
-                    <div class="form-group flex-1"><label>Valor Esperado:</label><input type="text" id="detalheValorEsperado" placeholder="R$ 0,00"></div>
-                    <div class="form-group flex-1"><label>Valor Atual:</label><input type="text" id="detalheValorAtual" placeholder="R$ 0,00"></div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group flex-1">
-                        <label><i class="fas fa-phone"></i> Tentativas Ligação:</label>
-                        <input type="number" id="detalheTentativasLigacao" min="0" placeholder="0">
-                    </div>
-                    <div class="form-group flex-1">
-                        <label><i class="fab fa-whatsapp"></i> Tentativas WhatsApp:</label>
-                        <input type="number" id="detalheTentativasZap" min="0" placeholder="0">
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group flex-2"><label>OBSERVAÇÕES GERAIS:</label><input type="text" id="detalheObs"></div>
-                    <div class="form-group flex-1"><label style="color: #ef4444;"><i class="fas fa-calendar-alt"></i> Agendar Retorno:</label><input type="date" id="detalheDataPrioridade" style="border: 1px solid #fca5a5;"></div>
-                </div>
-
-                <div class="tabs-container">
-                    <button type="button" class="tab-btn active" onclick="mudarAba(event, 'aba-saude')"><i class="fas fa-heartbeat"></i> Saúde</button>
-                    <button type="button" class="tab-btn" onclick="mudarAba(event, 'aba-odonto')"><i class="fas fa-tooth"></i> Odonto</button>
-                    <button type="button" class="tab-btn" onclick="mudarAba(event, 'aba-auto')"><i class="fas fa-car"></i> Auto</button>
-                    <button type="button" class="tab-btn" onclick="mudarAba(event, 'aba-residencial')"><i class="fas fa-house-user"></i> Residencial</button>
-                    <button type="button" class="tab-btn" onclick="mudarAba(event, 'aba-vida')"><i class="fas fa-user-shield"></i> Vida</button>
-                    <button type="button" class="tab-btn" onclick="mudarAba(event, 'aba-consorcio')"><i class="fas fa-home"></i> Consórcio</button>
-                    <button type="button" class="tab-btn" onclick="mudarAba(event, 'aba-pet')"><i class="fas fa-paw"></i> Pet</button>
-                    <button type="button" class="tab-btn" onclick="mudarAba(event, 'aba-viagem')"><i class="fas fa-plane"></i> Viagem</button>
-                    <button type="button" class="tab-btn" onclick="mudarAba(event, 'aba-empresarial')"><i class="fas fa-building"></i> Empresarial</button>
-                    <button type="button" class="tab-btn" onclick="mudarAba(event, 'aba-outros')"><i class="fas fa-box-open"></i> Outros</button>
-                </div>
-
-                <!-- ABA: SAÚDE -->
-                <div id="aba-saude" class="tab-content active">
-                    <div class="status-bar-tab">
-                        <label class="chk-interesse"><input type="checkbox" id="chkInteresseSaude"> <i class="fas fa-heartbeat"></i> Tem interesse?</label>
-                        <label class="chk-contrato"><input type="checkbox" id="chkContratoSaude"> <i class="fas fa-check-circle"></i> Já contratado?</label>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group flex-1"><label>Já possui plano? (Qual?):</label><input type="text" id="detalhePlanoAnterior"></div>
-                        <div class="form-group flex-1"><label>Plano de Interesse:</label><input type="text" id="detalhePlanoInteresse"></div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group flex-1">
-                            <label>Cotação PF:</label>
-                            <div style="display: flex; gap: 5px;">
-                                <input type="text" id="detalheLinkCotacaoPF" placeholder="Link PF" style="width: 100%;">
-                                <button type="button" id="btnAbrirLinkCotacaoPF" class="btn-modal-secundario" style="padding: 0 12px; cursor: pointer;" title="Abrir Link PF"><i class="fas fa-external-link-alt"></i></button>
+                        <div class="form-row">
+                            <div class="form-group flex-1">
+                                <label>Gênero:</label>
+                                <select id="detalheGenero">
+                                    <option value="">Selecione</option>
+                                    <option value="masculino">Masculino</option>
+                                    <option value="feminino">Feminino</option>
+                                    <option value="outro">Outro</option>
+                                </select>
+                            </div>
+                            <div class="form-group flex-1">
+                                <label>Estado Civil:</label>
+                                <select id="detalheEstadoCivil">
+                                    <option value="">Selecione</option>
+                                    <option value="solteiro">Solteiro(a)</option>
+                                    <option value="casado">Casado(a)</option>
+                                    <option value="divorciado">Divorciado(a)</option>
+                                    <option value="viuvo">Viúvo(a)</option>
+                                    <option value="uniao_estavel">União Estável</option>
+                                </select>
+                            </div>
+                            <div class="form-group flex-1">
+                                <label>Coluna / Status Atual:</label>
+                                <select id="detalheStatusSelect">
+                                    <option value="contato">Leads para Contato</option>
+                                    <option value="respondeu">Respondeu</option>
+                                    <option value="interessado">Interessado</option>
+                                    <option value="documentos">Documentos</option>
+                                    <option value="pagar boleto">Pagar Boleto</option>
+                                    <option value="finalizado">Finalizado</option>
+                                    <option value="pré cadastro agger">Pré Cadastro Agger</option>
+                                    <option value="pos venda">Pós Venda</option>
+                                    <option value="sem resposta">Sem Resposta</option>
+                                    <option value="sem interesse">Sem Interesse</option>
+                                    <option value="perdido">Perdido</option>
+                                </select>
                             </div>
                         </div>
-                        <div class="form-group flex-1">
-                            <label>Cotação PME:</label>
-                            <div style="display: flex; gap: 5px;">
-                                <input type="text" id="detalheLinkCotacaoPME" placeholder="Link PME" style="width: 100%;">
-                                <button type="button" id="btnAbrirLinkCotacaoPME" class="btn-modal-secundario" style="padding: 0 12px; cursor: pointer;" title="Abrir Link PME"><i class="fas fa-external-link-alt"></i></button>
+
+                        <div class="form-row">
+                            <div class="form-group"><label>CEP:</label><input type="text" id="detalheCep" placeholder="00000-000" maxlength="9"></div>
+                            <div class="form-group">
+                                <label>Cidade:</label>
+                                <input type="text" id="detalheCidade" list="listaCidades" placeholder="Digite a cidade...">
+                                <datalist id="listaCidades">
+                                    <option value="São Paulo"></option>
+                                    <option value="Guarulhos"></option>
+                                    <option value="Santo André"></option>
+                                    <option value="São Bernardo do Campo"></option>
+                                    <option value="São Caetano do Sul"></option>
+                                    <option value="Osasco"></option>
+                                    <option value="Campinas"></option>
+                                    <option value="Sorocaba"></option>
+                                </datalist>
+                            </div>
+                            <div class="form-group"><label>Profissão:</label><input type="text" id="detalheProfissao"></div>
+                            <div class="form-group"><label>Origem do Lead:</label><input type="text" id="detalheOrigem" placeholder="Ex: Face Ads, Indicação..."></div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group flex-1"><label>Modalidade (PF/PME):</label><input type="text" id="detalheTipoLead" placeholder="Ex: PME, PF, Adesão"></div>
+                            <div class="form-group flex-1">
+                                <label>Vendedor / Dono:</label>
+                                <select id="detalheVendedor" required>
+                                    <option value="livre">Sem dono (Livre)</option>
+                                </select>
+                            </div>
+                            <div class="form-group flex-1"><label>Valor do Plano:</label><input type="text" id="detalheValorEsperado" placeholder="Ex: R$ 650,00"></div>
+                            <div class="form-group flex-1"><label>Valor Atual:</label><input type="text" id="detalheValorAtual" placeholder="R$ 0,00"></div>
+                        </div>
+
+                        <!-- ABAS INTERNAS DE PRODUTOS E PÓS-VENDA -->
+                        <div class="tabs-container">
+                            <button type="button" class="tab-btn active" onclick="mudarAba(event, 'aba-saude')"><i class="fas fa-heartbeat"></i> Saúde</button>
+                            <button type="button" class="tab-btn" onclick="mudarAba(event, 'aba-odonto')"><i class="fas fa-tooth"></i> Odonto</button>
+                            <button type="button" class="tab-btn" onclick="mudarAba(event, 'aba-posvenda-agger')"><i class="fas fa-file-signature"></i> Implantação / Agger</button>
+                            <button type="button" class="tab-btn" onclick="mudarAba(event, 'aba-auto')"><i class="fas fa-car"></i> Auto</button>
+                            <button type="button" class="tab-btn" onclick="mudarAba(event, 'aba-residencial')"><i class="fas fa-house-user"></i> Residencial</button>
+                            <button type="button" class="tab-btn" onclick="mudarAba(event, 'aba-vida')"><i class="fas fa-user-shield"></i> Vida</button>
+                            <button type="button" class="tab-btn" onclick="mudarAba(event, 'aba-consorcio')"><i class="fas fa-home"></i> Consórcio</button>
+                            <button type="button" class="tab-btn" onclick="mudarAba(event, 'aba-pet')"><i class="fas fa-paw"></i> Pet</button>
+                            <button type="button" class="tab-btn" onclick="mudarAba(event, 'aba-viagem')"><i class="fas fa-plane"></i> Viagem</button>
+                            <button type="button" class="tab-btn" onclick="mudarAba(event, 'aba-empresarial')"><i class="fas fa-building"></i> Empresarial</button>
+                            <button type="button" class="tab-btn" onclick="mudarAba(event, 'aba-outros')"><i class="fas fa-box-open"></i> Outros</button>
+                        </div>
+
+                        <!-- ABA: SAÚDE -->
+                        <div id="aba-saude" class="tab-content active">
+                            <div class="status-bar-tab">
+                                <label class="chk-interesse"><input type="checkbox" id="chkInteresseSaude"> <i class="fas fa-heartbeat"></i> Tem interesse em Saúde</label>
+                                <label class="chk-contrato"><input type="checkbox" id="chkContratoSaude"> <i class="fas fa-check-circle"></i> Saúde Contratado</label>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group flex-1"><label>Já possui plano? (Qual?):</label><input type="text" id="detalhePlanoAnterior"></div>
+                                <div class="form-group flex-1"><label>Nome do Plano (Saúde):</label><input type="text" id="detalhePlanoInteresse" placeholder="Ex: Amil S380 / Porto Bronze"></div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group flex-1">
+                                    <label>Cotação PF:</label>
+                                    <div style="display: flex; gap: 5px;">
+                                        <input type="text" id="detalheLinkCotacaoPF" placeholder="Link PF" style="width: 100%;">
+                                        <button type="button" id="btnAbrirLinkCotacaoPF" class="btn-modal-secundario" style="padding: 0 12px; cursor: pointer;" title="Abrir Link PF"><i class="fas fa-external-link-alt"></i></button>
+                                    </div>
+                                </div>
+                                <div class="form-group flex-1">
+                                    <label>Cotação PME:</label>
+                                    <div style="display: flex; gap: 5px;">
+                                        <input type="text" id="detalheLinkCotacaoPME" placeholder="Link PME" style="width: 100%;">
+                                        <button type="button" id="btnAbrirLinkCotacaoPME" class="btn-modal-secundario" style="padding: 0 12px; cursor: pointer;" title="Abrir Link PME"><i class="fas fa-external-link-alt"></i></button>
+                                    </div>
+                                </div>
+                                <div class="form-group flex-1">
+                                    <label>Cotação Adesão:</label>
+                                    <div style="display: flex; gap: 5px;">
+                                        <input type="text" id="detalheLinkCotacaoAdesao" placeholder="Link Adesão" style="width: 100%;">
+                                        <button type="button" id="btnAbrirLinkCotacaoAdesao" class="btn-modal-secundario" style="padding: 0 12px; cursor: pointer;" title="Abrir Link Adesão"><i class="fas fa-external-link-alt"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ABA: ODONTO -->
+                        <div id="aba-odonto" class="tab-content">
+                            <div class="status-bar-tab">
+                                <label class="chk-interesse"><input type="checkbox" id="chkInteresseOdonto"> <i class="fas fa-tooth"></i> Tem interesse em Odonto</label>
+                                <label class="chk-contrato"><input type="checkbox" id="chkContratoOdonto"> <i class="fas fa-check-circle"></i> Odonto Contratado</label>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group flex-2">
+                                    <label>Plano Odonto:</label>
+                                    <input type="text" id="detalhePlanoOdontoInteresse" placeholder="Ex: Amil Dental, SulAmérica...">
+                                </div>
+                                <div class="form-group flex-1">
+                                    <label>Valor (Odonto):</label>
+                                    <input type="text" id="detalheValorOdonto" placeholder="R$ 0,00">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group flex-1">
+                                    <label>Cotação Odonto:</label>
+                                    <div style="display: flex; gap: 5px;">
+                                        <input type="text" id="detalheLinkCotacaoOdonto" placeholder="Link Odonto" style="width: 100%;">
+                                        <button type="button" id="btnAbrirLinkCotacaoOdonto" class="btn-modal-secundario" style="padding: 0 12px; cursor: pointer;" title="Abrir Link Odonto"><i class="fas fa-external-link-alt"></i></button>
+                                    </div>
+                                </div>
+                                <div class="form-group flex-1"></div>
+                            </div>
+                        </div>
+
+                        <!-- ABA: IMPLANTAÇÃO / AGGER / PÓS-VENDA -->
+                        <div id="aba-posvenda-agger" class="tab-content">
+                            <div class="status-bar-tab">
+                                <label class="chk-contrato"><input type="checkbox" id="chkCadastradoAgger"> <i class="fas fa-check-double"></i> Cadastrado no Agger?</label>
+                                <label class="chk-contrato"><input type="checkbox" id="chkPrimeiroBoletoPago"> <i class="fas fa-barcode"></i> 1º Boleto Pago?</label>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group flex-1"><label>Operadora / Plano Fechado:</label><input type="text" id="detalheOperadoraFechada" placeholder="Ex: Porto Seguro Saúde"></div>
+                                <div class="form-group flex-1"><label>Nº da Proposta / Apólice:</label><input type="text" id="detalheNumeroProposta" placeholder="Código da proposta"></div>
+                                <div class="form-group flex-1"><label>Data de Vigência / Renovação:</label><input type="date" id="detalheDataVigencia"></div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group flex-1"><label>Dia de Vencimento da Fatura:</label><input type="text" id="detalheDiaVencimento" placeholder="Ex: Todo dia 10"></div>
+                                <div class="form-group flex-2"><label>Anotações de Pós-Venda / Pendências Agger:</label><input type="text" id="detalheObsPosVenda" placeholder="Carteirinha enviada, aguardando assinatura, etc."></div>
+                            </div>
+                        </div>
+
+                        <!-- OUTRAS ABAS -->
+                        <div id="aba-auto" class="tab-content">
+                            <div class="status-bar-tab">
+                                <label class="chk-interesse"><input type="checkbox" id="chkInteresseAuto"> <i class="fas fa-car"></i> Tem interesse em Auto</label>
+                                <label class="chk-contrato"><input type="checkbox" id="chkContratoAuto"> <i class="fas fa-check-circle"></i> Auto Contratado</label>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group flex-1"><label>Veículo / Modelo / Ano:</label><input type="text" id="detalheAutoModelo" placeholder="Ex: Onix 2024"></div>
+                                <div class="form-group flex-1"><label>Placa / Vencimento da Apólice:</label><input type="text" id="detalheAutoInfo"></div>
+                            </div>
+                        </div>
+
+                        <div id="aba-residencial" class="tab-content">
+                            <div class="status-bar-tab">
+                                <label class="chk-interesse"><input type="checkbox" id="chkInteresseResidencial"> <i class="fas fa-house-user"></i> Tem interesse em Residencial</label>
+                                <label class="chk-contrato"><input type="checkbox" id="chkContratoResidencial"> <i class="fas fa-check-circle"></i> Residencial Contratado</label>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group flex-1"><label>Tipo de Imóvel (Casa/Apto):</label><input type="text" id="detalheResidencialTipo"></div>
+                                <div class="form-group flex-1"><label>Valor Estimado / Cobertura:</label><input type="text" id="detalheResidencialValor"></div>
+                            </div>
+                        </div>
+
+                        <div id="aba-vida" class="tab-content">
+                            <div class="status-bar-tab">
+                                <label class="chk-interesse"><input type="checkbox" id="chkInteresseVida"> <i class="fas fa-user-shield"></i> Tem interesse em Vida</label>
+                                <label class="chk-contrato"><input type="checkbox" id="chkContratoVida"> <i class="fas fa-check-circle"></i> Vida Contratado</label>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group flex-1"><label>Capital Segurado Desejado:</label><input type="text" id="detalheVidaCapital"></div>
+                                <div class="form-group flex-1"><label>Seguradora de Interesse:</label><input type="text" id="detalheVidaSeguradora"></div>
+                            </div>
+                        </div>
+
+                        <div id="aba-consorcio" class="tab-content">
+                            <div class="status-bar-tab">
+                                <label class="chk-interesse"><input type="checkbox" id="chkInteresseConsorcio"> <i class="fas fa-home"></i> Tem interesse em Consórcio</label>
+                                <label class="chk-contrato"><input type="checkbox" id="chkContratoConsorcio"> <i class="fas fa-check-circle"></i> Consórcio Contratado</label>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group flex-1"><label>Modalidade (Imóvel/Auto):</label><input type="text" id="detalheConsorcioTipo"></div>
+                                <div class="form-group flex-1"><label>Valor da Carta de Crédito:</label><input type="text" id="detalheConsorcioValor"></div>
+                            </div>
+                        </div>
+
+                        <div id="aba-pet" class="tab-content">
+                            <div class="status-bar-tab">
+                                <label class="chk-interesse"><input type="checkbox" id="chkInteressePet"> <i class="fas fa-paw"></i> Tem interesse em Pet</label>
+                                <label class="chk-contrato"><input type="checkbox" id="chkContratoPet"> <i class="fas fa-check-circle"></i> Pet Contratado</label>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group flex-1"><label>Quantidade / Espécie (Cão/Gato):</label><input type="text" id="detalhePetInfo"></div>
+                                <div class="form-group flex-1"><label>Plano Pet de Interesse:</label><input type="text" id="detalhePetPlano"></div>
+                            </div>
+                        </div>
+
+                        <div id="aba-viagem" class="tab-content">
+                            <div class="status-bar-tab">
+                                <label class="chk-interesse"><input type="checkbox" id="chkInteresseViagem"> <i class="fas fa-plane"></i> Tem interesse em Viagem</label>
+                                <label class="chk-contrato"><input type="checkbox" id="chkContratoViagem"> <i class="fas fa-check-circle"></i> Viagem Contratado</label>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group flex-1"><label>Destino da Viagem:</label><input type="text" id="detalheViagemDestino"></div>
+                                <div class="form-group flex-1"><label>Período (Ida e Volta):</label><input type="text" id="detalheViagemPeriodo"></div>
+                            </div>
+                        </div>
+
+                        <div id="aba-empresarial" class="tab-content">
+                            <div class="status-bar-tab">
+                                <label class="chk-interesse"><input type="checkbox" id="chkInteresseEmpresarial"> <i class="fas fa-building"></i> Tem interesse em Empresarial</label>
+                                <label class="chk-contrato"><input type="checkbox" id="chkContratoEmpresarial"> <i class="fas fa-check-circle"></i> Empresarial Contratado</label>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group flex-1"><label>Ramo de Atividade / Porte:</label><input type="text" id="detalheEmpresarialRamo"></div>
+                                <div class="form-group flex-1"><label>Número de Funcionários / Vidas:</label><input type="text" id="detalheEmpresarialVidas"></div>
+                            </div>
+                        </div>
+
+                        <div id="aba-outros" class="tab-content">
+                            <div class="status-bar-tab">
+                                <label class="chk-interesse"><input type="checkbox" id="chkInteresseOutros"> <i class="fas fa-box-open"></i> Tem interesse em Outros</label>
+                                <label class="chk-contrato"><input type="checkbox" id="chkContratoOutros"> <i class="fas fa-check-circle"></i> Outros Contratado</label>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group flex-1"><label>Especificação do Produto:</label><input type="text" id="detalheOutrosDescricao"></div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="form-row">
-                        <div class="form-group flex-1">
-                            <label>Cotação Adesão:</label>
-                            <div style="display: flex; gap: 5px;">
-                                <input type="text" id="detalheLinkCotacaoAdesao" placeholder="Link Adesão" style="width: 100%;">
-                                <button type="button" id="btnAbrirLinkCotacaoAdesao" class="btn-modal-secundario" style="padding: 0 12px; cursor: pointer;" title="Abrir Link Adesão"><i class="fas fa-external-link-alt"></i></button>
+                    <!-- COLUNA DIREITA: AGENDA E CONTROLE DO QUE APARECE NO CARD -->
+                    <aside class="modal-right-agenda">
+                        <div class="agenda-header">
+                            <span class="agenda-title"><i class="fas fa-book-open"></i> Agenda & Observações</span>
+                            <button type="button" class="btn-carimbar-data" id="btnCarimbarData" title="Inserir data e hora atual no caderno">
+                                <i class="fas fa-clock"></i> + Data de Hoje
+                            </button>
+                        </div>
+
+                        <div class="agenda-retorno-box">
+                            <div class="form-group" style="margin: 0;">
+                                <label style="color: #dc2626; font-size: 11px;"><i class="fas fa-calendar-check"></i> Agendar Próximo Retorno:</label>
+                                <input type="date" id="detalheDataPrioridade" style="border: 1px solid #fca5a5; background: #fff; padding: 8px 10px;">
+                            </div>
+                            <div style="display: flex; gap: 10px;">
+                                <div class="form-group" style="min-width: 0;">
+                                    <label><i class="fas fa-phone"></i> Ligações:</label>
+                                    <input type="number" id="detalheTentativasLigacao" min="0" placeholder="0" style="padding: 7px 10px;">
+                                </div>
+                                <div class="form-group" style="min-width: 0;">
+                                    <label><i class="fab fa-whatsapp"></i> WhatsApp:</label>
+                                    <input type="number" id="detalheTentativasZap" min="0" placeholder="0" style="padding: 7px 10px;">
+                                </div>
                             </div>
                         </div>
-                        <div class="form-group flex-1"></div>
-                    </div>
-                </div>
 
-                <!-- ABA: ODONTO -->
-                <div id="aba-odonto" class="tab-content">
-                    <div class="status-bar-tab">
-                        <label class="chk-interesse"><input type="checkbox" id="chkInteresseOdonto"> <i class="fas fa-tooth"></i> Tem interesse?</label>
-                        <label class="chk-contrato"><input type="checkbox" id="chkContratoOdonto"> <i class="fas fa-check-circle"></i> Já contratado?</label>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group flex-2">
-                            <label>Plano Odonto de Interesse:</label>
-                            <input type="text" id="detalhePlanoOdontoInteresse" placeholder="Ex: Amil Dental, SulAmérica...">
-                        </div>
-                        <div class="form-group flex-1">
-                            <label>Valor (Odonto):</label>
-                            <input type="text" id="detalheValorOdonto" placeholder="R$ 0,00">
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group flex-1">
-                            <label>Cotação Odonto:</label>
-                            <div style="display: flex; gap: 5px;">
-                                <input type="text" id="detalheLinkCotacaoOdonto" placeholder="Link Odonto" style="width: 100%;">
-                                <button type="button" id="btnAbrirLinkCotacaoOdonto" class="btn-modal-secundario" style="padding: 0 12px; cursor: pointer;" title="Abrir Link Odonto"><i class="fas fa-external-link-alt"></i></button>
+                        <!-- NOVA ÁREA: CONFIGURAR O QUE APARECE NO CARD DO PAINEL -->
+                        <div class="card-display-config-box">
+                            <div class="card-display-header">
+                                <span><i class="fas fa-thumbtack" style="color: var(--color-primary);"></i> O que mostrar no Card do Painel:</span>
+                                <span id="contadorResumoCard" class="char-counter">0/140</span>
                             </div>
+
+                            <div class="card-toggles-grid">
+                                <label class="card-toggle-item"><input type="checkbox" id="chkMostrarTagsCard" checked> Interesse / Contrato</label>
+                                <label class="card-toggle-item"><input type="checkbox" id="chkMostrarPlanoCard" checked> Nome do Plano</label>
+                                <label class="card-toggle-item"><input type="checkbox" id="chkMostrarValorCard" checked> Valor (R$)</label>
+                                <label class="card-toggle-item"><input type="checkbox" id="chkMostrarResumoCard" checked> Resumo Rápido</label>
+                            </div>
+
+                            <textarea id="detalheResumoCard" class="resumo-card-textarea" maxlength="140" placeholder="Escreva aqui o resumo curto que vai aparecer lá fora no card do painel (máx 140 letras)..."></textarea>
                         </div>
-                        <div class="form-group flex-1"></div>
-                    </div>
+
+                        <!-- CADERNO DE HISTÓRICO COMPLETO (SÓ DENTRO DO MODAL) -->
+                        <div class="agenda-textarea-wrapper">
+                            <label style="color: #92400e; font-size: 11px; font-weight: 800; text-transform: uppercase; margin-bottom: 5px; display: block;">
+                                <i class="fas fa-clipboard-list"></i> Caderno de Anotações Internas (Sem limite):
+                            </label>
+                            <textarea id="detalheObs" class="agenda-textarea" placeholder="Anote todo o histórico detalhado aqui (não deixa o card gigante lá fora)...&#10;- Preferências de rede hospitalar&#10;- Idades dos dependentes&#10;- Valores passados e objeções"></textarea>
+                        </div>
+                    </aside>
+
                 </div>
 
-                <!-- OUTRAS ABAS -->
-                <div id="aba-auto" class="tab-content">
-                    <div class="status-bar-tab">
-                        <label class="chk-interesse"><input type="checkbox" id="chkInteresseAuto"> <i class="fas fa-car"></i> Tem interesse?</label>
-                        <label class="chk-contrato"><input type="checkbox" id="chkContratoAuto"> <i class="fas fa-check-circle"></i> Já contratado?</label>
+                <!-- RODAPÉ DE AÇÕES DO MODAL -->
+                <div class="modal-actions" style="margin-top: 20px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--color-border); padding-top: 16px; flex-wrap: wrap; gap: 12px;">
+                    
+                    <div style="display: flex; gap: 10px;">
+                        <button type="button" class="btn-modal-secundario" id="btnExcluirLead" style="color: #ef4444; border: 1px solid #ef4444; background-color: #fff0f0; display:none; align-items: center; gap: 6px;">
+                            <i class="fas fa-trash-alt"></i> Excluir Lead
+                        </button>
                     </div>
-                </div>
 
-                <div id="aba-residencial" class="tab-content">
-                    <div class="status-bar-tab">
-                        <label class="chk-interesse"><input type="checkbox" id="chkInteresseResidencial"> <i class="fas fa-house-user"></i> Tem interesse?</label>
-                        <label class="chk-contrato"><input type="checkbox" id="chkContratoResidencial"> <i class="fas fa-check-circle"></i> Já contratado?</label>
+                    <div style="display: flex; justify-content: flex-end; gap: 10px; flex-wrap: wrap;">
+                        <button type="button" class="btn-modal-secundario" id="btnFecharModal">Fechar</button>
+                        
+                        <button type="button" class="btn-modal-secundario" id="btnAbrirModalCotacao" style="color: var(--color-primary); border: 1px solid var(--color-primary);">
+                            <i class="fas fa-file-pdf"></i> Gerar Cotação PDF
+                        </button>
+                        
+                        <button type="button" class="btn-modal-secundario" id="btnAbrirCotador"><i class="fas fa-calculator"></i> Abrir Cotador</button>
+
+                        <button type="button" class="btn-modal-secundario" id="btnZapStatus" style="color: #0284c7; border: 1px solid #0284c7; background-color: #f0f9ff;">
+                            <i class="fas fa-paper-plane"></i> Msg do Status
+                        </button>
+
+                        <button type="button" class="btn-modal-whatsapp" id="btnZapModal"><i class="fab fa-whatsapp"></i> Chamar no WhatsApp</button>
+                        <button type="submit" class="btn-modal-salvar" id="btnSalvar"><i class="fas fa-save"></i> Salvar Alterações</button>
                     </div>
-                </div>
-
-                <div id="aba-vida" class="tab-content">
-                    <div class="status-bar-tab">
-                        <label class="chk-interesse"><input type="checkbox" id="chkInteresseVida"> <i class="fas fa-user-shield"></i> Tem interesse?</label>
-                        <label class="chk-contrato"><input type="checkbox" id="chkContratoVida"> <i class="fas fa-check-circle"></i> Já contratado?</label>
-                    </div>
-                </div>
-
-                <div id="aba-consorcio" class="tab-content">
-                    <div class="status-bar-tab">
-                        <label class="chk-interesse"><input type="checkbox" id="chkInteresseConsorcio"> <i class="fas fa-home"></i> Tem interesse?</label>
-                        <label class="chk-contrato"><input type="checkbox" id="chkContratoConsorcio"> <i class="fas fa-check-circle"></i> Já contratado?</label>
-                    </div>
-                </div>
-
-                <div id="aba-pet" class="tab-content"><p style="padding: 20px; color: #64748b; text-align: center; font-weight: 500;">Campos em construção...</p></div>
-                <div id="aba-viagem" class="tab-content"><p style="padding: 20px; color: #64748b; text-align: center; font-weight: 500;">Campos em construção...</p></div>
-                <div id="aba-empresarial" class="tab-content"><p style="padding: 20px; color: #64748b; text-align: center; font-weight: 500;">Campos em construção...</p></div>
-
-                <div id="aba-outros" class="tab-content">
-                    <div class="status-bar-tab">
-                        <label class="chk-interesse"><input type="checkbox" id="chkInteresseOutros"> <i class="fas fa-box-open"></i> Tem interesse?</label>
-                        <label class="chk-contrato"><input type="checkbox" id="chkContratoOutros"> <i class="fas fa-check-circle"></i> Já contratado?</label>
-                    </div>
-                </div>
-
-                <div class="modal-actions" style="margin-top: 30px;">
-                    <button type="button" class="btn-modal-secundario" id="btnFecharModal">Cancelar</button>
-                    <button type="button" class="btn-modal-secundario" id="btnExcluirLead" style="color: #ef4444; border: 1px solid #ef4444; display:none;">Excluir Lead</button>
-                    <button type="button" class="btn-modal-secundario" id="btnResetarTentativas" style="color: #f59e0b; border: 1px solid #f59e0b; display:none;">Zerar Tentativas</button>
-                    <button type="button" class="btn-modal-secundario" id="btnAbrirCotador">Abrir Cotador</button>
-                    <button type="button" class="btn-modal-whatsapp" id="btnZapModal"><i class="fab fa-whatsapp"></i> Chamar no WhatsApp</button>
-                    <button type="submit" class="btn-modal-salvar" id="btnSalvar">Salvar Alterações</button>
                 </div>
             </form>
         </div>
     </div>
 
+    <!-- MODAL PARA GERAR COTAÇÃO PDF -->
+    <div id="modalCotacaoPdf" class="modal-overlay" style="display: none; z-index: 2000;">
+        <div class="modal-card" style="max-width: 600px; position: relative;">
+            <button type="button" id="btnFecharModalCotacao" class="btn-fechar-x" title="Fechar">
+                <i class="fas fa-times"></i>
+            </button>
+
+            <h2 style="margin-bottom: 25px; font-size: 20px; font-weight: 800; color: var(--color-primary-dark);">
+                <i class="fas fa-file-pdf" style="color: var(--color-primary);"></i> Gerar Estudo de Mercado
+            </h2>
+            
+            <div class="modal-cotacao-box">
+                <h4 style="font-size: 13px; color: var(--color-text-main); margin-bottom: 15px; text-transform: uppercase;">Adicionar Nova Opção à Cotação</h4>
+                
+                <div class="form-row" style="margin-bottom: 15px;">
+                    <div class="form-group flex-1">
+                        <label>Operadora / Seguradora:</label>
+                        <input type="text" id="pdfOperadora" placeholder="Ex: SulAmérica">
+                    </div>
+                    <div class="form-group flex-1">
+                        <label>Nome do Plano:</label>
+                        <input type="text" id="pdfPlano" placeholder="Ex: Direto SP">
+                    </div>
+                </div>
+
+                <div class="form-row" style="margin-bottom: 15px;">
+                    <div class="form-group flex-1">
+                        <label>Acomodação:</label>
+                        <select id="pdfAcomodacao">
+                            <option value="Enfermaria">Enfermaria</option>
+                            <option value="Apartamento">Apartamento</option>
+                            <option value="Não se aplica">Não se aplica</option>
+                        </select>
+                    </div>
+                    <div class="form-group flex-1">
+                        <label>Coparticipação:</label>
+                        <select id="pdfCoparticipacao">
+                            <option value="Sem Coparticipação">Sem Coparticipação</option>
+                            <option value="Coparticipação Parcial">Coparticipação Parcial</option>
+                            <option value="Com Coparticipação Total">Com Coparticipação Total</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row" style="margin-bottom: 5px;">
+                    <div class="form-group flex-1">
+                        <label>Valor Mensal (R$):</label>
+                        <input type="text" id="pdfValor" placeholder="Ex: 1.313,00">
+                    </div>
+                    <div class="form-group flex-1" style="justify-content: flex-end;">
+                        <button type="button" id="btnAdicionarCotacaoTabela" class="btn-adicionar-opcao">
+                            <i class="fas fa-plus"></i> Adicionar Opção
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <h4 style="font-size: 13px; color: var(--color-text-main); margin-bottom: 10px;">Opções Adicionadas:</h4>
+            <div id="cotacaoListContainer" class="cotacao-lista">
+                <div class="empty-cotacao">Nenhuma opção adicionada ainda.</div>
+            </div>
+
+            <div class="modal-actions" style="margin-top: 30px; display: flex; justify-content: flex-end; gap: 10px; border-top: none;">
+                <button type="button" class="btn-modal-secundario" id="btnCancelarCotacao">Cancelar</button>
+                <button type="button" class="btn-modal-salvar" id="btnBaixarPdfFinal" style="background: var(--color-primary); box-shadow: none;">
+                    <i class="fas fa-download"></i> Baixar PDF
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL DE CONFIGURAÇÃO DE MENSAGENS AUTOMÁTICAS -->
+    <div id="modalTemplatesMsg" class="modal-overlay" style="display: none; z-index: 2500;">
+        <div class="modal-card" style="max-width: 600px; position: relative;">
+            <button type="button" id="btnFecharTemplatesMsg" class="btn-fechar-x" title="Fechar">
+                <i class="fas fa-times"></i>
+            </button>
+
+            <h2 style="margin-bottom: 20px; font-size: 20px; font-weight: 800; color: var(--color-primary-dark);">
+                <i class="fas fa-robot" style="color: var(--color-primary);"></i> Mensagens Automáticas
+            </h2>
+            
+            <div class="form-group" style="margin-bottom: 15px;">
+                <label>1. Selecione a coluna (Status):</label>
+                <select id="selectStatusTemplate">
+                    <option value="contato">Leads para Contato</option>
+                    <option value="respondeu">Respondeu</option>
+                    <option value="interessado">Interessado</option>
+                    <option value="documentos">Documentos</option>
+                    <option value="pagar boleto">Pagar Boleto</option>
+                    <option value="finalizado">Finalizado</option>
+                    <option value="pré cadastro agger">Pré Cadastro Agger</option>
+                    <option value="pos venda">Pós Venda</option>
+                    <option value="sem resposta">Sem Resposta</option>
+                    <option value="sem interesse">Sem Interesse</option>
+                    <option value="perdido">Perdido</option>
+                </select>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 10px;">
+                <label>2. Crie o texto padrão para esta coluna:</label>
+                <textarea id="textoTemplateEdit" rows="6" style="width: 100%; border: 1px solid var(--color-border); border-radius: 12px; padding: 12px; font-family: inherit; font-size: 14px; resize: vertical; outline: none;"></textarea>
+            </div>
+
+            <div style="font-size: 12px; color: var(--color-text-muted); margin-bottom: 20px; background: #f8fafc; padding: 12px; border-radius: 8px; border: 1px solid #e2e8f0;">
+                <strong style="color: var(--color-text-main); display: block; margin-bottom: 5px;">Variáveis Automáticas (Copie e cole no texto):</strong>
+                <code>{nome}</code> - Primeiro nome do cliente<br>
+                <code>{vendedor}</code> - Nome do corretor logado<br>
+                <code>{saudacao}</code> - Bom dia / Boa tarde / Boa noite automático
+            </div>
+
+            <div style="display: flex; justify-content: flex-end; gap: 10px;">
+                <button type="button" class="btn-modal-secundario" id="btnCancelarTemplate">Cancelar</button>
+                <button type="button" class="btn-modal-salvar" id="btnSalvarTemplateMsg">Salvar Texto</button>
+            </div>
+        </div>
+    </div>
+
     <!-- SCRIPTS -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 
     <script>
         const supabaseUrl = 'https://flbxxsttexpxumbfqaxv.supabase.co';
         const supabaseKey = 'sb_publishable_OqPx1lTVT1XTGbMkDfc0MQ_vAXVltis';
         const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
 
-        const btnImportar = document.getElementById('btnImportar');
-        const inputExcel = document.getElementById('inputExcel');
         const modalLead = document.getElementById('modalLead');
         const btnNovoLead = document.getElementById('btnNovoLead');
         const btnFecharModal = document.getElementById('btnFecharModal');
+        const btnFecharX = document.getElementById('btnFecharX'); 
         const btnExcluirLead = document.getElementById('btnExcluirLead');
-        const btnResetarTentativas = document.getElementById('btnResetarTentativas');
         const formLeadDetalhes = document.getElementById('formLeadDetalhes');
-        const filtroVendedor = document.getElementById('filtroVendedor');
-        const detalheVendedor = document.getElementById('detalheVendedor');
         const inputBuscaGlobal = document.getElementById('inputBuscaGlobal');
+        const filtroVendedor = document.getElementById('filtroVendedor');
 
+        const modalCotacaoPdf = document.getElementById('modalCotacaoPdf');
+        const btnAbrirModalCotacao = document.getElementById('btnAbrirModalCotacao');
+        const btnFecharModalCotacao = document.getElementById('btnFecharModalCotacao');
+        const btnCancelarCotacao = document.getElementById('btnCancelarCotacao');
+        const btnAdicionarCotacaoTabela = document.getElementById('btnAdicionarCotacaoTabela');
+        const btnBaixarPdfFinal = document.getElementById('btnBaixarPdfFinal');
+        const cotacaoListContainer = document.getElementById('cotacaoListContainer');
+        
         let NOME_VENDEDOR_LOGADO = null; 
         let PERFIL_USUARIO_LOGADO = null;
         let todosOsLeadsMemoria = [];
+        let listaCotacoesAdicionadas = []; 
+        let COLUNAS_REAIS_SUPABASE = null;
+        let timerAutoSave = null;
 
+        // Contador de caracteres do Resumo do Card
+        const detalheResumoCard = document.getElementById('detalheResumoCard');
+        const contadorResumoCard = document.getElementById('contadorResumoCard');
+        function atualizarContadorResumo() {
+            const len = (detalheResumoCard.value || '').length;
+            contadorResumoCard.textContent = `${len}/140`;
+            contadorResumoCard.style.color = len >= 130 ? '#dc2626' : '#64748b';
+        }
+        detalheResumoCard.addEventListener('input', atualizarContadorResumo);
+
+        // ==========================================
+        // FUNÇÕES DE LEITURA E GRAVAÇÃO (NUNCA PERDE DADOS)
+        // ==========================================
+        function salvarDadosExtrasLocal(leadId, payload) {
+            if (!leadId) return;
+            const chave = String(leadId);
+            const cache = JSON.parse(localStorage.getItem('bvpinho_leads_extras') || '{}');
+            cache[chave] = { ...(cache[chave] || {}), ...payload };
+            localStorage.setItem('bvpinho_leads_extras', JSON.stringify(cache));
+        }
+
+        function obterDadosExtrasLocal(leadId) {
+            if (!leadId) return {};
+            const chave = String(leadId);
+            const cache = JSON.parse(localStorage.getItem('bvpinho_leads_extras') || '{}');
+            return cache[chave] || {};
+        }
+
+        function lerValorCampo(leadBanco, extrasLocal, nomeCampo, nomeAlternativo) {
+            const vBanco = leadBanco ? leadBanco[nomeCampo] : undefined;
+            if (vBanco !== null && vBanco !== undefined && String(vBanco).trim() !== '') {
+                return vBanco;
+            }
+            if (nomeAlternativo && leadBanco && leadBanco[nomeAlternativo] !== null && leadBanco[nomeAlternativo] !== undefined && String(leadBanco[nomeAlternativo]).trim() !== '') {
+                return leadBanco[nomeAlternativo];
+            }
+            const vExtra = extrasLocal ? extrasLocal[nomeCampo] : undefined;
+            if (vExtra !== null && vExtra !== undefined && String(vExtra).trim() !== '') {
+                return vExtra;
+            }
+            if (nomeAlternativo && extrasLocal && extrasLocal[nomeAlternativo] !== null && extrasLocal[nomeAlternativo] !== undefined && String(extrasLocal[nomeAlternativo]).trim() !== '') {
+                return extrasLocal[nomeAlternativo];
+            }
+            return '';
+        }
+
+        function lerCheckboxCampo(leadBanco, extrasLocal, nomeCampo) {
+            if (extrasLocal && typeof extrasLocal[nomeCampo] === 'boolean') {
+                return Boolean(leadBanco?.[nomeCampo] || extrasLocal[nomeCampo]);
+            }
+            return Boolean(leadBanco?.[nomeCampo]);
+        }
+
+        function obterConfigCard(leadBanco, extrasLocal) {
+            const padrao = { mostrar_tags: true, mostrar_plano: true, mostrar_valor: true, mostrar_resumo: true };
+            const cfgBanco = leadBanco?.config_card;
+            const cfgLocal = extrasLocal?.config_card;
+            if (cfgLocal && typeof cfgLocal === 'object') return { ...padrao, ...cfgLocal };
+            if (cfgBanco && typeof cfgBanco === 'object') return { ...padrao, ...cfgBanco };
+            return padrao;
+        }
+
+        function coletarPayloadDoModal() {
+            let valorVendedor = document.getElementById('detalheVendedor').value;
+            if (valorVendedor === 'livre') valorVendedor = null; 
+
+            const statusEscolhido = document.getElementById('detalheStatusSelect').value || 'contato';
+
+            return {
+                nome: document.getElementById('detalheNome').value.trim(),
+                numero: document.getElementById('detalheNumero').value.replace(/\D/g, '') || null,
+                telefone_fixo: document.getElementById('detalheTelefoneFixo').value.replace(/\D/g, '') || null,
+                email: document.getElementById('detalheEmail').value.trim() || null,
+                cpf: document.getElementById('detalheCpf').value.trim() || null,
+                data_nascimento: document.getElementById('detalheNascimento').value.trim() || null,
+                idade: document.getElementById('detalheIdade').value.trim() || null,
+                genero: document.getElementById('detalheGenero').value || null,
+                estado_civil: document.getElementById('detalheEstadoCivil').value || null,
+                cep: document.getElementById('detalheCep').value.trim() || null,
+                cidade: document.getElementById('detalheCidade').value.trim() || null,
+                profissao: document.getElementById('detalheProfissao').value.trim() || null,
+                origem: document.getElementById('detalheOrigem').value.trim() || null,
+                tipo_lead: document.getElementById('detalheTipoLead').value.trim() || null,
+                vendedor: valorVendedor,
+                status: statusEscolhido,
+                valor_esperado: document.getElementById('detalheValorEsperado').value.trim() || null,
+                valor_atual: document.getElementById('detalheValorAtual').value.trim() || null,
+                tentativas_ligacao: Number(document.getElementById('detalheTentativasLigacao').value) || 0,
+                tentativas_whatsapp: Number(document.getElementById('detalheTentativasZap').value) || 0,
+                resumo_card: document.getElementById('detalheResumoCard').value.trim() || null,
+                config_card: {
+                    mostrar_tags: document.getElementById('chkMostrarTagsCard').checked,
+                    mostrar_plano: document.getElementById('chkMostrarPlanoCard').checked,
+                    mostrar_valor: document.getElementById('chkMostrarValorCard').checked,
+                    mostrar_resumo: document.getElementById('chkMostrarResumoCard').checked
+                },
+                observacoes: document.getElementById('detalheObs').value.trim() || null,
+                data_prioridade: document.getElementById('detalheDataPrioridade').value || null,
+                interesse_saude: document.getElementById('chkInteresseSaude').checked,
+                contrato_saude: document.getElementById('chkContratoSaude').checked,
+                plano_anterior: document.getElementById('detalhePlanoAnterior').value.trim() || null,
+                plano_interesse: document.getElementById('detalhePlanoInteresse').value.trim() || null,
+                link_cotacao_pf: document.getElementById('detalheLinkCotacaoPF').value.trim() || null,
+                link_cotacao_pme: document.getElementById('detalheLinkCotacaoPME').value.trim() || null,
+                link_cotacao_adesao: document.getElementById('detalheLinkCotacaoAdesao').value.trim() || null,
+                interesse_odonto: document.getElementById('chkInteresseOdonto').checked,
+                contrato_odonto: document.getElementById('chkContratoOdonto').checked,
+                plano_odonto_interesse: document.getElementById('detalhePlanoOdontoInteresse').value.trim() || null,
+                valor_odonto: document.getElementById('detalheValorOdonto').value.trim() || null,
+                link_cotacao_odonto: document.getElementById('detalheLinkCotacaoOdonto').value.trim() || null,
+                cadastrado_agger: document.getElementById('chkCadastradoAgger').checked,
+                primeiro_boleto_pago: document.getElementById('chkPrimeiroBoletoPago').checked,
+                operadora_fechada: document.getElementById('detalheOperadoraFechada').value.trim() || null,
+                numero_proposta: document.getElementById('detalheNumeroProposta').value.trim() || null,
+                data_vigencia: document.getElementById('detalheDataVigencia').value || null,
+                dia_vencimento: document.getElementById('detalheDiaVencimento').value.trim() || null,
+                obs_pos_venda: document.getElementById('detalheObsPosVenda').value.trim() || null,
+                interesse_auto: document.getElementById('chkInteresseAuto').checked,
+                contrato_auto: document.getElementById('chkContratoAuto').checked,
+                auto_modelo: document.getElementById('detalheAutoModelo').value.trim() || null,
+                auto_info: document.getElementById('detalheAutoInfo').value.trim() || null,
+                interesse_residencial: document.getElementById('chkInteresseResidencial').checked,
+                contrato_residencial: document.getElementById('chkContratoResidencial').checked,
+                residencial_tipo: document.getElementById('detalheResidencialTipo').value.trim() || null,
+                residencial_valor: document.getElementById('detalheResidencialValor').value.trim() || null,
+                interesse_vida: document.getElementById('chkInteresseVida').checked,
+                contrato_vida: document.getElementById('chkContratoVida').checked,
+                vida_capital: document.getElementById('detalheVidaCapital').value.trim() || null,
+                vida_seguradora: document.getElementById('detalheVidaSeguradora').value.trim() || null,
+                interesse_consorcio: document.getElementById('chkInteresseConsorcio').checked,
+                contrato_consorcio: document.getElementById('chkContratoConsorcio').checked,
+                consorcio_tipo: document.getElementById('detalheConsorcioTipo').value.trim() || null,
+                consorcio_valor: document.getElementById('detalheConsorcioValor').value.trim() || null,
+                interesse_pet: document.getElementById('chkInteressePet').checked,
+                contrato_pet: document.getElementById('chkContratoPet').checked,
+                pet_info: document.getElementById('detalhePetInfo').value.trim() || null,
+                pet_plano: document.getElementById('detalhePetPlano').value.trim() || null,
+                interesse_viagem: document.getElementById('chkInteresseViagem').checked,
+                contrato_viagem: document.getElementById('chkContratoViagem').checked,
+                viagem_destino: document.getElementById('detalheViagemDestino').value.trim() || null,
+                viagem_periodo: document.getElementById('detalheViagemPeriodo').value.trim() || null,
+                interesse_empresarial: document.getElementById('chkInteresseEmpresarial').checked,
+                contrato_empresarial: document.getElementById('chkContratoEmpresarial').checked,
+                empresarial_ramo: document.getElementById('detalheEmpresarialRamo').value.trim() || null,
+                empresarial_vidas: document.getElementById('detalheEmpresarialVidas').value.trim() || null,
+                interesse_outros: document.getElementById('chkInteresseOutros').checked,
+                contrato_outros: document.getElementById('chkContratoOutros').checked,
+                outros_descricao: document.getElementById('detalheOutrosDescricao').value.trim() || null
+            };
+        }
+
+        function filtrarParaColunasDoBanco(payload) {
+            if (!COLUNAS_REAIS_SUPABASE || COLUNAS_REAIS_SUPABASE.length === 0) {
+                return {
+                    nome: payload.nome,
+                    numero: payload.numero,
+                    vendedor: payload.vendedor,
+                    status: payload.status
+                };
+            }
+            const filtrado = {};
+            COLUNAS_REAIS_SUPABASE.forEach(col => {
+                if (col !== 'id' && col !== 'created_at' && payload[col] !== undefined) {
+                    filtrado[col] = payload[col];
+                }
+            });
+            return filtrado;
+        }
+
+        function acionarAutoSaveTempoReal() {
+            const id = document.getElementById('leadId').value;
+            if (!id) return;
+
+            const payload = coletarPayloadDoModal();
+            salvarDadosExtrasLocal(id, payload);
+
+            const badge = document.getElementById('badgeAutoSave');
+            badge.style.opacity = '1';
+            clearTimeout(timerAutoSave);
+            timerAutoSave = setTimeout(async () => {
+                const dadosBanco = filtrarParaColunasDoBanco(payload);
+                await supabaseClient.from('leads').update(dadosBanco).eq('id', id);
+                carregarLeads();
+                setTimeout(() => { badge.style.opacity = '0'; }, 1200);
+            }, 350);
+        }
+
+        formLeadDetalhes.addEventListener('input', acionarAutoSaveTempoReal);
+        formLeadDetalhes.addEventListener('change', acionarAutoSaveTempoReal);
+
+        // ==========================================
+        // BOTÃO DE CARIMBAR DATA/HORA NA AGENDA LATERAL
+        // ==========================================
+        document.getElementById('btnCarimbarData').addEventListener('click', () => {
+            const campoObs = document.getElementById('detalheObs');
+            const agora = new Date();
+            const dia = String(agora.getDate()).padStart(2, '0');
+            const mes = String(agora.getMonth() + 1).padStart(2, '0');
+            const hora = String(agora.getHours()).padStart(2, '0');
+            const min = String(agora.getMinutes()).padStart(2, '0');
+            const carimbo = `[${dia}/${mes} às ${hora}:${min}]: `;
+
+            if (campoObs.value.trim() !== '') {
+                campoObs.value = campoObs.value.trimEnd() + '\n' + carimbo;
+            } else {
+                campoObs.value = carimbo;
+            }
+            campoObs.focus();
+            campoObs.scrollTop = campoObs.scrollHeight;
+            acionarAutoSaveTempoReal();
+        });
+
+        // ==========================================
+        // FILTRO DE ABAS DO PAINEL KANBAN
+        // ==========================================
+        window.filtrarColunasKanban = function(event, grupo) {
+            document.querySelectorAll('.funnel-tab-btn').forEach(b => b.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+
+            const grupos = {
+                'vendas': ['leads-contato', 'leads-respondeu', 'leads-interessado', 'leads-documentos', 'leads-pagar-boleto', 'leads-finalizado'],
+                'posvenda': ['leads-finalizado', 'leads-pre-cadastro-agger', 'leads-pos-venda'],
+                'arquivados': ['leads-sem-resposta', 'leads-sem-interesse', 'leads-perdido']
+            };
+
+            document.querySelectorAll('.board .column').forEach(coluna => {
+                const contentDiv = coluna.querySelector('.column-content');
+                if (!contentDiv) return;
+
+                if (grupo === 'todas') {
+                    coluna.style.display = 'flex';
+                } else {
+                    const mostrar = grupos[grupo] && grupos[grupo].includes(contentDiv.id);
+                    coluna.style.display = mostrar ? 'flex' : 'none';
+                }
+            });
+        };
+
+        // ==========================================
+        // MÁSCARAS E UTILITÁRIOS DE FORMULÁRIO
+        // ==========================================
         function mascaraTelefone(valor) {
             if (!valor) return '';
             valor = String(valor).replace(/\D/g, ""); 
@@ -938,106 +2000,629 @@
             return valor;
         }
 
-        document.getElementById('detalheNumero').addEventListener('input', function(e) { e.target.value = mascaraTelefone(e.target.value); });
-        document.getElementById('detalheTelefoneFixo').addEventListener('input', function(e) { e.target.value = mascaraTelefone(e.target.value); });
+        function mascaraData(valor) {
+            if (!valor) return '';
+            valor = String(valor).replace(/\D/g, "").substring(0, 8);
+            if (valor.length > 4) return valor.replace(/^(\d{2})(\d{2})(\d{1,4})/, "$1/$2/$3");
+            if (valor.length > 2) return valor.replace(/^(\d{2})(\d{1,2})/, "$1/$2");
+            return valor;
+        }
+
+        function mascaraCep(valor) {
+            if (!valor) return '';
+            valor = String(valor).replace(/\D/g, "").substring(0, 8);
+            return valor.replace(/^(\d{5})(\d)/, "$1-$2");
+        }
+
+        document.getElementById('detalheNumero').addEventListener('input', e => e.target.value = mascaraTelefone(e.target.value));
+        document.getElementById('detalheTelefoneFixo').addEventListener('input', e => e.target.value = mascaraTelefone(e.target.value));
+        document.getElementById('detalheNascimento').addEventListener('input', e => e.target.value = mascaraData(e.target.value));
+        
+        document.getElementById('detalheCep').addEventListener('input', async function(e) {
+            e.target.value = mascaraCep(e.target.value);
+            const cepLimpo = e.target.value.replace(/\D/g, '');
+            if (cepLimpo.length === 8) {
+                try {
+                    const resp = await fetch(`https://viacep.com.br/ws/${cepLimpo}/json/`);
+                    const dados = await resp.json();
+                    if (!dados.erro && dados.localidade) {
+                        document.getElementById('detalheCidade').value = dados.localidade;
+                        acionarAutoSaveTempoReal();
+                    }
+                } catch (err) {}
+            }
+        });
 
         function mudarAba(event, idAba) {
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
             document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
-            
             event.currentTarget.classList.add('active');
             document.getElementById(idAba).classList.add('active');
         }
 
+        document.getElementById('searchCorretora').addEventListener('input', function(e) {
+            const termo = e.target.value.toLowerCase();
+            document.querySelectorAll('#listaCorretoras li').forEach(li => {
+                const texto = li.textContent.toLowerCase();
+                li.style.display = texto.includes(termo) ? 'block' : 'none';
+            });
+        });
+
+        function configurarBotaoAbrirLink(idBotao, idInput) {
+            const btn = document.getElementById(idBotao);
+            if (!btn) return;
+            btn.addEventListener('click', () => {
+                let url = document.getElementById(idInput).value.trim();
+                if (!url) return alert('Nenhum link informado neste campo.');
+                if (!/^https?:\/\//i.test(url)) url = 'https://' + url;
+                window.open(url, '_blank');
+            });
+        }
+        configurarBotaoAbrirLink('btnAbrirLinkCotacaoPF', 'detalheLinkCotacaoPF');
+        configurarBotaoAbrirLink('btnAbrirLinkCotacaoPME', 'detalheLinkCotacaoPME');
+        configurarBotaoAbrirLink('btnAbrirLinkCotacaoAdesao', 'detalheLinkCotacaoAdesao');
+        configurarBotaoAbrirLink('btnAbrirLinkCotacaoOdonto', 'detalheLinkCotacaoOdonto');
+
+        document.getElementById('btnAbrirCotador').addEventListener('click', () => {
+            window.open('https://app.agger.com.br/', '_blank');
+        });
+
+        window.fazerLogout = async function() {
+            await supabaseClient.auth.signOut();
+            window.location.href = '../login/index.html';
+        };
+
+        // ==========================================
+        // INICIALIZAÇÃO DO SISTEMA E VENDEDORES
+        // ==========================================
         window.addEventListener('load', iniciarSistema);
 
         async function iniciarSistema() {
-            const { data: { session }, error } = await supabaseClient.auth.getSession();
-            if (error || !session) {
-                window.location.href = '../index.html'; 
-                return;
-            }
+            const { data: { session } } = await supabaseClient.auth.getSession();
+            if (session && session.user) {
+                const emailLogado = session.user.email;
+                const { data: usuarioData } = await supabaseClient.from('usuarios').select('nome, perfil').eq('email', emailLogado).single();
 
-            const emailLogado = session.user.email;
-            const { data: usuarioData } = await supabaseClient.from('usuarios').select('nome, perfil').eq('email', emailLogado).single();
-
-            if (usuarioData && usuarioData.nome) {
-                NOME_VENDEDOR_LOGADO = usuarioData.nome;
-                PERFIL_USUARIO_LOGADO = usuarioData.perfil || 'vendedor';
-                document.getElementById('nomeVendedorLogado').textContent = NOME_VENDEDOR_LOGADO;
+                if (usuarioData && usuarioData.nome) {
+                    NOME_VENDEDOR_LOGADO = usuarioData.nome;
+                    PERFIL_USUARIO_LOGADO = usuarioData.perfil || 'vendedor';
+                } else {
+                    NOME_VENDEDOR_LOGADO = emailLogado.split('@')[0];
+                    PERFIL_USUARIO_LOGADO = 'vendedor';
+                }
             } else {
-                NOME_VENDEDOR_LOGADO = emailLogado;
-                PERFIL_USUARIO_LOGADO = 'vendedor';
-                document.getElementById('nomeVendedorLogado').textContent = emailLogado;
+                NOME_VENDEDOR_LOGADO = 'Administrador';
+                PERFIL_USUARIO_LOGADO = 'admin';
             }
+
+            document.getElementById('nomeVendedorLogado').textContent = NOME_VENDEDOR_LOGADO;
 
             if (PERFIL_USUARIO_LOGADO !== 'admin') {
-                document.getElementById('filtroVendedor').style.display = 'none';
+                filtroVendedor.style.display = 'none';
             }
 
             await carregarListaVendedores();
-            carregarLeads();
-        }
-
-        async function fazerLogout() {
-            await supabaseClient.auth.signOut();
-            window.location.href = '../index.html';
+            await carregarLeads();
         }
 
         async function carregarListaVendedores() {
-            const { data: vendedores, error } = await supabaseClient.from('usuarios').select('nome').order('nome');
-            if (error) return;
+            const selectModal = document.getElementById('detalheVendedor');
+            const selectTopo = document.getElementById('filtroVendedor');
 
-            let acheiLogado = false;
-            vendedores.forEach(v => {
-                if (v.nome === NOME_VENDEDOR_LOGADO) acheiLogado = true;
-                let optionFiltro = document.createElement('option'); optionFiltro.value = v.nome; optionFiltro.text = v.nome; filtroVendedor.appendChild(optionFiltro);
-                let optionModal = document.createElement('option'); optionModal.value = v.nome; optionModal.text = v.nome; detalheVendedor.appendChild(optionModal);
-            });
-
-            if (!acheiLogado && NOME_VENDEDOR_LOGADO) {
-                let optionFiltro = document.createElement('option'); optionFiltro.value = NOME_VENDEDOR_LOGADO; optionFiltro.text = NOME_VENDEDOR_LOGADO; filtroVendedor.appendChild(optionFiltro);
-                let optionModal = document.createElement('option'); optionModal.value = NOME_VENDEDOR_LOGADO; optionModal.text = NOME_VENDEDOR_LOGADO; detalheVendedor.appendChild(optionModal);
+            const { data: usuarios } = await supabaseClient.from('usuarios').select('nome').order('nome', { ascending: true });
+            
+            const nomesUnicos = new Set();
+            if (usuarios) {
+                usuarios.forEach(u => { if (u.nome) nomesUnicos.add(u.nome.trim()); });
             }
+            if (NOME_VENDEDOR_LOGADO) nomesUnicos.add(NOME_VENDEDOR_LOGADO);
+
+            selectModal.innerHTML = '<option value="livre">Sem dono (Livre)</option>';
+            selectTopo.innerHTML = '<option value="todos">Toda a equipe</option><option value="livres">Leads Livres</option>';
+
+            nomesUnicos.forEach(nome => {
+                selectModal.innerHTML += `<option value="${nome}">${nome}</option>`;
+                selectTopo.innerHTML += `<option value="${nome}">${nome}</option>`;
+            });
         }
 
-        filtroVendedor.addEventListener('change', () => { carregarLeads(); });
+        filtroVendedor.addEventListener('change', carregarLeads);
 
+        // ==========================================
+        // NOTIFICAÇÕES (SINO: RETORNOS E ANIVERSÁRIOS)
+        // ==========================================
+        const btnNotificacoes = document.getElementById('btnNotificacoes');
+        const dropdownNotificacoes = document.getElementById('dropdownNotificacoes');
+
+        btnNotificacoes.addEventListener('click', (e) => {
+            e.stopPropagation();
+            dropdownNotificacoes.style.display = dropdownNotificacoes.style.display === 'block' ? 'none' : 'block';
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!dropdownNotificacoes.contains(e.target) && e.target !== btnNotificacoes) {
+                dropdownNotificacoes.style.display = 'none';
+            }
+        });
+
+        function atualizarNotificacoes(leads) {
+            const hoje = new Date();
+            const ano = hoje.getFullYear();
+            const mes = String(hoje.getMonth() + 1).padStart(2, '0');
+            const dia = String(hoje.getDate()).padStart(2, '0');
+            const dataHojeISO = `${ano}-${mes}-${dia}`;
+            const diaMesHoje = `${dia}/${mes}`;
+
+            document.getElementById('dataHojeNotif').textContent = `${dia}/${mes}/${ano}`;
+
+            const retornosHoje = [];
+            const aniversariantesHoje = [];
+
+            leads.forEach(lead => {
+                const extras = obterDadosExtrasLocal(lead.id);
+                const dataPrioridade = lerValorCampo(lead, extras, 'data_prioridade');
+                const nascimento = lerValorCampo(lead, extras, 'data_nascimento', 'nascimento');
+
+                if (dataPrioridade && dataPrioridade <= dataHojeISO && lead.status !== 'finalizado' && lead.status !== 'perdido') {
+                    retornosHoje.push({ ...lead, dataPrioridade });
+                }
+
+                if (nascimento && String(nascimento).startsWith(diaMesHoje)) {
+                    aniversariantesHoje.push(lead);
+                }
+            });
+
+            const totalAvisos = retornosHoje.length + aniversariantesHoje.length;
+            const badge = document.getElementById('badgeNotificacao');
+            const container = document.getElementById('listaNotificacoes');
+
+            if (totalAvisos > 0) {
+                badge.textContent = totalAvisos;
+                badge.style.display = 'block';
+            } else {
+                badge.style.display = 'none';
+            }
+
+            if (totalAvisos === 0) {
+                container.innerHTML = '<div style="padding: 20px; text-align: center; color: #94a3b8; font-size: 13px;">Nenhum retorno ou aniversário para hoje!</div>';
+                return;
+            }
+
+            let html = '';
+
+            if (aniversariantesHoje.length > 0) {
+                html += `<div class="birthday-section-title"><i class="fas fa-birthday-cake"></i> Aniversariantes do Dia</div>`;
+                aniversariantesHoje.forEach(lead => {
+                    const num = lead.numero ? String(lead.numero).replace(/\D/g, '') : '';
+                    const primeiroNome = (lead.nome || 'Cliente').split(' ')[0];
+                    const msgParabens = encodeURIComponent(`Olá ${primeiroNome}! Passando para desejar um feliz aniversário, muita saúde, paz e realizações! Um grande abraço de ${NOME_VENDEDOR_LOGADO || 'toda a equipe'} da BV Pinho!`);
+                    
+                    html += `
+                        <div class="birthday-notification">
+                            <div class="birthday-top" onclick="abrirModalEdicao(${lead.id})" style="cursor:pointer;">
+                                <div class="birthday-icon"><i class="fas fa-gift"></i></div>
+                                <div class="birthday-text">
+                                    <span class="birthday-label">Aniversário Hoje</span>
+                                    <span class="birthday-name">${lead.nome || 'Sem nome'}</span>
+                                </div>
+                            </div>
+                            ${num ? `<a href="https://web.whatsapp.com/send?phone=55${num}&text=${msgParabens}" target="_blank" class="btn-whatsapp-aniversario"><i class="fab fa-whatsapp"></i> Mandar Parabéns</a>` : `<span class="birthday-no-phone">Sem telefone cadastrado</span>`}
+                        </div>
+                    `;
+                });
+            }
+
+            if (retornosHoje.length > 0) {
+                html += `<div class="birthday-section-title"><i class="fas fa-calendar-check"></i> Retornos Agendados</div>`;
+                retornosHoje.forEach(lead => {
+                    const partesData = lead.dataPrioridade.split('-');
+                    const dataBr = partesData.length === 3 ? `${partesData[2]}/${partesData[1]}/${partesData[0]}` : lead.dataPrioridade;
+                    const atrasado = lead.dataPrioridade < dataHojeISO;
+
+                    html += `
+                        <div class="notification-item" onclick="abrirModalEdicao(${lead.id})">
+                            <span class="notif-nome">${lead.nome || 'Sem Nome'}</span>
+                            <span class="notif-data">
+                                <i class="fas fa-clock"></i> ${atrasado ? 'Atrasado: ' : 'Para Hoje: '} ${dataBr}
+                            </span>
+                            <span style="font-size: 11px; color: #64748b;">Coluna: ${(lead.status || 'contato').toUpperCase()}</span>
+                        </div>
+                    `;
+                });
+            }
+
+            container.innerHTML = html;
+        }
+
+        // ==========================================
+        // LÓGICA DO MODAL DE COTAÇÃO PDF (CARDS)
+        // ==========================================
+        btnAbrirModalCotacao.addEventListener('click', () => {
+            listaCotacoesAdicionadas = []; 
+            renderizarListaCotacao();
+            
+            document.getElementById('pdfOperadora').value = '';
+            document.getElementById('pdfPlano').value = '';
+            document.getElementById('pdfValor').value = '';
+            document.getElementById('pdfAcomodacao').value = 'Enfermaria';
+            document.getElementById('pdfCoparticipacao').value = 'Sem Coparticipação';
+
+            modalCotacaoPdf.style.display = 'flex';
+        });
+
+        const fecharModalCotacao = () => { modalCotacaoPdf.style.display = 'none'; };
+        btnFecharModalCotacao.addEventListener('click', fecharModalCotacao);
+        btnCancelarCotacao.addEventListener('click', fecharModalCotacao);
+
+        btnAdicionarCotacaoTabela.addEventListener('click', () => {
+            const operadora = document.getElementById('pdfOperadora').value.trim();
+            const plano = document.getElementById('pdfPlano').value.trim();
+            const acomodacao = document.getElementById('pdfAcomodacao').value;
+            const coparticipacao = document.getElementById('pdfCoparticipacao').value;
+            const valor = document.getElementById('pdfValor').value.trim();
+
+            if (!operadora || !plano || !valor) {
+                alert("Preencha Operadora, Plano e Valor para adicionar!");
+                return;
+            }
+
+            listaCotacoesAdicionadas.push({ operadora, plano, acomodacao, coparticipacao, valor });
+            renderizarListaCotacao();
+
+            document.getElementById('pdfOperadora').value = '';
+            document.getElementById('pdfPlano').value = '';
+            document.getElementById('pdfValor').value = '';
+            document.getElementById('pdfOperadora').focus();
+        });
+
+        window.removerCotacao = function(index) {
+            listaCotacoesAdicionadas.splice(index, 1);
+            renderizarListaCotacao();
+        };
+
+        function renderizarListaCotacao() {
+            if (listaCotacoesAdicionadas.length === 0) {
+                cotacaoListContainer.innerHTML = '<div class="empty-cotacao">Nenhuma opção adicionada ainda.</div>';
+                return;
+            }
+
+            cotacaoListContainer.innerHTML = '';
+            listaCotacoesAdicionadas.forEach((item, index) => {
+                cotacaoListContainer.innerHTML += `
+                    <div class="cotacao-item">
+                        <div class="cotacao-item-info">
+                            <span class="cotacao-item-title">${item.operadora} - ${item.plano}</span>
+                            <span class="cotacao-item-details">${item.acomodacao} | ${item.coparticipacao} | R$ ${item.valor}</span>
+                        </div>
+                        <button type="button" class="btn-remover-opcao" onclick="removerCotacao(${index})" title="Remover">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                `;
+            });
+        }
+
+        async function obterBase64DaLogo(url) {
+            return new Promise((resolve) => {
+                const img = new Image();
+                img.crossOrigin = "Anonymous";
+                img.onload = function() {
+                    const canvas = document.createElement("canvas");
+                    canvas.width = img.width || 300;
+                    canvas.height = img.height || 100;
+                    const ctx = canvas.getContext("2d");
+                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                    resolve({ data: canvas.toDataURL("image/png"), w: canvas.width, h: canvas.height });
+                };
+                img.onerror = function() { resolve(null); };
+                img.src = url;
+            });
+        }
+
+        btnBaixarPdfFinal.addEventListener('click', async () => {
+            if (listaCotacoesAdicionadas.length === 0) {
+                alert("Adicione pelo menos uma opção para gerar o PDF.");
+                return;
+            }
+
+            btnBaixarPdfFinal.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Gerando...';
+            btnBaixarPdfFinal.disabled = true;
+
+            try {
+                const nomeCliente = document.getElementById('detalheNome').value || 'Cliente';
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
+
+                const logoInfo = await obterBase64DaLogo("../src/logo.svg");
+
+                const colorPrimary = [58, 110, 133]; 
+                const colorText = [100, 116, 139]; 
+                const colorSubtitle = [132, 147, 165]; 
+                
+                const desenharCabecalho = (doc) => {
+                    doc.setFillColor(colorPrimary[0], colorPrimary[1], colorPrimary[2]);
+                    doc.rect(0, 0, 210, 45, 'F');
+
+                    doc.setTextColor(255, 255, 255);
+                    doc.setFontSize(22);
+                    doc.setFont("helvetica", "bold");
+                    doc.text("ESTUDO DE MERCADO", 15, 24);
+                    
+                    doc.setFontSize(11);
+                    doc.setFont("helvetica", "normal");
+                    doc.text("Comparativo de Planos de Saúde", 15, 32);
+
+                    if (logoInfo && logoInfo.data) {
+                        let imgH = 20; 
+                        let imgW = imgH * (logoInfo.w / logoInfo.h); 
+                        if (imgW > 60) { imgW = 60; imgH = imgW * (logoInfo.h / logoInfo.w); }
+                        doc.addImage(logoInfo.data, 'PNG', 195 - imgW, (45 - imgH) / 2, imgW, imgH);
+                    }
+                };
+
+                desenharCabecalho(doc);
+
+                doc.setTextColor(colorText[0], colorText[1], colorText[2]);
+                doc.setFontSize(9);
+                doc.text("Cotação preparada exclusivamente para:", 15, 60);
+
+                doc.setTextColor(colorPrimary[0], colorPrimary[1], colorPrimary[2]); 
+                doc.setFontSize(16);
+                doc.setFont("helvetica", "bold");
+                doc.text(nomeCliente, 15, 67);
+
+                const dataHoje = new Date().toLocaleDateString('pt-BR');
+                doc.setTextColor(colorText[0], colorText[1], colorText[2]);
+                doc.setFontSize(8);
+                doc.setFont("helvetica", "normal");
+                doc.text(`Data: ${dataHoje}`, 15, 73);
+
+                let currentY = 85;
+                
+                listaCotacoesAdicionadas.forEach((item, index) => {
+                    let isLeft = (index % 2 === 0);
+                    let xPos = isLeft ? 15 : 110;
+                    
+                    if (index > 0 && isLeft) {
+                        currentY += 105; 
+                        if (currentY > 250) {
+                            doc.addPage();
+                            desenharCabecalho(doc);
+                            currentY = 60; 
+                        }
+                    }
+
+                    doc.setDrawColor(226, 232, 240); 
+                    doc.setFillColor(255, 255, 255); 
+                    doc.roundedRect(xPos, currentY, 85, 95, 3, 3, 'FD');
+
+                    doc.setTextColor(colorPrimary[0], colorPrimary[1], colorPrimary[2]);
+                    doc.setFontSize(16);
+                    doc.setFont("helvetica", "bold");
+                    doc.text(item.operadora.toUpperCase(), xPos + 8, currentY + 15);
+
+                    doc.setTextColor(colorSubtitle[0], colorSubtitle[1], colorSubtitle[2]);
+                    doc.setFontSize(11);
+                    doc.text(item.plano, xPos + 8, currentY + 25);
+
+                    doc.setTextColor(colorText[0], colorText[1], colorText[2]);
+                    doc.setFontSize(9);
+                    doc.setFont("helvetica", "normal");
+                    
+                    let tipoPlanoStr = "Saúde"; 
+                    if(document.getElementById('aba-odonto').classList.contains('active')) tipoPlanoStr = "Odontológico";
+                    
+                    doc.text(tipoPlanoStr, xPos + 8, currentY + 38);
+                    doc.text(item.acomodacao, xPos + 8, currentY + 44);
+                    doc.text(item.coparticipacao, xPos + 8, currentY + 50);
+
+                    doc.setTextColor(colorText[0], colorText[1], colorText[2]);
+                    doc.setFontSize(10);
+                    doc.setFont("helvetica", "bold");
+                    doc.text("R$", xPos + 8, currentY + 82);
+                    
+                    doc.setTextColor(colorPrimary[0], colorPrimary[1], colorPrimary[2]);
+                    doc.setFontSize(24); 
+                    let valorFormatado = String(item.valor).replace('R$', '').trim();
+                    doc.text(valorFormatado, xPos + 15, currentY + 82);
+
+                    let priceWidth = doc.getTextWidth(valorFormatado);
+                    doc.setTextColor(colorText[0], colorText[1], colorText[2]);
+                    doc.setFontSize(9);
+                    doc.setFont("helvetica", "normal");
+                    doc.text("/mês", xPos + 15 + priceWidth + 2, currentY + 82);
+                });
+
+                const pageCount = doc.internal.getNumberOfPages();
+                for (let i = 1; i <= pageCount; i++) {
+                    doc.setPage(i);
+                    doc.setDrawColor(226, 232, 240);
+                    doc.line(15, 275, 195, 275);
+                    
+                    doc.setTextColor(colorText[0], colorText[1], colorText[2]);
+                    doc.setFontSize(8);
+                    doc.setFont("helvetica", "normal");
+                    doc.text("*Valores sujeitos a alteração de acordo com a política comercial das operadoras.", 105, 282, { align: "center" });
+                    
+                    doc.setFont("helvetica", "bold");
+                    doc.text(`Consultor(a): ${NOME_VENDEDOR_LOGADO} | BV Pinho`, 105, 287, { align: "center" });
+                }
+
+                doc.save(`Estudo_de_Mercado_${nomeCliente.replace(/\s+/g, '_')}.pdf`);
+                fecharModalCotacao();
+
+            } catch (err) {
+                console.error("Erro ao gerar PDF:", err);
+                alert("Erro ao gerar o PDF.");
+            } finally {
+                btnBaixarPdfFinal.innerHTML = '<i class="fas fa-download"></i> Baixar PDF';
+                btnBaixarPdfFinal.disabled = false;
+            }
+        });
+
+        // ==========================================
+        // LÓGICA DE DRAG & DROP E CARDS DO KANBAN
+        // ==========================================
         function onDragStart(event, id) { event.dataTransfer.setData("text/plain", id); }
         function onDragOver(event) { event.preventDefault(); }
-
+        
         async function onDrop(event, novoStatus) {
             event.preventDefault();
             const id = event.dataTransfer.getData("text");
             const card = document.getElementById('lead-' + id);
-            
             if (card && event.currentTarget) event.currentTarget.appendChild(card);
-            
-            let updateData = { status: novoStatus };
-            await supabaseClient.from('leads').update(updateData).eq('id', id);
+            salvarDadosExtrasLocal(id, { status: novoStatus });
+            await supabaseClient.from('leads').update({ status: novoStatus }).eq('id', id);
             carregarLeads(); 
         }
 
+        window.dispararZapCard = async function(event, leadId) {
+            event.stopPropagation();
+            const lead = todosOsLeadsMemoria.find(l => l.id == leadId);
+            if (!lead || !lead.numero) return alert('Lead sem número cadastrado!');
+
+            const extras = obterDadosExtrasLocal(leadId);
+            const numLimpo = String(lead.numero).replace(/\D/g, '');
+            const statusAtual = (lead.status || 'contato').toLowerCase().trim();
+            const primeiroNome = (lead.nome || 'Cliente').split(' ')[0];
+            const vendedorAtual = NOME_VENDEDOR_LOGADO || 'Corretor';
+
+            const novasTentativas = (Number(lead.tentativas_whatsapp || extras.tentativas_whatsapp) || 0) + 1;
+            salvarDadosExtrasLocal(leadId, { tentativas_whatsapp: novasTentativas });
+            await supabaseClient.from('leads').update({ tentativas_whatsapp: novasTentativas }).eq('id', leadId);
+            
+            const template = templatesMensagens[statusAtual];
+            let urlZap = `https://web.whatsapp.com/send?phone=55${numLimpo}`;
+
+            if (template) {
+                const textoFinal = template
+                    .replace(/{nome}/gi, primeiroNome)
+                    .replace(/{vendedor}/gi, vendedorAtual)
+                    .replace(/{saudacao}/gi, obterSaudacao());
+                urlZap += `&text=${encodeURIComponent(textoFinal)}`;
+            }
+
+            window.open(urlZap, '_blank');
+            carregarLeads();
+        };
+
+        window.somarLigacaoCard = async function(event, leadId) {
+            event.stopPropagation();
+            const lead = todosOsLeadsMemoria.find(l => l.id == leadId);
+            if (!lead) return;
+            const extras = obterDadosExtrasLocal(leadId);
+            const novasTentativas = (Number(lead.tentativas_ligacao || extras.tentativas_ligacao) || 0) + 1;
+            salvarDadosExtrasLocal(leadId, { tentativas_ligacao: novasTentativas });
+            await supabaseClient.from('leads').update({ tentativas_ligacao: novasTentativas }).eq('id', leadId);
+            carregarLeads();
+        };
+
+        // CRIAÇÃO DO CARD RESPEITANDO AS ESCOLHAS DA ÁREA "O QUE MOSTRAR NO CARD"
         function criarCardHTML(lead) {
-            const numeroLimpo = lead.numero ? String(lead.numero).replace(/\D/g, '') : '';
-            const ligacoes = lead.tentativas_ligacao || 0;
-            const wpps = lead.tentativas_whatsapp || 0;
+            const extras = obterDadosExtrasLocal(lead.id);
+            const val = (campo, alt) => lerValorCampo(lead, extras, campo, alt);
+            const chk = (campo) => lerCheckboxCampo(lead, extras, campo);
+            const cfg = obterConfigCard(lead, extras);
+
+            const ligacoes = Number(val('tentativas_ligacao')) || 0;
+            const wpps = Number(val('tentativas_whatsapp')) || 0;
             const vendedorTexto = (lead.vendedor && lead.vendedor !== 'livre' && String(lead.vendedor).trim() !== '') ? lead.vendedor : 'Livre (Sem dono)';
+            const dataRetorno = val('data_prioridade');
+            const cidade = val('cidade');
+
+            // 1. Retorno Agendado
+            let badgeRetornoHTML = '';
+            if (dataRetorno) {
+                const p = dataRetorno.split('-');
+                const dataFormatada = p.length === 3 ? `${p[2]}/${p[1]}` : dataRetorno;
+                badgeRetornoHTML = `<div class="retorno-badge"><i class="fas fa-calendar-alt"></i> Retorno: ${dataFormatada}</div>`;
+            }
+
+            // 2. Tags "Contratado" vs "Interesse" (só exibe se cfg.mostrar_tags estiver marcado)
+            let tagsStatusProdutosHTML = '';
+            if (cfg.mostrar_tags) {
+                const listaContratados = [];
+                const listaInteresses = [];
+
+                const mapearProduto = (nomeProd, campoInt, campoCont) => {
+                    if (chk(campoCont)) listaContratados.push(nomeProd);
+                    else if (chk(campoInt)) listaInteresses.push(nomeProd);
+                };
+
+                mapearProduto('Saúde', 'interesse_saude', 'contrato_saude');
+                mapearProduto('Odonto', 'interesse_odonto', 'contrato_odonto');
+                mapearProduto('Auto', 'interesse_auto', 'contrato_auto');
+                mapearProduto('Residencial', 'interesse_residencial', 'contrato_residencial');
+                mapearProduto('Vida', 'interesse_vida', 'contrato_vida');
+                mapearProduto('Consórcio', 'interesse_consorcio', 'contrato_consorcio');
+                mapearProduto('Pet', 'interesse_pet', 'contrato_pet');
+                mapearProduto('Viagem', 'interesse_viagem', 'contrato_viagem');
+                mapearProduto('Empresarial', 'interesse_empresarial', 'contrato_empresarial');
+                mapearProduto('Outros', 'interesse_outros', 'contrato_outros');
+
+                listaContratados.forEach(p => {
+                    tagsStatusProdutosHTML += `<span class="tag-contratado"><i class="fas fa-check-circle"></i> ${p}</span>`;
+                });
+                listaInteresses.forEach(p => {
+                    tagsStatusProdutosHTML += `<span class="tag-interesse"><i class="fas fa-star"></i> ${p}</span>`;
+                });
+                if (chk('cadastrado_agger')) {
+                    tagsStatusProdutosHTML += `<span class="tag-contratado"><i class="fas fa-check-double"></i> Agger</span>`;
+                }
+            }
+
+            // 3. Nome do Plano e Valor (respeita os checkboxes individuais)
+            const nomePlano = cfg.mostrar_plano ? (val('operadora_fechada') || val('plano_interesse') || val('plano_odonto_interesse') || val('auto_modelo') || '') : '';
+            let valorPlano = cfg.mostrar_valor ? (val('valor_esperado') || val('valor_odonto') || val('valor_atual') || '') : '';
+            if (valorPlano && !String(valorPlano).includes('R$')) {
+                valorPlano = 'R$ ' + valorPlano;
+            }
+
+            let boxPlanoValorHTML = '';
+            if (nomePlano || valorPlano) {
+                boxPlanoValorHTML = `
+                    <div class="card-plano-box">
+                        ${nomePlano ? `<div class="card-plano-nome" title="${nomePlano}"><i class="fas fa-file-medical" style="color: var(--color-primary);"></i> ${nomePlano}</div>` : '<span></span>'}
+                        ${valorPlano ? `<div class="card-plano-valor">${valorPlano}</div>` : ''}
+                    </div>
+                `;
+            }
+
+            // 4. Resumo Rápido Controlado (máx 140 chars / 2 linhas no card)
+            const resumoCardTexto = cfg.mostrar_resumo ? val('resumo_card') : '';
+            let boxObsHTML = '';
+            if (resumoCardTexto) {
+                boxObsHTML = `
+                    <div class="card-obs-box" title="${resumoCardTexto.replace(/"/g, '&quot;')}">
+                        <i class="fas fa-thumbtack"></i> ${resumoCardTexto}
+                    </div>
+                `;
+            }
 
             return `
                 <div class="lead-card" id="lead-${lead.id}" draggable="true" ondragstart="onDragStart(event, ${lead.id})" onclick="abrirModalEdicao(${lead.id})">
                     <div class="lead-info">
-                        <div style="color: #64748b; font-size: 12px;">WhatsApp:</div>
-                        <div style="color: #1e293b; font-size: 15px; font-weight: 600; margin-bottom: 8px;">${lead.numero ? mascaraTelefone(String(lead.numero)) : 'Sem número'}</div>
-                        <div style="color: #64748b; font-size: 12px; margin-top: 8px;">Nome:</div>
-                        <div style="color: #1e293b; font-size: 15px; font-weight: 600;">${lead.nome || 'Sem Nome'}</div>
+                        <div style="color: #1e293b; font-size: 14.5px; font-weight: 700;">${lead.nome || 'Sem Nome'}</div>
+                        <div style="color: #3a6e85; font-size: 13px; font-weight: 600;">${lead.numero ? mascaraTelefone(String(lead.numero)) : 'Sem número'}</div>
+                        ${cidade ? `<div style="font-size: 11px; color: #64748b;"><i class="fas fa-map-marker-alt"></i> ${cidade}</div>` : ''}
                     </div>
-                    <div class="vendedor-badge"><i class="fas fa-user"></i> ${vendedorTexto}</div>
+
+                    <div style="display: flex; flex-wrap: wrap; gap: 4px;">
+                        <div class="vendedor-badge"><i class="fas fa-user"></i> ${vendedorTexto}</div>
+                        ${badgeRetornoHTML}
+                    </div>
+
+                    ${tagsStatusProdutosHTML ? `<div style="display: flex; flex-wrap: wrap; gap: 4px;">${tagsStatusProdutosHTML}</div>` : ''}
+                    ${boxPlanoValorHTML}
+                    ${boxObsHTML}
+
                     <div class="lead-actions">
-                        <span class="action-item"><i class="fas fa-phone"></i> ${ligacoes}/4</span>
-                        <a href="https://api.whatsapp.com/send?phone=55${numeroLimpo}" target="_blank" onclick="event.stopPropagation()" style="text-decoration: none; color: inherit;">
-                            <span class="action-item" style="cursor: pointer;"><i class="fab fa-whatsapp"></i> ${wpps}/4</span>
-                        </a>
+                        <button type="button" class="action-item" onclick="somarLigacaoCard(event, ${lead.id})" title="Clique para somar +1 tentativa de ligação">
+                            <i class="fas fa-phone"></i> ${ligacoes}/4
+                        </button>
+                        <button type="button" class="action-item zap-btn" onclick="dispararZapCard(event, ${lead.id})" title="Abrir WhatsApp com mensagem automática da coluna">
+                            <i class="fab fa-whatsapp"></i> ${wpps}/4
+                        </button>
                     </div>
                 </div>
             `;
@@ -1045,15 +2630,17 @@
 
         function aplicarFiltroDeBusca() {
             const termoBusca = inputBuscaGlobal.value.toLowerCase().trim();
-            if (termoBusca === '') {
-                renderizarLeads(todosOsLeadsMemoria);
-                return;
-            }
+            if (termoBusca === '') return renderizarLeads(todosOsLeadsMemoria);
             const leadsFiltrados = todosOsLeadsMemoria.filter(lead => {
+                const extras = obterDadosExtrasLocal(lead.id);
                 const nome = (lead.nome || '').toLowerCase();
                 const vendedor = (lead.vendedor || 'livre').toLowerCase();
                 const numeroOriginal = (String(lead.numero) || '').toLowerCase();
-                return nome.includes(termoBusca) || vendedor.includes(termoBusca) || numeroOriginal.includes(termoBusca);
+                const cidade = lerValorCampo(lead, extras, 'cidade').toLowerCase();
+                const resumo = lerValorCampo(lead, extras, 'resumo_card').toLowerCase();
+                const obs = lerValorCampo(lead, extras, 'observacoes', 'obs').toLowerCase();
+                const plano = (lerValorCampo(lead, extras, 'plano_interesse') + ' ' + lerValorCampo(lead, extras, 'plano_odonto_interesse')).toLowerCase();
+                return nome.includes(termoBusca) || vendedor.includes(termoBusca) || numeroOriginal.includes(termoBusca) || cidade.includes(termoBusca) || resumo.includes(termoBusca) || obs.includes(termoBusca) || plano.includes(termoBusca);
             });
             renderizarLeads(leadsFiltrados);
         }
@@ -1061,234 +2648,404 @@
         inputBuscaGlobal.addEventListener('input', aplicarFiltroDeBusca);
 
         async function carregarLeads() {
-            const vendedorSelecionado = filtroVendedor.value;
+            const vendedorSelecionado = document.getElementById('filtroVendedor').value;
             let query = supabaseClient.from('leads').select('*').order('id', { ascending: false });
 
-            if (PERFIL_USUARIO_LOGADO !== 'admin') {
-                query = query.eq('vendedor', NOME_VENDEDOR_LOGADO);
-            } else {
-                if (vendedorSelecionado === 'livres') {
-                    query = query.or('vendedor.is.null,vendedor.eq.,vendedor.eq.livre');
-                } else if (vendedorSelecionado !== 'todos') {
-                    query = query.eq('vendedor', vendedorSelecionado);
-                }
-            }
+            if (PERFIL_USUARIO_LOGADO !== 'admin') query = query.eq('vendedor', NOME_VENDEDOR_LOGADO);
+            else if (vendedorSelecionado === 'livres') query = query.or('vendedor.is.null,vendedor.eq.,vendedor.eq.livre');
+            else if (vendedorSelecionado !== 'todos') query = query.eq('vendedor', vendedorSelecionado);
 
             const { data: leads, error } = await query;
             if (error) return;
-
-            todosOsLeadsMemoria = leads;
+            todosOsLeadsMemoria = leads || [];
+            if (todosOsLeadsMemoria.length > 0 && !COLUNAS_REAIS_SUPABASE) {
+                COLUNAS_REAIS_SUPABASE = Object.keys(todosOsLeadsMemoria[0]);
+            }
+            atualizarNotificacoes(todosOsLeadsMemoria);
             aplicarFiltroDeBusca();
-            atualizarNotificacoes();
         }
 
         function renderizarLeads(listaDeLeads) {
-            const idsColunas = ['leads-contato', 'leads-respondeu', 'leads-interessado', 'leads-documentos', 'leads-pagar-boleto', 'leads-finalizado', 'leads-pre-cadastro-agger', 'leads-pos-venda', 'leads-sem-resposta', 'leads-sem-interesse', 'leads-perdido'];
-            idsColunas.forEach(id => {
-                const el = document.getElementById(id);
+            const mapaColunas = {
+                'contato': { col: 'leads-contato', count: 'count-contato', total: 0, grupo: 'vendas' },
+                'respondeu': { col: 'leads-respondeu', count: 'count-respondeu', total: 0, grupo: 'vendas' },
+                'interessado': { col: 'leads-interessado', count: 'count-interessado', total: 0, grupo: 'vendas' },
+                'documentos': { col: 'leads-documentos', count: 'count-documentos', total: 0, grupo: 'vendas' },
+                'pagar boleto': { col: 'leads-pagar-boleto', count: 'count-pagar-boleto', total: 0, grupo: 'vendas' },
+                'finalizado': { col: 'leads-finalizado', count: 'count-finalizado', total: 0, grupo: 'ambos' },
+                'pré cadastro agger': { col: 'leads-pre-cadastro-agger', count: 'count-pre-cadastro-agger', total: 0, grupo: 'posvenda' },
+                'pos venda': { col: 'leads-pos-venda', count: 'count-pos-venda', total: 0, grupo: 'posvenda' },
+                'sem resposta': { col: 'leads-sem-resposta', count: 'count-sem-resposta', total: 0, grupo: 'arquivados' },
+                'sem interesse': { col: 'leads-sem-interesse', count: 'count-sem-interesse', total: 0, grupo: 'arquivados' },
+                'perdido': { col: 'leads-perdido', count: 'count-perdido', total: 0, grupo: 'arquivados' }
+            };
+
+            Object.values(mapaColunas).forEach(item => {
+                const el = document.getElementById(item.col);
                 if (el) el.innerHTML = '';
             });
 
             listaDeLeads.forEach(lead => {
                 let statusAtual = lead.status ? String(lead.status).trim().toLowerCase() : 'contato';
-                const mapaColunas = {
-                    'contato': 'leads-contato', 'respondeu': 'leads-respondeu', 'interessado': 'leads-interessado', 'documentos': 'leads-documentos', 'pagar boleto': 'leads-pagar-boleto', 'finalizado': 'leads-finalizado', 'pré cadastro agger': 'leads-pre-cadastro-agger', 'pos venda': 'leads-pos-venda', 'sem resposta': 'leads-sem-resposta', 'sem interesse': 'leads-sem-interesse', 'perdido': 'leads-perdido'
-                };
-                const idDaColuna = mapaColunas[statusAtual] || 'leads-contato';
-                const container = document.getElementById(idDaColuna);
-                if (container) container.innerHTML += criarCardHTML(lead);
+                const destino = mapaColunas[statusAtual] || mapaColunas['contato'];
+                const container = document.getElementById(destino.col);
+                if (container) {
+                    container.innerHTML += criarCardHTML(lead);
+                    destino.total++;
+                }
             });
+
+            let countVendas = 0;
+            let countPosVenda = 0;
+            let countArquivados = 0;
+
+            Object.values(mapaColunas).forEach(item => {
+                const badge = document.getElementById(item.count);
+                if (badge) badge.textContent = item.total;
+
+                if (item.grupo === 'vendas') countVendas += item.total;
+                if (item.grupo === 'posvenda') countPosVenda += item.total;
+                if (item.grupo === 'ambos') { countVendas += item.total; countPosVenda += item.total; }
+                if (item.grupo === 'arquivados') countArquivados += item.total;
+            });
+
+            document.getElementById('tab-count-todas').textContent = listaDeLeads.length;
+            document.getElementById('tab-count-vendas').textContent = countVendas;
+            document.getElementById('tab-count-posvenda').textContent = countPosVenda;
+            document.getElementById('tab-count-arquivados').textContent = countArquivados;
         }
 
+        // ==========================================
+        // ABRIR, PREENCHER E SALVAR MODAL COMPLETO
+        // ==========================================
         btnNovoLead.addEventListener('click', () => {
             formLeadDetalhes.reset();
             document.getElementById('leadId').value = '';
+            document.getElementById('leadStatusAtual').value = 'contato';
+            document.getElementById('detalheStatusSelect').value = 'contato';
+            document.getElementById('chkMostrarTagsCard').checked = true;
+            document.getElementById('chkMostrarPlanoCard').checked = true;
+            document.getElementById('chkMostrarValorCard').checked = true;
+            document.getElementById('chkMostrarResumoCard').checked = true;
+            atualizarContadorResumo();
             document.getElementById('modalTitulo').textContent = 'Adicionar Lead Manual';
-            if (NOME_VENDEDOR_LOGADO) detalheVendedor.value = NOME_VENDEDOR_LOGADO;
+            if (NOME_VENDEDOR_LOGADO) document.getElementById('detalheVendedor').value = NOME_VENDEDOR_LOGADO;
             btnExcluirLead.style.display = 'none';
-            btnResetarTentativas.style.display = 'none'; 
             modalLead.style.display = 'flex';
         });
 
-        btnFecharModal.addEventListener('click', () => { modalLead.style.display = 'none'; });
+        async function fecharESalvarModal() {
+            const id = document.getElementById('leadId').value;
+            if (id) {
+                const payload = coletarPayloadDoModal();
+                salvarDadosExtrasLocal(id, payload);
+                const dadosBanco = filtrarParaColunasDoBanco(payload);
+                await supabaseClient.from('leads').update(dadosBanco).eq('id', id);
+                await carregarLeads();
+            }
+            modalLead.style.display = 'none';
+        }
+
+        btnFecharModal.addEventListener('click', fecharESalvarModal);
+        btnFecharX.addEventListener('click', fecharESalvarModal);
 
         window.abrirModalEdicao = async function(id) {
+            dropdownNotificacoes.style.display = 'none';
             const { data: lead } = await supabaseClient.from('leads').select('*').eq('id', id).single();
             if (!lead) return;
 
+            if (!COLUNAS_REAIS_SUPABASE) {
+                COLUNAS_REAIS_SUPABASE = Object.keys(lead);
+            }
+
+            formLeadDetalhes.reset();
+            const extras = obterDadosExtrasLocal(lead.id);
+            const val = (campoDb, campoAlternativo) => lerValorCampo(lead, extras, campoDb, campoAlternativo);
+            const chk = (campoDb) => lerCheckboxCampo(lead, extras, campoDb);
+            const cfg = obterConfigCard(lead, extras);
+
             document.getElementById('leadId').value = lead.id;
-            document.getElementById('detalheNome').value = lead.nome || '';
+            const statusLead = (lead.status || extras.status || 'contato').toLowerCase();
+            document.getElementById('leadStatusAtual').value = statusLead;
+            document.getElementById('detalheStatusSelect').value = statusLead;
+
+            document.getElementById('detalheNome').value = val('nome');
             document.getElementById('detalheNumero').value = lead.numero ? mascaraTelefone(String(lead.numero)) : '';
-            document.getElementById('detalheNascimento').value = lead.data_nascimento || '';
-            document.getElementById('detalheVendedor').value = lead.vendedor || 'livre';
-            document.getElementById('detalheDataPrioridade').value = lead.data_prioridade || ''; 
+            document.getElementById('detalheTelefoneFixo').value = mascaraTelefone(val('telefone_fixo'));
+            document.getElementById('detalheEmail').value = val('email');
+            document.getElementById('detalheCpf').value = val('cpf');
+            document.getElementById('detalheNascimento').value = val('data_nascimento', 'nascimento');
+            document.getElementById('detalheIdade').value = val('idade', 'idades');
+            document.getElementById('detalheGenero').value = val('genero');
+            document.getElementById('detalheEstadoCivil').value = val('estado_civil');
+            document.getElementById('detalheCep').value = val('cep');
+            document.getElementById('detalheCidade').value = val('cidade');
+            document.getElementById('detalheProfissao').value = val('profissao');
+            document.getElementById('detalheOrigem').value = val('origem');
+            document.getElementById('detalheTipoLead').value = val('tipo_lead');
+            
+            const vend = lead.vendedor || 'livre';
+            const selectVend = document.getElementById('detalheVendedor');
+            if (vend !== 'livre' && ![...selectVend.options].some(o => o.value === vend)) {
+                selectVend.innerHTML += `<option value="${vend}">${vend}</option>`;
+            }
+            selectVend.value = vend;
+
+            document.getElementById('detalheValorEsperado').value = val('valor_esperado');
+            document.getElementById('detalheValorAtual').value = val('valor_atual');
+            document.getElementById('detalheTentativasLigacao').value = Number(val('tentativas_ligacao')) || 0;
+            document.getElementById('detalheTentativasZap').value = Number(val('tentativas_whatsapp')) || 0;
+
+            // Configuração do Card e Resumo Rápido
+            document.getElementById('chkMostrarTagsCard').checked = cfg.mostrar_tags;
+            document.getElementById('chkMostrarPlanoCard').checked = cfg.mostrar_plano;
+            document.getElementById('chkMostrarValorCard').checked = cfg.mostrar_valor;
+            document.getElementById('chkMostrarResumoCard').checked = cfg.mostrar_resumo;
+            document.getElementById('detalheResumoCard').value = val('resumo_card');
+            atualizarContadorResumo();
+
+            // Caderno Completo e Retorno
+            document.getElementById('detalheObs').value = val('observacoes', 'obs');
+            document.getElementById('detalheDataPrioridade').value = val('data_prioridade');
+
+            // Abas Saúde e Odonto
+            document.getElementById('chkInteresseSaude').checked = chk('interesse_saude');
+            document.getElementById('chkContratoSaude').checked = chk('contrato_saude');
+            document.getElementById('detalhePlanoAnterior').value = val('plano_anterior');
+            document.getElementById('detalhePlanoInteresse').value = val('plano_interesse');
+            document.getElementById('detalheLinkCotacaoPF').value = val('link_cotacao_pf');
+            document.getElementById('detalheLinkCotacaoPME').value = val('link_cotacao_pme');
+            document.getElementById('detalheLinkCotacaoAdesao').value = val('link_cotacao_adesao');
+
+            document.getElementById('chkInteresseOdonto').checked = chk('interesse_odonto');
+            document.getElementById('chkContratoOdonto').checked = chk('contrato_odonto');
+            document.getElementById('detalhePlanoOdontoInteresse').value = val('plano_odonto_interesse');
+            document.getElementById('detalheValorOdonto').value = val('valor_odonto');
+            document.getElementById('detalheLinkCotacaoOdonto').value = val('link_cotacao_odonto');
+
+            // Aba Implantação / Agger / Pós-Venda
+            document.getElementById('chkCadastradoAgger').checked = chk('cadastrado_agger');
+            document.getElementById('chkPrimeiroBoletoPago').checked = chk('primeiro_boleto_pago');
+            document.getElementById('detalheOperadoraFechada').value = val('operadora_fechada');
+            document.getElementById('detalheNumeroProposta').value = val('numero_proposta');
+            document.getElementById('detalheDataVigencia').value = val('data_vigencia');
+            document.getElementById('detalheDiaVencimento').value = val('dia_vencimento');
+            document.getElementById('detalheObsPosVenda').value = val('obs_pos_venda');
+
+            // Demais Abas
+            document.getElementById('chkInteresseAuto').checked = chk('interesse_auto');
+            document.getElementById('chkContratoAuto').checked = chk('contrato_auto');
+            document.getElementById('detalheAutoModelo').value = val('auto_modelo');
+            document.getElementById('detalheAutoInfo').value = val('auto_info');
+
+            document.getElementById('chkInteresseResidencial').checked = chk('interesse_residencial');
+            document.getElementById('chkContratoResidencial').checked = chk('contrato_residencial');
+            document.getElementById('detalheResidencialTipo').value = val('residencial_tipo');
+            document.getElementById('detalheResidencialValor').value = val('residencial_valor');
+
+            document.getElementById('chkInteresseVida').checked = chk('interesse_vida');
+            document.getElementById('chkContratoVida').checked = chk('contrato_vida');
+            document.getElementById('detalheVidaCapital').value = val('vida_capital');
+            document.getElementById('detalheVidaSeguradora').value = val('vida_seguradora');
+
+            document.getElementById('chkInteresseConsorcio').checked = chk('interesse_consorcio');
+            document.getElementById('chkContratoConsorcio').checked = chk('contrato_consorcio');
+            document.getElementById('detalheConsorcioTipo').value = val('consorcio_tipo');
+            document.getElementById('detalheConsorcioValor').value = val('consorcio_valor');
+
+            document.getElementById('chkInteressePet').checked = chk('interesse_pet');
+            document.getElementById('chkContratoPet').checked = chk('contrato_pet');
+            document.getElementById('detalhePetInfo').value = val('pet_info');
+            document.getElementById('detalhePetPlano').value = val('pet_plano');
+
+            document.getElementById('chkInteresseViagem').checked = chk('interesse_viagem');
+            document.getElementById('chkContratoViagem').checked = chk('contrato_viagem');
+            document.getElementById('detalheViagemDestino').value = val('viagem_destino');
+            document.getElementById('detalheViagemPeriodo').value = val('viagem_periodo');
+
+            document.getElementById('chkInteresseEmpresarial').checked = chk('interesse_empresarial');
+            document.getElementById('chkContratoEmpresarial').checked = chk('contrato_empresarial');
+            document.getElementById('detalheEmpresarialRamo').value = val('empresarial_ramo');
+            document.getElementById('detalheEmpresarialVidas').value = val('empresarial_vidas');
+
+            document.getElementById('chkInteresseOutros').checked = chk('interesse_outros');
+            document.getElementById('chkContratoOutros').checked = chk('contrato_outros');
+            document.getElementById('detalheOutrosDescricao').value = val('outros_descricao');
 
             document.getElementById('modalTitulo').textContent = 'Editar Informações do Lead';
-            btnExcluirLead.style.display = 'inline-block';
-            btnResetarTentativas.style.display = 'inline-block';
+            btnExcluirLead.style.display = 'flex';
             modalLead.style.display = 'flex';
-        }
+        };
 
         formLeadDetalhes.addEventListener('submit', async (e) => {
             e.preventDefault(); 
             const id = document.getElementById('leadId').value;
-            let valorVendedor = document.getElementById('detalheVendedor').value;
-            if (valorVendedor === 'livre') valorVendedor = null; 
+            const payloadCompleto = coletarPayloadDoModal();
 
-            const dadosLead = {
-                nome: document.getElementById('detalheNome').value,
-                numero: document.getElementById('detalheNumero').value.replace(/\D/g, '') || null,
-                data_nascimento: document.getElementById('detalheNascimento').value,
-                vendedor: valorVendedor,
-                data_prioridade: document.getElementById('detalheDataPrioridade').value || null,
-            };
+            if (id) salvarDadosExtrasLocal(id, payloadCompleto);
 
-            let error;
+            const dadosParaBanco = filtrarParaColunasDoBanco(payloadCompleto);
+            let leadIdSalvo = id;
+            let erroFinal = null;
+
             if (id) {
-                const res = await supabaseClient.from('leads').update(dadosLead).eq('id', id);
-                error = res.error;
+                const res = await supabaseClient.from('leads').update(dadosParaBanco).eq('id', id);
+                erroFinal = res.error;
             } else {
-                dadosLead.status = 'contato';
-                const res = await supabaseClient.from('leads').insert([dadosLead]);
-                error = res.error;
+                const res = await supabaseClient.from('leads').insert([dadosParaBanco]).select().single();
+                erroFinal = res.error;
+                if (res.data) leadIdSalvo = res.data.id;
             }
 
-            if (error) alert('Erro ao salvar: ' + error.message);
-            else { modalLead.style.display = 'none'; carregarLeads(); }
-        });
-
-        document.getElementById('btnZapModal').addEventListener('click', () => {
-            const num = document.getElementById('detalheNumero').value.replace(/\D/g, ''); 
-            if (num) window.open(`https://api.whatsapp.com/send?phone=55${num}`, '_blank');
+            if (erroFinal) {
+                alert('Erro ao salvar no banco: ' + erroFinal.message);
+            } else {
+                salvarDadosExtrasLocal(leadIdSalvo, payloadCompleto);
+                modalLead.style.display = 'none';
+                await carregarLeads();
+            }
         });
 
         btnExcluirLead.addEventListener('click', async () => {
             const id = document.getElementById('leadId').value;
-            if (confirm('Excluir este lead?')) {
-                await supabaseClient.from('leads').delete().eq('id', id);
-                modalLead.style.display = 'none'; 
-                carregarLeads();
+            if (!id) return;
+            if (confirm('Tem certeza que deseja excluir este lead permanentemente?')) {
+                const { error } = await supabaseClient.from('leads').delete().eq('id', id);
+                if (error) alert('Erro ao excluir: ' + error.message);
+                else { modalLead.style.display = 'none'; carregarLeads(); }
             }
         });
 
-        const btnNotificacoes = document.getElementById('btnNotificacoes');
-        const dropdownNotificacoes = document.getElementById('dropdownNotificacoes');
-        const listaNotificacoes = document.getElementById('listaNotificacoes');
-        const badgeNotificacao = document.getElementById('badgeNotificacao');
-
-        btnNotificacoes.addEventListener('click', (e) => {
-            e.stopPropagation();
-            const isOpen = dropdownNotificacoes.style.display === 'block';
-            dropdownNotificacoes.style.display = isOpen ? 'none' : 'block';
+        document.getElementById('btnZapModal').addEventListener('click', () => {
+            const num = document.getElementById('detalheNumero').value.replace(/\D/g, ''); 
+            if (num) window.open(`https://web.whatsapp.com/send?phone=55${num}`, '_blank');
         });
 
-        document.addEventListener('click', (e) => {
-            if (!dropdownNotificacoes.contains(e.target) && !btnNotificacoes.contains(e.target)) {
-                dropdownNotificacoes.style.display = 'none';
-            }
-        });
+        // ==========================================
+        // IMPORTAÇÃO DE PLANILHA EXCEL (.XLSX / .XLS)
+        // ==========================================
+        const btnImportar = document.getElementById('btnImportar');
+        const inputExcel = document.getElementById('inputExcel');
 
-        function atualizarNotificacoes() {
-            const hoje = new Date();
-            const ano = hoje.getFullYear();
-            const mes = String(hoje.getMonth() + 1).padStart(2, '0');
-            const dia = String(hoje.getDate()).padStart(2, '0');
-            const dataHojeStr = `${ano}-${mes}-${dia}`;
-            const diaMesAtualStr = `${dia}/${mes}`;
+        btnImportar.addEventListener('click', () => inputExcel.click());
 
-            const leadsRetorno = todosOsLeadsMemoria.filter(lead => {
-                if (lead.vendedor !== NOME_VENDEDOR_LOGADO) return false;
-                if (!lead.data_prioridade) return false;
-                const status = String(lead.status).toLowerCase();
-                if (status === 'finalizado' || status === 'perdido' || status === 'sem interesse') return false;
-                return lead.data_prioridade <= dataHojeStr; 
-            });
+        inputExcel.addEventListener('change', async (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
 
-            const leadsAniversario = todosOsLeadsMemoria.filter(lead => {
-                if (lead.vendedor !== NOME_VENDEDOR_LOGADO) return false;
-                if (!lead.data_nascimento) return false;
-                const partesNasc = lead.data_nascimento.split('/');
-                if (partesNasc.length >= 2) {
-                    const diaMesLead = `${partesNasc[0]}/${partesNasc[1]}`;
-                    return diaMesLead === diaMesAtualStr;
+            const reader = new FileReader();
+            reader.onload = async function(evt) {
+                try {
+                    const data = new Uint8Array(evt.target.result);
+                    const workbook = XLSX.read(data, { type: 'array' });
+                    const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
+                    const rows = XLSX.utils.sheet_to_json(firstSheet, { defval: "" });
+
+                    if (rows.length === 0) return alert('A planilha está vazia.');
+
+                    const novosLeads = rows.map(r => {
+                        const chaves = Object.keys(r);
+                        const acharColuna = (termos) => {
+                            const k = chaves.find(key => termos.some(t => key.toLowerCase().includes(t)));
+                            return k ? String(r[k]).trim() : '';
+                        };
+
+                        const nome = acharColuna(['nome', 'cliente', 'lead']) || 'Lead Importado';
+                        const numero = acharColuna(['whats', 'tel', 'cel', 'numero', 'número', 'fone']).replace(/\D/g, '');
+                        const vendedor = acharColuna(['vendedor', 'corretor', 'dono']) || NOME_VENDEDOR_LOGADO || null;
+
+                        return { nome, numero: numero || null, vendedor, status: 'contato' };
+                    }).filter(l => l.nome || l.numero);
+
+                    if (novosLeads.length === 0) return alert('Nenhum dado válido encontrado na planilha.');
+
+                    const { error } = await supabaseClient.from('leads').insert(novosLeads);
+                    if (error) alert('Erro ao importar planilha: ' + error.message);
+                    else {
+                        alert(`${novosLeads.length} leads importados com sucesso!`);
+                        carregarLeads();
+                    }
+                } catch (err) {
+                    alert('Erro ao ler o arquivo Excel.');
+                } finally {
+                    inputExcel.value = '';
                 }
-                return false;
-            });
+            };
+            reader.readAsArrayBuffer(file);
+        });
 
-            const totalNotificacoes = leadsRetorno.length + leadsAniversario.length;
+        // ==========================================
+        // LÓGICA DE MENSAGENS AUTOMÁTICAS E PAINEL
+        // ==========================================
+        const modalTemplatesMsg = document.getElementById('modalTemplatesMsg');
+        const selectStatusTemplate = document.getElementById('selectStatusTemplate');
+        const textoTemplateEdit = document.getElementById('textoTemplateEdit');
 
-            if (totalNotificacoes > 0) {
-                badgeNotificacao.textContent = totalNotificacoes;
-                badgeNotificacao.style.display = 'block';
-            } else {
-                badgeNotificacao.style.display = 'none';
-            }
+        let templatesMensagens = JSON.parse(localStorage.getItem('bvpinho_templates_msg')) || {
+            'contato': '{saudacao} {nome}, tudo bem? Sou {vendedor} da BV Pinho, recebi sua solicitação de cotação. Podemos falar agora?',
+            'respondeu': '{saudacao} {nome}! Que ótimo falar com você. Para eu montar as melhores opções, quais seriam as idades e se possui CNPJ?',
+            'interessado': '{saudacao} {nome}, separei o comparativo dos planos para você analisar! Ficou com alguma dúvida nos valores ou rede credenciada?',
+            'documentos': '{saudacao} {nome}, passando para lembrar dos documentos pendentes para darmos andamento na sua proposta, qualquer dúvida estou aqui!',
+            'pagar boleto': '{saudacao} {nome}! Sua proposta já foi implantada. Segue o lembrete do boleto de vigência para ativarmos seu plano!',
+            'pos venda': '{saudacao} {nome}, tudo bem? Passando para saber se já baixou a carteirinha digital do seu plano e se precisa de algum auxílio!',
+            'sem resposta': 'Oi {nome}, tentei contato mais cedo e não consegui. Qual melhor horário para conversarmos sobre sua cotação?'
+        };
 
-            listaNotificacoes.innerHTML = '';
-            
-            if (totalNotificacoes === 0) {
-                listaNotificacoes.innerHTML = '<div style="text-align: center; color: #64748b; font-size: 13px; padding: 20px 0;">Nenhum aviso para hoje! 🎉</div>';
+        document.getElementById('btnAbrirPainelMensagens').addEventListener('click', (e) => {
+            e.preventDefault();
+            selectStatusTemplate.value = 'contato';
+            textoTemplateEdit.value = templatesMensagens['contato'] || '';
+            modalTemplatesMsg.style.display = 'flex';
+        });
+
+        document.getElementById('btnFecharTemplatesMsg').addEventListener('click', () => modalTemplatesMsg.style.display = 'none');
+        document.getElementById('btnCancelarTemplate').addEventListener('click', () => modalTemplatesMsg.style.display = 'none');
+
+        selectStatusTemplate.addEventListener('change', (e) => {
+            textoTemplateEdit.value = templatesMensagens[e.target.value] || '';
+        });
+
+        document.getElementById('btnSalvarTemplateMsg').addEventListener('click', () => {
+            const status = selectStatusTemplate.value;
+            templatesMensagens[status] = textoTemplateEdit.value;
+            localStorage.setItem('bvpinho_templates_msg', JSON.stringify(templatesMensagens));
+            alert('Mensagem atualizada com sucesso!');
+            modalTemplatesMsg.style.display = 'none';
+        });
+
+        function obterSaudacao() {
+            const hora = new Date().getHours();
+            if (hora < 12) return 'Bom dia';
+            if (hora < 18) return 'Boa tarde';
+            return 'Boa noite';
+        }
+
+        document.getElementById('btnZapStatus').addEventListener('click', () => {
+            const num = document.getElementById('detalheNumero').value.replace(/\D/g, '');
+            const nomeCompleto = document.getElementById('detalheNome').value || 'Cliente';
+            const primeiroNome = nomeCompleto.split(' ')[0];
+            const statusAtual = document.getElementById('detalheStatusSelect').value || document.getElementById('leadStatusAtual').value || 'contato';
+            const vendedorAtual = NOME_VENDEDOR_LOGADO || 'Corretor';
+
+            if (!num) {
+                alert('Este lead não possui um número de telefone salvo.');
                 return;
             }
 
-            if (leadsAniversario.length > 0) {
-                const tituloAniversarios = document.createElement('div');
-                tituloAniversarios.className = 'birthday-section-title';
-                tituloAniversarios.innerHTML = '<i class="fas fa-birthday-cake"></i> Aniversários de hoje';
-                listaNotificacoes.appendChild(tituloAniversarios);
+            const template = templatesMensagens[statusAtual];
+            if (!template) {
+                alert('Você ainda não configurou uma mensagem para a coluna "' + statusAtual.toUpperCase() + '". Configure em Textos Automáticos no menu lateral.');
+                return;
             }
 
-            leadsAniversario.forEach(lead => {
-                const item = document.createElement('div');
-                item.className = 'notification-item birthday-notification';
-                const numeroLimpo = lead.numero ? String(lead.numero).replace(/\D/g, '') : '';
-                const mensagemZap = encodeURIComponent(`Olá, ${lead.nome}! A equipe da BV Pinho deseja a você um feliz aniversário! 🎂 Muitas felicidades e sucesso!`);
+            let textoFinal = template
+                .replace(/{nome}/gi, primeiroNome)
+                .replace(/{vendedor}/gi, vendedorAtual)
+                .replace(/{saudacao}/gi, obterSaudacao());
 
-                item.innerHTML = `
-                    <div class="birthday-top">
-                        <div class="birthday-icon"><i class="fas fa-birthday-cake"></i></div>
-                        <div class="birthday-text">
-                            <span class="birthday-label">🎉 Aniversário hoje</span>
-                            <span class="birthday-name">${lead.nome || 'Sem Nome'}</span>
-                        </div>
-                    </div>
-                    <p class="birthday-message">Aproveite para enviar uma mensagem especial para o cliente.</p>
-                    ${numeroLimpo ? `
-                        <a class="btn-whatsapp-aniversario" href="https://api.whatsapp.com/send?phone=55${numeroLimpo}&text=${mensagemZap}" target="_blank" onclick="event.stopPropagation()" title="Abrir WhatsApp com mensagem pronta">
-                            <i class="fab fa-whatsapp"></i>
-                            <span>Enviar parabéns pelo WhatsApp</span>
-                        </a>
-                    ` : `
-                        <span class="birthday-no-phone"><i class="fas fa-phone-slash"></i> Sem telefone cadastrado</span>
-                    `}
-                `;
-                item.addEventListener('click', () => {
-                    abrirModalEdicao(lead.id);
-                    dropdownNotificacoes.style.display = 'none';
-                });
-                listaNotificacoes.appendChild(item);
-            });
-
-            leadsRetorno.forEach(lead => {
-                const item = document.createElement('div');
-                item.className = 'notification-item';
-                
-                const partesData = lead.data_prioridade.split('-');
-                const dataFormatada = `${partesData[2]}/${partesData[1]}/${partesData[0]}`;
-
-                item.innerHTML = `
-                    <span class="notif-nome">📞 ${lead.nome || 'Sem Nome'}</span>
-                    <span class="notif-data"><i class="fas fa-calendar-alt"></i> Agendado: ${dataFormatada}</span>
-                `;
-                
-                item.addEventListener('click', () => {
-                    abrirModalEdicao(lead.id);
-                    dropdownNotificacoes.style.display = 'none';
-                });
-                
-                listaNotificacoes.appendChild(item);
-            });
-        }
+            const textoUrl = encodeURIComponent(textoFinal);
+            window.open(`https://web.whatsapp.com/send?phone=55${num}&text=${textoUrl}`, '_blank');
+        });
     </script>
 </body>
 </html>
